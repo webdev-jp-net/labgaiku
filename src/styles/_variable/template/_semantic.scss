@@ -1,0 +1,107 @@
+@use '../function/rem' as *;
+
+// ===========================
+// ボタン系 Semantic Tokens
+// ===========================
+
+@mixin tmp-btn-error {
+  color: var(--fg-error);
+  background-color: var(--bg-error);
+  border-color: var(--border-error);
+}
+
+@mixin tmp-btn-info {
+  color: var(--blue-contrast);
+  background-color: var(--blue-solid);
+  border-color: var(--border-info);
+}
+
+@mixin tmp-btn-warning {
+  color: var(--fg-warning);
+  background-color: var(--bg-warning);
+  border-color: var(--border-warning);
+}
+
+@mixin tmp-btn-success {
+  color: var(--fg-success);
+  background-color: var(--bg-success);
+  border-color: var(--border-success);
+}
+
+@mixin tmp-btn-primary {
+  color: var(--blue-contrast);
+  background-color: var(--blue-solid);
+
+  &:hover {
+    background-color: var(--blue-emphasized);
+  }
+}
+
+// ===========================
+// アラート系 Semantic Tokens
+// ===========================
+
+@mixin tmp-alert-error {
+  color: var(--fg-error);
+  background-color: var(--bg-error);
+  border-color: var(--border-error);
+}
+
+@mixin tmp-alert-warning {
+  color: var(--fg-warning);
+  background-color: var(--bg-warning);
+  border-color: var(--border-warning);
+}
+
+@mixin tmp-alert-success {
+  color: var(--fg-success);
+  background-color: var(--bg-success);
+  border-color: var(--border-success);
+}
+
+@mixin tmp-alert-info {
+  color: var(--fg-info);
+  background-color: var(--bg-info);
+  border-color: var(--border-info);
+}
+
+// ===========================
+// テキスト系 Semantic Tokens
+// ===========================
+
+@mixin tmp-text-error {
+  color: var(--fg-error);
+}
+
+@mixin tmp-text-warning {
+  color: var(--fg-warning);
+}
+
+@mixin tmp-text-success {
+  color: var(--fg-success);
+}
+
+@mixin tmp-text-info {
+  color: var(--fg-info);
+}
+
+@mixin tmp-text-muted {
+  color: var(--fg-muted);
+}
+
+// ===========================
+// ナビゲーション系 Semantic Tokens
+// ===========================
+
+@mixin tmp-nav-active {
+  font-weight: 600;
+  color: var(--blue-fg);
+}
+
+@mixin tmp-nav-hover {
+  color: var(--blue-emphasized);
+}
+
+@mixin tmp-nav-inactive {
+  color: var(--text-primary);
+}

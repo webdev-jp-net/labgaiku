@@ -7,11 +7,11 @@ lab-ga-iku/
 ├── src/                           # Astroソースコード
 │   ├── components/                # 再利用可能なコンポーネント
 │   │   ├── Header.astro
-│   │   ├── Header.module.css
+│   │   ├── Header.module.scss
 │   │   ├── Footer.astro
-│   │   ├── Footer.module.css
+│   │   ├── Footer.module.scss
 │   │   ├── ArticleCard.astro
-│   │   └── ArticleCard.module.css
+│   │   └── ArticleCard.module.scss
 │   ├── layouts/                   # ページレイアウト
 │   │   ├── BaseLayout.astro
 │   │   └── ArticleLayout.astro
@@ -32,8 +32,12 @@ lab-ga-iku/
 │   │   ├── auth.ts                # Auth.js設定
 │   │   └── utils.ts               # 汎用関数
 │   └── styles/                    # グローバルスタイル
-│       ├── global.css             # グローバルCSS
-│       └── variables.css          # CSS変数
+│       ├── _variable/             # SCSS ユーティリティ
+│       │   ├── _index.scss        # エントリーポイント
+│       │   ├── function/          # SCSS関数（rem変換等）
+│       │   ├── mixin/             # SCSS mixin（mq, cq, hover等）
+│       │   └── template/          # スタイルテンプレート
+│       └── index.scss             # グローバルSCSS（CSS変数定義含む）
 ├── public/                        # 静的アセット
 │   ├── images/                    # 画像ファイル
 │   └── favicon.ico
@@ -48,12 +52,15 @@ lab-ga-iku/
 ## 主要ファイル
 
 ### 設定ファイル
-- `astro.config.mjs`: Astro設定（SSRモード有効化）
+- `astro.config.mjs`: Astro設定（SSRモード、Vercelアダプタ）
 - `auth.config.ts`: Auth.js設定
 - `tsconfig.json`: TypeScript設定
 - `package.json`: 依存関係・スクリプト
 - `.env.local`: 環境変数（Git管理外）
 - `.gitignore`: Git除外設定
+- `eslint.config.js`: ESLint設定
+- `prettier.config.js`: Prettier設定
+- `.stylelintrc.json`: StyleLint設定（SCSS）
 
 ### 開発ガイド
 - `AGENT.md`: AI開発者向けガイド
@@ -66,10 +73,10 @@ lab-ga-iku/
 - `ArticleLayout.astro`: 記事詳細用レイアウト
 
 ### コンポーネント
-- `Header.astro` + `Header.module.css`: ヘッダーナビゲーション
-- `Footer.astro` + `Footer.module.css`: フッター
-- `ArticleCard.astro` + `ArticleCard.module.css`: 記事カード
-- `AuthButton.astro` + `AuthButton.module.css`: 認証ボタン
+- `Header.astro` + `Header.module.scss`: ヘッダーナビゲーション
+- `Footer.astro` + `Footer.module.scss`: フッター
+- `ArticleCard.astro` + `ArticleCard.module.scss`: 記事カード
+- `AuthButton.astro` + `AuthButton.module.scss`: 認証ボタン
 
 ### ページ
 - `index.astro`: トップページ（認証後リダイレクト）
@@ -81,7 +88,7 @@ lab-ga-iku/
 
 ### ファイル・ディレクトリ
 - **Astroコンポーネント**: PascalCase（例: `ArticleCard.astro`）
-- **CSS Modules**: PascalCase + `.module.css`（例: `ArticleCard.module.css`）
+- **SCSS Modules**: PascalCase + `.module.scss`（例: `ArticleCard.module.scss`）
 - **ページファイル**: kebab-case（例: `article-list.astro`）
 - **ユーティリティ**: camelCase（例: `formatDate.ts`）
 - **記事ファイル**: `YYYY-MM-slug.md`（例: `2025-01-interview-01.md`）
@@ -89,6 +96,8 @@ lab-ga-iku/
 ### CSS・スタイル
 - **クラス名**: セマンティックな短い命名（例: `.header`, `.nav`, `.article`）
 - **CSS変数**: kebab-case（例: `--primary-color`, `--spacing-md`）
+- **SCSS部分ファイル**: アンダースコア始まり（例: `_index.scss`, `_mq.scss`）
+- **SCSS mixin/function**: kebab-case（例: `@mixin any-hover`, `@function rem`）
 - **BEM不使用**: 冗長な命名規則は排除
 
 ### TypeScript
@@ -96,12 +105,12 @@ lab-ga-iku/
 - **型・インターフェース**: PascalCase（例: `Article`, `AuthUser`）
 - **定数**: UPPER_SNAKE_CASE（例: `MAX_ARTICLES`）
 
-## CSS Modules 使用例
+## SCSS Modules 使用例
 
 ```astro
 ---
 // ArticleCard.astro
-import styles from './ArticleCard.module.css';
+import styles from './ArticleCard.module.scss';
 ---
 
 <article class={styles.article}>
@@ -110,11 +119,23 @@ import styles from './ArticleCard.module.css';
 </article>
 ```
 
-```css
-/* ArticleCard.module.css */
+```scss
+/* ArticleCard.module.scss */
+@use '@/styles/_variable' as *;
+
 .article {
   padding: var(--spacing-md);
   border: 1px solid var(--border-color);
+
+  // mixin使用例: ホバー対応デバイスのみ
+  @include any-hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  // mixin使用例: メディアクエリ
+  @include mq($until: 'middle') {
+    padding: var(--spacing-sm);
+  }
 }
 
 .title {
