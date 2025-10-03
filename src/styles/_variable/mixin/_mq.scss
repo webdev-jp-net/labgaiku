@@ -93,7 +93,7 @@
     }
   } @else if $preset == middle {
     // tablet portrait
-    @media screen and (width >= $narrow) and (width < $wide) {
+    @media screen and (width >= $narrow) and (width < $middle) {
       @content;
     }
   } @else if $preset == fromLaptop {
