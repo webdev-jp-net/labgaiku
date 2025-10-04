@@ -2,160 +2,72 @@
 
 ## 概要
 
-React 19 + TypeScript + Chakra UIを基盤とした、効率的なコンポーネント設計方針です。
+Next.js App Router + React 19 + TypeScript を前提としたコンポーネント分割指針。UIライブラリは採用しておらず、SCSS Modules で最小限の装飾を行う。
 
 ## 設計原則
 
-### Chakra UI優先
-- 基本UIコンポーネント（Button、Input、Modal等）はChakra UIを使用
-- カスタムコンポーネントは機能固有・プロジェクト固有のもののみ作成
+### View / Logic 分離
+- `*.tsx` は View（表示責務）のみ
+- `use*.ts` は Logic（状態管理・イベント処理）を担当
+- App Router のページでも `_parts` ディレクトリを用いて責務を分割
 
-### 単一責任の原則
-- 各コンポーネントは1つの責任のみを持つ
-- 複雑な機能は複数のコンポーネントに分割
+### 単一責任
+- 1 つのコンポーネントが扱う責務は明確に絞る
+- ページ固有の処理は `src/app/(...)/[page]/_parts/` へ配置
 
-### 型安全性
-- すべてのPropsにTypeScript型定義を必須
-- 厳密な型チェックでランタイムエラーを予防
+### 型安全
+- すべての Props / 戻り値に TypeScript 型を付与
+- 必要な型は `src/lib` 配下で共有
 
-### View/Logic分離
-- **\*.tsx**: Viewの責務（UI表示・レンダリング）
-- **use\*.ts**: Logicの責務（状態管理・ビジネスロジック・API呼び出し）
-- 明確な責任分離により保守性とテスタビリティを向上
-
-## ディレクトリ構造（vite.config.ts alias準拠）
+## ディレクトリ構造
 
 ```
 src/
-├── components/             # 機能をまたぐ共通コンポーネント
-├── layout/                 # レイアウトコンポーネント
-└── pages/                  # ページコンポーネント
-    ├── Home/               # ダッシュボード
-    ├── TimeTrackingIndex/  # 稼働時間管理
-    ├── CaseSalesIndex/     # 案件別売上
-    ├── MasterIndex/        # マスター管理
-    └── ...                 # その他のページ
+├── app/
+│   ├── page.tsx                # Home（サーバーコンポーネント）
+│   ├── _parts/
+│   │   ├── view.tsx            # HomeView（クライアント）
+│   │   └── useHome.ts          # Home向けフック
+│   └── (authenticated)/app/
+│       ├── page.tsx
+│       └── _parts/
+│           ├── view.tsx
+│           └── useApp.ts
+├── components/
+│   └── auth/                   # 共通利用コンポーネント
+│       ├── SessionWrapper.tsx
+│       ├── SignIn.tsx
+│       └── SignOut.tsx
+└── lib/
+    └── api/
+        └── microcms.ts
 ```
 
-### ページコンポーネント構造例
-```
-pages/TimeTrackingIndex/
-├── index.ts                       # Re-export
-├── TimeTrackingIndex.tsx          # View層
-├── useTimeTrackingIndex.ts        # Logic層
-├── TimeTrackingIndex.module.scss # スタイル
-└── components/                    # ページ固有コンポーネント
-    └── MonthlyGrid/
-        ├── index.ts               # Re-export
-        ├── MonthlyGrid.tsx        # View層
-        └── useMonthlyGrid.ts      # Logic層
-```
+## scaffdog テンプレート
+- `page-component.md` : App Router 用ページ雛形（`page.tsx` + `_parts`）
+- `parts-component.md` : 汎用コンポーネント雛形
+- 詳細は [コンポーネント生成ガイド](../../operation/generate-component.md)
 
-## scaffdog活用
+## 命名規則
+- ディレクトリ / コンポーネント名: PascalCase
+- hook 名: `use` プレフィックス + PascalCase
+- SCSS: `*.module.scss`、クラス名は辞書に準拠
 
-### コンポーネント生成
+## View層の責務
+- UI描画
+- 最小限のイベントハンドリング（処理本体はhookへ委譲）
+- `_parts/view.tsx`は`"use client"`で宣言し、サーバー側から受け取ったデータを表示
 
-プロジェクトではscaffdogを使用してコンポーネントを効率的に生成します：
+## Logic層の責務
+- `use*.ts`に状態管理・データ変換ロジックを配置
+- API呼び出しは`src/lib`の関数を利用
+- hookはViewに必要な値・ハンドラを返却
 
-[コンポーネント生成ガイド](../../operation/generate-component.md) を参照してください。
+## 共通コンポーネント
+- `src/components/auth` など再利用可能な単位で配置
+- 認証系は `SignIn` / `SignOut` / `SessionWrapper`
+- 今後の増設も同じ方針で配置する
 
-## 命名規約
-
-### ファイル・ディレクトリ
-- **PascalCase**: コンポーネント名（例: `TimeTracker`）
-- **index.ts**: Re-export用ファイル
-- **ComponentName.tsx**: メインコンポーネントファイル（View責務）
-- **useComponentName.ts**: カスタムフック（Logic責務）
-- **ComponentName.module.scss**: スタイルファイル
-
-### Props・State
-- **camelCase**: プロパティ名
-- **Interface**: `ComponentNameProps`形式
-
-## 実装例
-
-### 基本的な実装パターン
-
-#### View層（\*.tsx）
-```typescript
-// コンポーネントはUIの表示のみに集中
-export const ComponentName: React.FC = () => {
-  const { data, handlers } = useComponentName()
-  
-  return (
-    <ChakraUIComponent>
-      {/* UI表示とイベント受け取りのみ */}
-    </ChakraUIComponent>
-  )
-}
-```
-
-#### Logic層（use\*.ts）
-```typescript
-// ビジネスロジック・状態管理・API呼び出しを担当
-export const useComponentName = () => {
-  // Jotai Atomとの連携
-  // ビジネスロジック
-  // API呼び出し
-  
-  return { data, handlers }
-}
-```
-
-## View/Logic分離の指針
-
-### View層（\*.tsx）の責務
-- **UI表示**: JSX/TSXによるレンダリング
-- **イベントハンドリング**: ユーザー操作の受け取り（ロジックは呼び出すのみ）
-- **スタイリング**: Chakra UIコンポーネントの組み合わせ
-- **条件分岐**: 表示/非表示の制御
-
-### Logic層（use\*.ts）の責務
-- **状態管理**: Jotai Atomとの連携
-- **ビジネスロジック**: データ変換・計算・バリデーション
-- **API呼び出し**: GraphQL操作・外部API連携
-- **副作用処理**: useEffect等による非同期処理
-
-### 分離のメリット
-- **テスタビリティ**: Logic層を独立してテスト可能
-- **再利用性**: 同じロジックを複数のViewで使用可能
-- **保守性**: 責任が明確で変更影響範囲が限定的
-- **可読性**: ViewとLogicが分離され理解しやすい
-
-## コンポーネント配置指針
-
-### src/components/ (機能をまたぐ共通)
-- 複数のページで使用されるコンポーネント
-- ビジネスロジックを含む再利用可能なコンポーネント
-- 例: `WorkLogCard`, `ProjectSelector`, `DatePicker`
-
-### src/pages/[PageName]/components/ (ページ固有)
-- 特定のページでのみ使用されるコンポーネント
-- そのページの機能に特化したコンポーネント
-- 例: `Home/components/StatsCard`, `TimeTrackingIndex/components/MonthlyGrid`
-
-### src/layout/ (レイアウト)
-- アプリケーション全体のレイアウト構造
-- ヘッダー、サイドバー、フッターなど
-- 例: `Header`, `Sidebar`, `AppLayout`
-
-## パフォーマンス考慮
-
-### React.memo使用
-```typescript
-// 不要な再レンダリングを防ぐ
-export const StatsCard = React.memo<StatsCardProps>(({ label, value, color }) => {
-  // コンポーネント実装
-})
-```
-
-### 遅延読み込み
-```typescript
-// 大きなコンポーネントの遅延読み込み
-const ReportsPage = React.lazy(() => import('pages/Reports'))
-```
-
-## 関連ドキュメント
-
-- [コンポーネント生成ガイド](../../operation/generate-component.md)
-- [スタイリング方針](./style.md)
+## 補足
+- Chakra UI等の外部UIライブラリは未使用
+- 装飾は仕様で明示された範囲のみ実装し、共通スタイルは`src/styles`配下で管理

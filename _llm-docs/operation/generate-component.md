@@ -17,7 +17,7 @@
 
 ## 生成されるファイル構造
 
-page-component テンプレートは以下の構造を生成します：
+page-componentテンプレートは以下の構造を生成します：
 
 ```
 [component-name]/
@@ -28,7 +28,7 @@ page-component テンプレートは以下の構造を生成します：
     └── page.module.scss     # スタイル（必要最低限）
 ```
 
-parts-component テンプレートは以下を生成します（`.stories.tsx` 付き）：
+parts-componentテンプレートは以下を生成します（`.stories.tsx`付き）：
 
 ```
 [ComponentName]/

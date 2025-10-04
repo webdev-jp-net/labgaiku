@@ -2,21 +2,19 @@
 
 ## 概要
 
-React 19 + TypeScript + Vite 6を基盤とした、モダンなSPAフロントエンドの仕様書です。
+Next.js App Router + React 19 + TypeScriptを前提としたフロントエンド仕様。
 
 ## 仕様書一覧
 
 ### UI・デザイン
-- [スタイリング方針](./style.md) - CSS/SCSS、コンポーネントスタイリングの方針
+- [スタイリング方針](./style.md)
 
 ### 開発・設計
-- [ルーティング仕様](./routing.md) - React Routerを使用したSPAルーティング設計
-- [コンポーネント設計](./components.md) - Reactコンポーネントの設計方針
-- [状態管理仕様](./state-management.md) - Jotaiを使用したグローバル状態管理
-- [API層設計](./api-layer.md) - データアクセス層の設計仕様
+- [ルーティング仕様](./routing.md)
+- [コンポーネント設計](./components.md)
+- [microCMS連携仕様](./microcms.md)
+- [認証仕様](../backend/next-auth.md)
 
 ## 関連ドキュメント
-
-- [技術スタック全体](../tech_structure.md)
-- [バックエンド仕様](../backend/index.md)
-- [機能・コンテンツ仕様](../contents/index.md)
+- [技術構成](../tech_structure.md)
+- [運用ガイド一覧](../operation/)
