@@ -2,13 +2,13 @@
 import type { FlashMessageType } from '../lib/error-handler';
 import styles from './Toast.module.scss';
 
-export interface ToastProps {
+interface Props {
   message: string;
   type?: FlashMessageType;
   duration?: number;
 }
 
-const { message, type = 'info', duration = 4000 }: ToastProps = Astro.props;
+const { message, type = 'info', duration = 4000 } = Astro.props as Props;
 const hiddenClass = styles.hidden;
 ---
 
@@ -21,11 +21,11 @@ const hiddenClass = styles.hidden;
   </div>
 )}
 
-<script is:inline>
+<script is:inline define:vars={{ hiddenClass, duration }}>
   const toast = document.querySelector('[data-toast]');
   if (toast) {
     const hide = () => {
-      toast.classList.add('${hiddenClass}');
+      toast.classList.add(hiddenClass);
       window.setTimeout(() => {
         toast.remove();
       }, 250);
@@ -34,7 +34,7 @@ const hiddenClass = styles.hidden;
     const button = toast.querySelector('button');
     button?.addEventListener('click', hide);
 
-    window.setTimeout(hide, Number(${duration}));
+    window.setTimeout(hide, duration);
 
     const url = new URL(window.location.href);
     url.searchParams.delete('error');
