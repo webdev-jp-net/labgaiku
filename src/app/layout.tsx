@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SessionWrapper } from "@/components/auth/SessionWrapper";
+import { AppHeader } from "@/components/layout/AppHeader";
 import "@/styles/index.scss";
 
 export const metadata: Metadata = {
@@ -16,7 +17,10 @@ export default function RootLayout({
     <html lang="ja">
       <body>
         <SessionWrapper>
-          <div id="root">{children}</div>
+          <div id="root">
+            <AppHeader />
+            <main>{children}</main>
+          </div>
         </SessionWrapper>
       </body>
     </html>
