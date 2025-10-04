@@ -1,7 +1,7 @@
 # 実装計画
 
 - [ ] 1. Auth.js依存関係の追加と基本設定
-  - package.jsonに@auth/astroと@auth/coreを追加
+  - package.jsonに@auth/coreを追加
   - 環境変数設定ファイル（.env.example）を更新
   - _要件: 1.1, 1.2, 1.3_
 
