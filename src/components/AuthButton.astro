@@ -1,13 +1,13 @@
 ---
 import styles from './AuthButton.module.scss';
 
-export interface AuthButtonProps {
+interface Props {
   variant: 'login' | 'logout';
   provider?: 'google' | 'github';
   callbackUrl?: string;
 }
 
-const { variant, provider, callbackUrl }: AuthButtonProps = Astro.props;
+const { variant, provider, callbackUrl } = Astro.props as Props;
 
 const isLoginVariant = variant === 'login';
 
@@ -29,14 +29,15 @@ const buttonClass = [styles.button, styles[variant], provider ? styles[provider]
   .join(' ');
 ---
 
-<form action={action} method="post" class={styles.form}>
-  <input type="hidden" name="callbackUrl" value={targetCallbackUrl} />
-  <button type="submit" class={buttonClass} data-provider={provider ?? 'logout'}>
-    {isLoginVariant && (
-      <span class={styles.providerLabel} aria-hidden="true">
-        {provider === 'google' ? 'G' : 'GH'}
-      </span>
-    )}
-    <span>{buttonLabel}</span>
-  </button>
-</form>
+<a 
+  href={`${action}?callbackUrl=${encodeURIComponent(targetCallbackUrl)}`}
+  class={buttonClass} 
+  data-provider={provider ?? 'logout'}
+>
+  {isLoginVariant && (
+    <span class={styles.providerLabel} aria-hidden="true">
+      {provider === 'google' ? 'G' : 'GH'}
+    </span>
+  )}
+  <span>{buttonLabel}</span>
+</a>

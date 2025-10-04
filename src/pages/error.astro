@@ -2,10 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import type { AuthUser } from '../lib/auth';
 import { getAuthErrorMessage } from '../lib/error-handler';
-import styles from './error.module.scss';
+import styles from './_error.module.scss';
 
-const user = (Astro.locals.user as AuthUser | null) ?? null;
-const flash = Astro.locals.flash;
+// 一時的に認証を無効化
+const user = null;
+const flash = null;
 
 const errorCode = Astro.url.searchParams.get('error');
 const message =
