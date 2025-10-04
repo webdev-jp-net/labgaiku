@@ -1,0 +1,17 @@
+@use "@/styles/_variable" as *;
+
+.home {
+  padding: var(--spacing-lg);
+}
+
+.title {
+  margin-bottom: var(--spacing-md);
+}
+
+.nav ul {
+  display: flex;
+  gap: var(--spacing-sm);
+  list-style: none;
+  padding: 0;
+}
+
