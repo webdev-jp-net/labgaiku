@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
 import { getReportById } from "@/lib/api/microcms";
-import { ReportDetailView } from "../reports/_parts/detail-view";
 import { authOptions } from "@/lib/auth";
+import { ReportDetailView } from "./_parts/view";
 
 type ReportDetailPageProps = {
   params: {

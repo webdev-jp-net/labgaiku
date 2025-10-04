@@ -1,22 +1,17 @@
 import { getServerSession } from "next-auth";
 import { getReports } from "@/lib/api/microcms";
 import { authOptions } from "@/lib/auth";
-import { ReportsListView } from "./reports/_parts/list-view";
+import { HomeView } from "./_parts/view";
 
-export default async function ReportsIndexPage() {
+export default async function HomePage() {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return (
-      <section>
-        <h1>レポート一覧</h1>
-        <p>閲覧するにはログインしてください。</p>
-      </section>
-    );
+    return <HomeView session={null} reports={[]} />;
   }
 
   const reports = await getReports();
 
-  return <ReportsListView reports={reports.contents} />;
+  return <HomeView session={session} reports={reports.contents} />;
 }
- 
+
