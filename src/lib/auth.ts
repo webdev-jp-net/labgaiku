@@ -1,4 +1,4 @@
-import { AstroAuth, type AuthConfig } from '@auth/astro';
+import { Auth, type AuthConfig } from '@auth/core';
 import GitHub from '@auth/core/providers/github';
 import Google from '@auth/core/providers/google';
 import type { Session } from '@auth/core/types';
@@ -31,7 +31,7 @@ const resolveEnv = (key: string, defaultValue = ''): string => {
   return defaultValue;
 };
 
-const authConfig = {
+const config = {
   secret: resolveEnv('AUTH_SECRET'),
   trustHost: resolveEnv('AUTH_TRUST_HOST', 'true') !== 'false',
   session: {
@@ -130,4 +130,10 @@ const authConfig = {
   },
 } satisfies AuthConfig;
 
-export const { handlers, signIn, signOut, getSession } = AstroAuth(authConfig);
+// Astro用のAuth.js設定をエクスポート
+export const authConfig = config;
+
+// Auth.jsハンドラーを作成する関数
+export function createAuthHandlers() {
+  return Auth(config);
+}
