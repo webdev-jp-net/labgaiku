@@ -8,10 +8,8 @@
 
 `.env.local`に以下を定義する。
 
-- `NEXT_PUBLIC_MICROCMS_SERVICE_KEY`: サービスドメイン（例: `tamsan-lab`）
-- `NEXT_PUBLIC_MICROCMS_API_KEY`: APIキー
-
-ビルド時にも参照するため`NEXT_PUBLIC_`プレフィックスを使用する。
+- `MICROCMS_SERVICE_DOMAIN`: サービスドメイン（例: `tamsan-lab`）
+- `MICROCMS_API_KEY`: APIキー（サーバー側のみで使用）
 
 ## コンテンツモデル（report）
 
