@@ -3,11 +3,11 @@
 import type { Report } from "@/lib/api/microcms";
 import { sanitizeHtml } from "@/lib/sanitize";
 
-type ReportDetailViewProps = {
+type ReportArticleViewProps = {
   report: Report;
 };
 
-export function ReportDetailView({ report }: ReportDetailViewProps) {
+export function ReportArticleView({ report }: ReportArticleViewProps) {
   return (
     <article>
       <header>

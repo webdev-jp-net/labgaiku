@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
 import { getReportById } from "@/lib/api/microcms";
 import { authOptions } from "@/lib/auth";
-import { ReportDetailView } from "./_parts/view";
+import { ReportArticleView } from "./_parts/view";
 
 type ReportDetailPageProps = {
   params: {
@@ -21,7 +21,7 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
 
   try {
     const report = await getReportById(slug);
-    return <ReportDetailView report={report} />;
+    return <ReportArticleView report={report} />;
   } catch (error) {
     console.error(error);
     notFound();
