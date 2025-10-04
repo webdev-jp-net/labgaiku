@@ -38,6 +38,12 @@
 2. 取得結果を`_parts/view.tsx`に渡し、一覧表示やフィルタリングを実装する。
 3. 公開範囲や詳細表示などの応用が必要になった場合は、追加の取得関数やAPI Routeを`src/lib/api/microcms.ts`/`src/app/api/...`に追加する。
 
+## HTML表示とサニタイズ
+
+- `report.content`は`richEditorV2`形式でHTML文字列が返る。
+- クライアント側でHTMLを描画する場合は`isomorphic-dompurify`を利用し、`sanitizeHtml(report.content ?? "")`のようにサニタイズしてから`dangerouslySetInnerHTML`に渡す。
+- サニタイズ処理は`src/lib/sanitize.ts`で定義し、クライアント用ビュー（例: `src/app/[slug]/_parts/view.tsx`）から利用する。
+
 ## 今後の拡張メモ
 
 - 公開範囲（`visibility`）による権限制御
