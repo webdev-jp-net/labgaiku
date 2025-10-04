@@ -134,7 +134,10 @@ const config = {
 export const authConfig = config;
 
 // Auth.jsハンドラーをエクスポート
-export const handlers = Auth(config);
+export const handlers = {
+  GET: async (request: Request) => Auth(request, config),
+  POST: async (request: Request) => Auth(request, config),
+};
 
 // セッション取得関数（Astro用）
 export async function getSession(context: { request: Request }): Promise<Session | null> {
@@ -151,7 +154,7 @@ export async function getSession(context: { request: Request }): Promise<Session
     });
     
     // Auth.jsのセッションエンドポイントを呼び出す
-    const response = await handlers.GET(sessionRequest);
+    const response = await Auth(sessionRequest, config);
     
     if (!response.ok) {
       return null;

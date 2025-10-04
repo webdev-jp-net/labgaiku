@@ -16,10 +16,6 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/vercel": "^8.1.0",
-<<<<<<< HEAD
-    "@auth/astro": "^0.9.4",
-=======
->>>>>>> 9b6bb66aeebac066325a3efb72e84fc19a859f1d
     "@auth/core": "^0.37.2",
     "astro": "^5.14.1",
     "typescript": "^5.7.2"

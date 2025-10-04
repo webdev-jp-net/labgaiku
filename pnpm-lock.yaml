@@ -25,20 +25,8 @@ importers:
         version: 5.9.3
     devDependencies:
       '@eslint/js':
-<<<<<<< HEAD
         specifier: ^9.18.0
-        version: 9.36.0
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^8.18.2
-        version: 8.45.0(@typescript-eslint/parser@8.45.0(eslint@9.36.0)(typescript@5.9.3))(eslint@9.36.0)(typescript@5.9.3)
-      '@typescript-eslint/parser':
-        specifier: ^8.18.2
-        version: 8.45.0(eslint@9.36.0)(typescript@5.9.3)
-      eslint:
-=======
->>>>>>> 9b6bb66aeebac066325a3efb72e84fc19a859f1d
-        specifier: ^9.18.0
-        version: 9.36.0
+        version: 9.37.0
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.18.2
         version: 8.45.0(@typescript-eslint/parser@8.45.0(eslint@9.37.0)(typescript@5.9.3))(eslint@9.37.0)(typescript@5.9.3)
