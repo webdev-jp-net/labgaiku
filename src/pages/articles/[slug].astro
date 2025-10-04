@@ -19,8 +19,9 @@ interface PageProps {
 }
 
 const { article } = Astro.props as PageProps;
-const user = (Astro.locals.user as AuthUser | null) ?? null;
-const flash = Astro.locals.flash;
+// 一時的に認証を無効化
+const user = null;
+const flash = null;
 
 const { Content } = await article.render();
 
