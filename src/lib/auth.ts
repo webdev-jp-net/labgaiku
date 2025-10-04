@@ -133,7 +133,5 @@ const config = {
 // Astro用のAuth.js設定をエクスポート
 export const authConfig = config;
 
-// Auth.jsハンドラーを作成する関数
-export function createAuthHandlers() {
-  return Auth(config);
-}
+// Auth.jsハンドラーをエクスポート
+export const handlers = Auth(config);
