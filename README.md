@@ -4,14 +4,15 @@ TAMSAN Labサークルのインタビュー活動レポート記事を管理・�
 
 ## 概要
 
-「Labが行く」は、TAMSAN Labのインタビュー記事をSSO認証で保護された環境で閲覧できるブログ形式のWebアプリケーションです。
+「Labが行く」は、TAMSAN Labのインタビュー企画です
+ここでは、これまでにインタビューした記事をブログ形式で確認できるアプリケーションを構築します。
 
 ## 技術スタック
 
-- **フロントエンド**: Astro (SSR)
+- **フロントエンド**: 選定中
 - **スタイリング**: SCSS Modules
-- **認証**: Auth.js (@auth/core)
-- **OAuth**: Google / GitHub
+- **認証**: 選定中
+- **OAuth**: Google
 - **ホスティング**: Vercel
 - **パッケージマネージャー**: pnpm
 
@@ -42,10 +43,6 @@ NEXTAUTH_URL=http://localhost:4321
 # Google OAuth（Google Cloud Consoleで取得）
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
-
-# GitHub OAuth（GitHub Developer Settingsで取得）
-GITHUB_CLIENT_ID=your-github-client-id
-GITHUB_CLIENT_SECRET=your-github-client-secret
 ```
 
 ### 3. OAuth設定
@@ -84,26 +81,11 @@ pnpm format
 
 ## プロジェクト構造
 
-```
-lab-ga-iku/
-├── src/
-│   ├── components/      # 再利用可能なコンポーネント
-│   ├── layouts/         # ページレイアウト
-│   ├── pages/           # ページファイル（ルーティング）
-│   │   ├── api/auth/    # Auth.js APIルート
-│   │   └── articles/    # 記事ページ（認証必須）
-│   ├── content/         # Markdownコンテンツ
-│   │   └── articles/    # 記事ファイル
-│   ├── lib/             # ユーティリティ・ライブラリ
-│   ├── middleware/      # 認証ミドルウェア
-│   └── styles/          # グローバルスタイル
-├── public/              # 静的アセット
-└── _llm-rules/          # AI開発者向けルール
-```
+選定中
 
 ## 機能
 
-- ✅ SSO認証（Google / GitHub）
+- ✅ SSO認証（Google）
 - ✅ 認証保護された記事閲覧
 - ✅ Markdown記事管理
 - ✅ レスポンシブデザイン
@@ -112,23 +94,7 @@ lab-ga-iku/
 
 ## 記事の追加
 
-1. `src/content/articles/`に新しいMarkdownファイルを作成
-2. Frontmatterでメタデータを設定：
-
-```markdown
----
-title: "記事タイトル"
-date: 2025-01-15
-author: "TAMSAN Lab"
-tags: ["インタビュー", "技術"]
-draft: false
----
-
-記事本文をここに記述...
-```
-
-3. Gitにコミット・プッシュ
-4. Vercelが自動デプロイ
+選定中
 
 ## ライセンス
 
