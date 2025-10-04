@@ -27,6 +27,12 @@ importers:
       '@eslint/js':
         specifier: ^9.18.0
         version: 9.37.0
+      '@types/node':
+        specifier: 24.6.2
+        version: 24.6.2
+      '@types/react':
+        specifier: 19.2.0
+        version: 19.2.0
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.18.2
         version: 8.45.0(@typescript-eslint/parser@8.45.0(eslint@9.37.0(jiti@1.21.7))(typescript@5.9.3))(eslint@9.37.0(jiti@1.21.7))(typescript@5.9.3)
@@ -44,7 +50,7 @@ importers:
         version: 1.93.2
       scaffdog:
         specifier: ^4.1.0
-        version: 4.1.0
+        version: 4.1.0(@types/node@24.6.2)
       typescript-eslint:
         specifier: ^8.18.2
         version: 8.45.0(eslint@9.37.0(jiti@1.21.7))(typescript@5.9.3)
@@ -458,6 +464,12 @@ packages:
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
 
+  '@types/node@24.6.2':
+    resolution: {integrity: sha512-d2L25Y4j+W3ZlNAeMKcy7yDsK425ibcAOO2t7aPTz6gNMH0z2GThtwENCDc0d/Pw9wgyRqE5Px1wkV7naz8ang==}
+
+  '@types/react@19.2.0':
+    resolution: {integrity: sha512-1LOH8xovvsKsCBq1wnT4ntDUdCJKmnEakhsuoUSy6ExlHCkGP2hqnatagYTgFk6oeL0VU31u7SNjunPN+GchtA==}
+
   '@types/unist@2.0.11':
     resolution: {integrity: sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA==}
 
@@ -706,6 +718,9 @@ packages:
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
+
+  csstype@3.1.3:
+    resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
 
   dayjs@1.11.18:
     resolution: {integrity: sha512-zFBQ7WFRvVRhKcWoUh+ZA1g2HVgUbsZm9sbddh8EC5iv93sui8DVVz1Npvz+r6meo9VKfa8NyLWBsQK1VvIKPA==}
@@ -1712,6 +1727,9 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  undici-types@7.13.0:
+    resolution: {integrity: sha512-Ov2Rr9Sx+fRgagJ5AX0qvItZG/JKKoBRAVITs1zk7IqZGTJUwgUr7qoYBpWwakpWilTZFM98rG/AFRocu10iIQ==}
+
   unicode-emoji-modifier-base@1.0.0:
     resolution: {integrity: sha512-yLSH4py7oFH3oG/9K+XWrz1pSi3dfUrWEnInbxMfArOfc1+33BlGPQtLsOYwvdMy11AwUBetYuaRxSPqgkq+8g==}
     engines: {node: '>=4'}
@@ -1986,10 +2004,12 @@ snapshots:
   '@img/sharp-win32-x64@0.34.4':
     optional: true
 
-  '@inquirer/external-editor@1.0.2':
+  '@inquirer/external-editor@1.0.2(@types/node@24.6.2)':
     dependencies:
       chardet: 2.1.0
       iconv-lite: 0.7.0
+    optionalDependencies:
+      '@types/node': 24.6.2
 
   '@inquirer/figures@1.0.13': {}
 
@@ -2167,6 +2187,14 @@ snapshots:
       '@types/unist': 3.0.3
 
   '@types/ms@2.1.0': {}
+
+  '@types/node@24.6.2':
+    dependencies:
+      undici-types: 7.13.0
+
+  '@types/react@19.2.0':
+    dependencies:
+      csstype: 3.1.3
 
   '@types/unist@2.0.11': {}
 
@@ -2439,6 +2467,8 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
+  csstype@3.1.3: {}
+
   dayjs@1.11.18: {}
 
   debug@4.4.3:
@@ -2679,18 +2709,18 @@ snapshots:
 
   ini@4.1.1: {}
 
-  inquirer-autocomplete-prompt@3.0.1(inquirer@9.3.8):
+  inquirer-autocomplete-prompt@3.0.1(inquirer@9.3.8(@types/node@24.6.2)):
     dependencies:
       ansi-escapes: 6.2.1
       figures: 5.0.0
-      inquirer: 9.3.8
+      inquirer: 9.3.8(@types/node@24.6.2)
       picocolors: 1.1.1
       run-async: 2.4.1
       rxjs: 7.8.2
 
-  inquirer@9.3.8:
+  inquirer@9.3.8(@types/node@24.6.2):
     dependencies:
-      '@inquirer/external-editor': 1.0.2
+      '@inquirer/external-editor': 1.0.2(@types/node@24.6.2)
       '@inquirer/figures': 1.0.13
       ansi-escapes: 4.3.2
       cli-width: 4.1.0
@@ -3303,7 +3333,7 @@ snapshots:
       '@parcel/watcher': 2.5.1
     optional: true
 
-  scaffdog@4.1.0:
+  scaffdog@4.1.0(@types/node@24.6.2):
     dependencies:
       '@scaffdog/config': 4.1.0
       '@scaffdog/core': 4.1.0
@@ -3320,8 +3350,8 @@ snapshots:
       fuse.js: 7.1.0
       globby: 14.1.0
       indent-string: 5.0.0
-      inquirer: 9.3.8
-      inquirer-autocomplete-prompt: 3.0.1(inquirer@9.3.8)
+      inquirer: 9.3.8(@types/node@24.6.2)
+      inquirer-autocomplete-prompt: 3.0.1(inquirer@9.3.8(@types/node@24.6.2))
       is-plain-obj: 4.1.0
       log-symbols: 7.0.1
       micromatch: 4.0.8
@@ -3484,6 +3514,8 @@ snapshots:
       - supports-color
 
   typescript@5.9.3: {}
+
+  undici-types@7.13.0: {}
 
   unicode-emoji-modifier-base@1.0.0: {}
 
