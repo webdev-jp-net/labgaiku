@@ -5,7 +5,7 @@ import { signIn } from "next-auth/react";
 
 export function SignIn() {
   const handleClick = useCallback(() => {
-    void signIn("google", { callbackUrl: "/app" });
+    void signIn("google", { callbackUrl: "/" });
   }, []);
 
   return (
