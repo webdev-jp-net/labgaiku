@@ -1,7 +1,8 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { AppView } from "./_parts/view";
 import { authOptions } from "@/lib/auth";
+import { getReports } from "@/lib/api/microcms";
+import { AppView } from "./_parts/view";
 
 export default async function AppPage() {
   const session = await getServerSession(authOptions);
@@ -10,6 +11,8 @@ export default async function AppPage() {
     redirect("/signin");
   }
 
-  return <AppView session={session} />;
+  const reports = await getReports();
+
+  return <AppView session={session} reports={reports.contents} />;
 }
 
