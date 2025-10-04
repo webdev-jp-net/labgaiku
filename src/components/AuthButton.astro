@@ -1,0 +1,43 @@
+---
+import styles from './AuthButton.module.scss';
+
+interface Props {
+  variant: 'login' | 'logout';
+  provider?: 'google' | 'github';
+  callbackUrl?: string;
+}
+
+const { variant, provider, callbackUrl } = Astro.props as Props;
+
+const isLoginVariant = variant === 'login';
+
+if (isLoginVariant && !provider) {
+  throw new Error('Login variant requires a provider name.');
+}
+
+const targetCallbackUrl =
+  callbackUrl ?? (isLoginVariant ? '/articles?success=login' : '/login?success=logout');
+
+const action = isLoginVariant ? `/api/auth/signin/${provider}` : '/api/auth/signout';
+
+const buttonLabel = isLoginVariant
+  ? `${provider === 'google' ? 'Google' : 'GitHub'}でログイン`
+  : 'ログアウト';
+
+const buttonClass = [styles.button, styles[variant], provider ? styles[provider] : '']
+  .filter(Boolean)
+  .join(' ');
+---
+
+<a 
+  href={`${action}?callbackUrl=${encodeURIComponent(targetCallbackUrl)}`}
+  class={buttonClass} 
+  data-provider={provider ?? 'logout'}
+>
+  {isLoginVariant && (
+    <span class={styles.providerLabel} aria-hidden="true">
+      {provider === 'google' ? 'G' : 'GH'}
+    </span>
+  )}
+  <span>{buttonLabel}</span>
+</a>

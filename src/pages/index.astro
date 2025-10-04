@@ -1,16 +1,10 @@
 ---
+const session = Astro.locals.session;
 
+if (session?.user) {
+  return Astro.redirect('/articles');
+}
+
+const loginUrl = new URL('/login', Astro.url);
+return Astro.redirect(loginUrl.toString());
 ---
-
-<html lang="ja">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>TAMSAN Lab - Labが行く-</title>
-	</head>
-	<body>
-		<h1>TAMSAN Lab - Labが行く-</h1>
-	</body>
-</html>

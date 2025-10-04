@@ -1,0 +1,136 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-xl);
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brandArea {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.logo {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.logoAccent {
+  color: var(--blue-fg);
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex: 1;
+}
+
+.navigation a {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.navigation a:hover,
+.navigation a:focus-visible {
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+}
+
+.active {
+  color: var(--text-primary) !important;
+  background-color: var(--bg-secondary);
+}
+
+.accountArea {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  min-width: 12rem;
+  justify-content: flex-end;
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.avatar,
+.avatarFallback {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: var(--bg-secondary);
+  display: grid;
+  place-items: center;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.avatarFallback {
+  text-transform: uppercase;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.userName {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.userEmail {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.loginLink {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--blue-solid);
+  color: var(--blue-solid);
+  font-weight: var(--font-weight-medium);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.loginLink:hover {
+  background-color: var(--blue-solid);
+  color: var(--blue-contrast);
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-md);
+  }
+
+  .navigation {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .accountArea {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

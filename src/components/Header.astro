@@ -1,0 +1,53 @@
+---
+import type { AuthUser } from '../lib/auth';
+import AuthButton from './AuthButton.astro';
+import styles from './Header.module.scss';
+
+export interface HeaderProps {
+  user: AuthUser | null;
+  currentPath?: string;
+}
+
+const { user, currentPath = '/' }: HeaderProps = Astro.props;
+const isAuthenticated = Boolean(user);
+---
+
+<header class={styles.header}>
+  <div class={styles.brandArea}>
+    <a href="/" class={styles.logo}>
+      <span class={styles.logoAccent}>Lab</span>が行く
+    </a>
+  </div>
+  <nav class={styles.navigation} aria-label="主要ナビゲーション">
+    <a
+      href="/articles"
+      class:list={{ [styles.active]: currentPath.startsWith('/articles') }}
+    >
+      インタビュー記事
+    </a>
+  </nav>
+  <div class={styles.accountArea}>
+    {isAuthenticated ? (
+      <>
+        <div class={styles.userProfile}>
+          {user?.image ? (
+            <img src={user.image} alt={`${user?.name ?? 'ユーザー'}のアバター`} class={styles.avatar} />
+          ) : (
+            <div class={styles.avatarFallback} aria-hidden="true">
+              {(user?.name ?? 'U').slice(0, 1)}
+            </div>
+          )}
+          <div class={styles.userInfo}>
+            <span class={styles.userName}>{user?.name ?? 'ゲスト'}</span>
+            {user?.email && <span class={styles.userEmail}>{user.email}</span>}
+          </div>
+        </div>
+        <AuthButton variant="logout" />
+      </>
+    ) : (
+      <a href="/login" class={styles.loginLink}>
+        ログイン
+      </a>
+    )}
+  </div>
+</header>

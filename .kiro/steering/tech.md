@@ -8,7 +8,7 @@
 - **SCSS Modules**: コンポーネント単位のスタイル管理
 
 ### 認証
-- **Auth.js**: 軽量な認証ライブラリ（旧NextAuth.js）
+- **Auth.js**: 軽量な認証ライブラリ（@auth/core使用）
 - **SSOプロバイダー**: Google / GitHub
 
 ### 記事管理

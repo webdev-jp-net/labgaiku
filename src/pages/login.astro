@@ -1,0 +1,70 @@
+---
+import AuthButton from '../components/AuthButton.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { AuthUser } from '../lib/auth';
+import { getAuthErrorMessage, getAuthSuccessMessage } from '../lib/error-handler';
+import styles from './_login.module.scss';
+
+// 一時的に認証を無効化
+const user = null;
+const flash = null;
+
+const errorMessage =
+  flash?.type === 'error' ? flash.message : getAuthErrorMessage(Astro.url.searchParams.get('error'));
+const successMessage =
+  flash?.type === 'success'
+    ? flash.message
+    : getAuthSuccessMessage(Astro.url.searchParams.get('success'));
+
+const buildCallbackUrl = (rawCallback: string | null): string => {
+  if (!rawCallback) {
+    return '/articles?success=login';
+  }
+
+  try {
+    const baseUrl = Astro.url;
+    const target = new URL(rawCallback, baseUrl.origin);
+    if (target.origin !== baseUrl.origin) {
+      return '/articles?success=login';
+    }
+
+    if (!target.searchParams.has('success')) {
+      target.searchParams.set('success', 'login');
+    }
+
+    return `${target.pathname}${target.search}`;
+  } catch {
+    return '/articles?success=login';
+  }
+};
+
+const callbackUrl = buildCallbackUrl(Astro.url.searchParams.get('callbackUrl'));
+---
+
+<BaseLayout
+  title="ログイン | TAMSAN Lab"
+  user={user}
+  currentPath="/login"
+  flash={flash}
+>
+  <section class={styles.container}>
+    <div class={styles.card}>
+      <h1 class={styles.title}>TAMSAN Lab アカウントでログイン</h1>
+      <p class={styles.description}>
+        Google または GitHub アカウントを使用して「Labが行く」のインタビュー記事にアクセスできます。
+      </p>
+
+      {errorMessage && <p class={`${styles.alert} ${styles.error}`}>{errorMessage}</p>}
+      {successMessage && <p class={`${styles.alert} ${styles.success}`}>{successMessage}</p>}
+
+      <div class={styles.buttonGroup}>
+        <AuthButton variant="login" provider="google" callbackUrl={callbackUrl} />
+        <AuthButton variant="login" provider="github" callbackUrl={callbackUrl} />
+      </div>
+
+      <p class={styles.note}>
+        ログインすることで、利用規約およびプライバシーポリシーに同意したものとみなされます。
+      </p>
+    </div>
+  </section>
+</BaseLayout>
