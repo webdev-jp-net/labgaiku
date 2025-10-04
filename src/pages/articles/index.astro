@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { AuthUser } from '../../lib/auth';
+import styles from './index.module.scss';
+
+const user = (Astro.locals.user as AuthUser | null) ?? null;
+const flash = Astro.locals.flash;
+
+const entries = await getCollection('articles', ({ data }) => !data.draft);
+
+const sortedEntries = entries.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+type ArticleSummary = CollectionEntry<'articles'> & {
+  excerpt: string;
+  formattedDate: string;
+};
+
+const summaries: ArticleSummary[] = sortedEntries.map((entry) => {
+  const plainText = entry.body.replace(/\s+/g, ' ').trim();
+  const excerpt = plainText.length > 120 ? `${plainText.slice(0, 120)}…` : plainText;
+
+  return {
+    ...entry,
+    excerpt,
+    formattedDate: entry.data.date.toLocaleDateString('ja-JP', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }),
+  };
+});
+---
+
+<BaseLayout
+  title="インタビュー記事一覧 | TAMSAN Lab"
+  user={user}
+  currentPath="/articles"
+  flash={flash}
+>
+  <section class={styles.wrapper}>
+    <header class={styles.header}>
+      <h1>インタビュー記事</h1>
+      <p>
+        TAMSAN Labの研究者やプロジェクトメンバーへのインタビュー記事をお届けします。最新の取り組みや学びをチェックしましょう。
+      </p>
+    </header>
+
+    {summaries.length > 0 ? (
+      <ul class={styles.list}>
+        {summaries.map((article) => (
+          <li class={styles.listItem}>
+            <a href={`/articles/${article.slug}`} class={styles.articleLink}>
+              <div class={styles.meta}>
+                <span class={styles.date}>{article.formattedDate}</span>
+                <span class={styles.author}>{article.data.author}</span>
+              </div>
+              <h2 class={styles.title}>{article.data.title}</h2>
+              <p class={styles.excerpt}>{article.excerpt}</p>
+              <div class={styles.tags}>
+                {article.data.tags.map((tag) => (
+                  <span class={styles.tag}>{tag}</span>
+                ))}
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class={styles.empty}>公開中の記事はまだありません。準備が整い次第、順次公開していきます。</p>
+    )}
+  </section>
+</BaseLayout>

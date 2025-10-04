@@ -1,0 +1,62 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { AuthUser } from '../../lib/auth';
+import styles from './slug.module.scss';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => !data.draft);
+
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+interface PageProps {
+  article: CollectionEntry<'articles'>;
+}
+
+const { article } = Astro.props as PageProps;
+const user = (Astro.locals.user as AuthUser | null) ?? null;
+const flash = Astro.locals.flash;
+
+const { Content } = await article.render();
+
+const formattedDate = article.data.date.toLocaleDateString('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout
+  title={`${article.data.title} | TAMSAN Lab`}
+  user={user}
+  currentPath="/articles"
+  flash={flash}
+>
+  <article class={styles.article}>
+    <header class={styles.header}>
+      <p class={styles.kicker}>インタビュー</p>
+      <h1 class={styles.title}>{article.data.title}</h1>
+      <div class={styles.meta}>
+        <span class={styles.date}>{formattedDate}</span>
+        <span class={styles.author}>{article.data.author}</span>
+      </div>
+      <div class={styles.tags}>
+        {article.data.tags.map((tag) => (
+          <span class={styles.tag}>{tag}</span>
+        ))}
+      </div>
+    </header>
+    <div class={styles.content}>
+      <Content />
+    </div>
+  </article>
+
+  <nav class={styles.backNavigation}>
+    <a href="/articles">← 記事一覧に戻る</a>
+  </nav>
+</BaseLayout>

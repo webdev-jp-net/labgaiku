@@ -1,0 +1,80 @@
+.form {
+  width: 100%;
+}
+
+.button {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--border-radius);
+  border: 1px solid transparent;
+  transition: background-color var(--transition),
+    color var(--transition),
+    border-color var(--transition),
+    transform var(--transition);
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--blue-fg);
+  outline-offset: 2px;
+}
+
+.login {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.login:hover {
+  background-color: #edf2f7;
+}
+
+.google {
+  background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+}
+
+.github {
+  background-color: #24292e;
+  color: var(--blue-contrast);
+  border-color: #2f363d;
+}
+
+.github:hover {
+  background-color: #1b1f23;
+}
+
+.logout {
+  background-color: var(--blue-solid);
+  color: var(--blue-contrast);
+  border-color: transparent;
+}
+
+.logout:hover {
+  background-color: var(--blue-emphasized);
+}
+
+.providerLabel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  font-weight: var(--font-weight-bold);
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
+}
+
+.github .providerLabel {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: var(--blue-contrast);
+}
