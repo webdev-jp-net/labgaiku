@@ -1,6 +1,7 @@
 "use client";
 
 import type { Report } from "@/lib/api/microcms";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 type ReportDetailViewProps = {
   report: Report;
@@ -16,7 +17,7 @@ export function ReportDetailView({ report }: ReportDetailViewProps) {
       <section>
         <div
           dangerouslySetInnerHTML={{
-            __html: report.content ?? "",
+            __html: sanitizeHtml(report.content ?? ""),
           }}
         />
       </section>
