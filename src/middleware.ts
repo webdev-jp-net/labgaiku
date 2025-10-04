@@ -1,6 +1,6 @@
 import { defineMiddleware } from 'astro:middleware';
+import { authenticationMiddleware } from './middleware/auth';
 
-export const onRequest = defineMiddleware((context, next) => {
-  // 一時的に認証を無効化
-  return next();
-});
+export const onRequest = defineMiddleware((context, next) =>
+  authenticationMiddleware(context, next),
+);

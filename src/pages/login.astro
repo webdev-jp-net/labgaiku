@@ -5,9 +5,8 @@ import type { AuthUser } from '../lib/auth';
 import { getAuthErrorMessage, getAuthSuccessMessage } from '../lib/error-handler';
 import styles from './_login.module.scss';
 
-// 一時的に認証を無効化
-const user = null;
-const flash = null;
+const user = (Astro.locals.user as AuthUser | null) ?? null;
+const flash = Astro.locals.flash;
 
 const errorMessage =
   flash?.type === 'error' ? flash.message : getAuthErrorMessage(Astro.url.searchParams.get('error'));

@@ -5,9 +5,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import type { AuthUser } from '../../lib/auth';
 import styles from './_index.module.scss';
 
-// 一時的に認証を無効化
-const user = null;
-const flash = null;
+const user = (Astro.locals.user as AuthUser | null) ?? null;
+const flash = Astro.locals.flash;
 
 const entries = await getCollection('articles', ({ data }) => !data.draft);
 

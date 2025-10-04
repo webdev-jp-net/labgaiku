@@ -135,3 +135,32 @@ export const authConfig = config;
 
 // Auth.jsハンドラーをエクスポート
 export const handlers = Auth(config);
+
+// セッション取得関数（Astro用）
+export async function getSession(context: { request: Request }): Promise<Session | null> {
+  try {
+    const url = new URL(context.request.url);
+    const sessionUrl = new URL('/api/auth/session', url.origin);
+    
+    // 元のリクエストのCookieを引き継ぐ
+    const sessionRequest = new Request(sessionUrl, {
+      method: 'GET',
+      headers: {
+        cookie: context.request.headers.get('cookie') || '',
+      },
+    });
+    
+    // Auth.jsのセッションエンドポイントを呼び出す
+    const response = await handlers.GET(sessionRequest);
+    
+    if (!response.ok) {
+      return null;
+    }
+    
+    const session = await response.json();
+    return session || null;
+  } catch (error) {
+    console.error('Failed to get session:', error);
+    return null;
+  }
+}
