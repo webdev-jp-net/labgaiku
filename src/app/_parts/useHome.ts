@@ -12,7 +12,7 @@ export const useHome = ({ session }: HomeLinksOptions) => {
   }
 
   return {
-    links: [{ href: "/signin", label: "ログイン" }],
+    links: [{ href: "/api/auth/signin?callbackUrl=%2Fapp", label: "Googleでサインイン" }],
   };
 };
 
