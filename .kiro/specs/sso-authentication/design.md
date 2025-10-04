@@ -300,7 +300,6 @@ src/
 {
   "dependencies": {
     "@auth/core": "^0.37.2",
-    "@auth/astro": "^0.9.4",
     "astro": "^5.14.1"
   }
 }
