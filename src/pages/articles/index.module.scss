@@ -1,0 +1,107 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.header h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.header p {
+  color: var(--text-secondary);
+}
+
+.list {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.listItem {
+  list-style: none;
+}
+
+.articleLink {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  border-radius: calc(var(--border-radius) * 2);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.articleLink:hover,
+.articleLink:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(49, 130, 206, 0.4);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.date::before {
+  content: '📅';
+  margin-right: var(--spacing-xs);
+}
+
+.author::before {
+  content: '👤';
+  margin-right: var(--spacing-xs);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.excerpt {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  background-color: rgba(49, 130, 206, 0.1);
+  color: var(--blue-fg);
+  font-size: var(--font-size-sm);
+}
+
+.empty {
+  padding: var(--spacing-xl);
+  border-radius: calc(var(--border-radius) * 2);
+  border: 1px dashed var(--border-color);
+  color: var(--text-secondary);
+  text-align: center;
+  background-color: var(--bg-secondary);
+}
+
+@media (max-width: 640px) {
+  .articleLink {
+    padding: var(--spacing-md);
+  }
+}
