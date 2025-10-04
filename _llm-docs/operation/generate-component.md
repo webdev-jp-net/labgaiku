@@ -10,25 +10,34 @@
 
 `.scaffdog`ディレクトリで定義されているテンプレート:
 
-- `hooks.md` - カスタムReactフック
-- `page-component.md` - ページコンポーネント（ルーティング対応）
+- `page-component.md` - App Router対応ページコンポーネント
 - `parts-component.md` - 再利用可能なUI部品
 
 **注意**: 生成後のカスタマイズ（ロジック実装、API連携、スタイル調整など）は別タスクとして扱います。
 
 ## 生成されるファイル構造
 
-scaffdogは以下の構造でファイルを生成します：
+page-componentテンプレートは以下の構造を生成します：
+
+```
+[component-name]/
+├── page.tsx                  # サーバーコンポーネント（データ取得・ルーティング）
+└── _parts/
+    ├── view.tsx             # 'use client' 指定の表示専用コンポーネント
+    ├── useComponentName.ts  # ビジネスロジック／フック
+    └── page.module.scss     # スタイル（必要最低限）
+```
+
+parts-componentテンプレートは以下を生成します（`.stories.tsx`付き）：
 
 ```
 [ComponentName]/
-├── index.ts                    # エクスポート用
-├── [ComponentName].tsx         # コンポーネント本体
-├── use[ComponentName].ts       # カスタムフック
-└── [ComponentName].module.scss # スタイル
+├── index.ts
+├── [ComponentName].tsx
+├── [ComponentName].module.scss
+├── use[ComponentName].ts
+└── [ComponentName].stories.tsx
 ```
-
-※ parts-componentの場合は`.stories.tsx`ファイルも生成されます。
 
 ## 前提条件
 
@@ -39,7 +48,7 @@ scaffdogは以下の構造でファイルを生成します：
 
 ### 概要
 
-routing.mdで定義されたページコンポーネントを生成します。
+`src/app` 配下にページディレクトリ（`page.tsx` + `_parts`）を生成し、サーバーコンポーネントとクライアントコンポーネントの責務を切り分けます。
 
 ### 生成手順
 
@@ -48,54 +57,40 @@ routing.mdで定義されたページコンポーネントを生成します。
 scaffdogコマンドを使用してコンポーネントを生成します。認証の要否に応じてディレクトリを分けて配置します。
 
 ```bash
-# 認証必要ページの生成（pages/_authenticated 配下に生成）
-npx scaffdog generate page-component --output "pages/_authenticated" --answer "name:AccountIndex"
+# 認証が必要なページ（例: src/app/(authenticated) 配下）
+npx scaffdog generate page-component --output "(authenticated)" --answer "name:AccountIndex"
 
-# 認証不要ページの生成（pages/_unauthenticated 配下に生成）
-npx scaffdog generate page-component --output "pages/_unauthenticated" --answer "name:Login"
+# 認証不要ページ（例: src/app/(unauthenticated) 配下）
+npx scaffdog generate page-component --output "(unauthenticated)" --answer "name:Login"
 ```
 
 **重要**:
-- 認証が必要なページは `pages/_authenticated`、認証不要ページは `pages/_unauthenticated` を `--output` に指定
-- `--answer`でコンポーネント名を指定（3階層以上のパスは接頭辞として連結）
-- 認証区分ごとのディレクトリ構造を必ず維持する
-
+- `--output` は `src/app` からの相対パスを指定します。グループディレクトリ（例: `(authenticated)`）の命名ルールを維持してください。
+- 生成される `page.tsx` はサーバーコンポーネントとしてデータ取得やリダイレクトなどを担当します。表示ロジックや状態管理は `_parts/view.tsx` と `use*.ts` に閉じ込めます。
+- テンプレートには装飾を含めないため、スタイルは `_parts/page.module.scss` に必要最低限だけ定義し、追加装飾は別タスクで行います。
 
 ### 命名パターン別の生成例
 
 #### 基本パターン
 
 ```bash
-# 通常のページコンポーネント（認証あり）
-npx scaffdog generate page-component --output "pages/_authenticated" --answer "name:NewsIndex"
-npx scaffdog generate page-component --output "pages/_authenticated" --answer "name:AccountDetail"
+# 認証ありページの例
+npx scaffdog generate page-component --output "(authenticated)" --answer "name:NewsIndex"
+npx scaffdog generate page-component --output "(authenticated)" --answer "name:AccountDetail"
 ```
 
 **命名規則**:
-- `{Resource}{Action}` (例: NewsIndex, AccountDetail)
+- `{Resource}{Action}` (例: NewsIndex, AccountDetail)。ディレクトリ名は自動的にケバブケース化されます。
 
 ### 生成後の確認事項
 
 #### エイリアスの確認
 
-インポート時はプロジェクトで定義されたエイリアスを使用します（すべて直接パス）：
-
-```typescript
-// 認証必要ページ
-import { AccountDetail } from 'pages/_authenticated/AccountDetail'
-import { LearningTechIndex } from 'pages/_authenticated/LearningTechIndex'
-
-// 認証不要ページ
-import { Login } from 'pages/_unauthenticated/Login'
-import { RegisterAccount } from 'pages/_unauthenticated/RegisterAccount'
-
-// 共通ページ
-import { NotFound } from 'pages/NotFound'
-```
+`src/app` 配下の `page.tsx` がルーティングエントリになります。共通コンポーネントは `@/components/...` 形式で参照し、クライアントコンポーネントは `_parts/view` を通して読み込んでください。
 
 ### 注意事項
 
-- **重複生成の防止**: すでに存在する場合は上書きされるため注意
+- **重複生成の防止**: 同名ディレクトリが存在すると `page.tsx` や `_parts` が上書きされるため注意
 - **作業ディレクトリ**: プロジェクトルートから実行すること
 
 ### トラブルシューティング
