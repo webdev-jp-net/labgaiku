@@ -3,7 +3,6 @@ import AuthButton from '../components/AuthButton.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import type { AuthUser } from '../lib/auth';
 import { getAuthErrorMessage, getAuthSuccessMessage } from '../lib/error-handler';
-import styles from './_login.module.scss';
 
 const user = (Astro.locals.user as AuthUser | null) ?? null;
 const flash = Astro.locals.flash;
@@ -46,22 +45,22 @@ const callbackUrl = buildCallbackUrl(Astro.url.searchParams.get('callbackUrl'));
   currentPath="/login"
   flash={flash}
 >
-  <section class={styles.container}>
-    <div class={styles.card}>
-      <h1 class={styles.title}>TAMSAN Lab アカウントでログイン</h1>
-      <p class={styles.description}>
+  <section>
+    <div>
+      <h1>TAMSAN Lab アカウントでログイン</h1>
+      <p>
         Google または GitHub アカウントを使用して「Labが行く」のインタビュー記事にアクセスできます。
       </p>
 
-      {errorMessage && <p class={`${styles.alert} ${styles.error}`}>{errorMessage}</p>}
-      {successMessage && <p class={`${styles.alert} ${styles.success}`}>{successMessage}</p>}
+      {errorMessage && <p>{errorMessage}</p>}
+      {successMessage && <p>{successMessage}</p>}
 
-      <div class={styles.buttonGroup}>
+      <div>
         <AuthButton variant="login" provider="google" callbackUrl={callbackUrl} />
         <AuthButton variant="login" provider="github" callbackUrl={callbackUrl} />
       </div>
 
-      <p class={styles.note}>
+      <p>
         ログインすることで、利用規約およびプライバシーポリシーに同意したものとみなされます。
       </p>
     </div>

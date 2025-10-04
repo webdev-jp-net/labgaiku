@@ -1,7 +1,6 @@
 ---
 import type { AuthUser } from '../lib/auth';
 import AuthButton from './AuthButton.astro';
-import styles from './Header.module.scss';
 
 export interface HeaderProps {
   user: AuthUser | null;
@@ -12,42 +11,24 @@ const { user, currentPath = '/' }: HeaderProps = Astro.props;
 const isAuthenticated = Boolean(user);
 ---
 
-<header class={styles.header}>
-  <div class={styles.brandArea}>
-    <a href="/" class={styles.logo}>
-      <span class={styles.logoAccent}>Lab</span>が行く
-    </a>
+<header>
+  <div>
+    <a href="/">Labが行く</a>
   </div>
-  <nav class={styles.navigation} aria-label="主要ナビゲーション">
-    <a
-      href="/articles"
-      class:list={{ [styles.active]: currentPath.startsWith('/articles') }}
-    >
-      インタビュー記事
-    </a>
+  <nav aria-label="主要ナビゲーション">
+    <a href="/articles">インタビュー記事</a>
   </nav>
-  <div class={styles.accountArea}>
+  <div>
     {isAuthenticated ? (
       <>
-        <div class={styles.userProfile}>
-          {user?.image ? (
-            <img src={user.image} alt={`${user?.name ?? 'ユーザー'}のアバター`} class={styles.avatar} />
-          ) : (
-            <div class={styles.avatarFallback} aria-hidden="true">
-              {(user?.name ?? 'U').slice(0, 1)}
-            </div>
-          )}
-          <div class={styles.userInfo}>
-            <span class={styles.userName}>{user?.name ?? 'ゲスト'}</span>
-            {user?.email && <span class={styles.userEmail}>{user.email}</span>}
-          </div>
+        <div>
+          {user?.name ?? 'ゲスト'}
+          {user?.email && <span>({user.email})</span>}
         </div>
         <AuthButton variant="logout" />
       </>
     ) : (
-      <a href="/login" class={styles.loginLink}>
-        ログイン
-      </a>
+      <a href="/login">ログイン</a>
     )}
   </div>
 </header>

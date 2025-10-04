@@ -1,10 +1,8 @@
 ---
-import '../styles/index.scss';
 import Header from '../components/Header.astro';
 import Toast from '../components/Toast.astro';
 import type { AuthUser } from '../lib/auth';
 import type { FlashMessage } from '../lib/error-handler';
-import styles from './BaseLayout.module.scss';
 
 export interface BaseLayoutProps {
   title?: string;
@@ -31,9 +29,9 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
-  <body class={styles.page}>
+  <body>
     <Header user={user} currentPath={currentPath} />
-    <main class={styles.main}>
+    <main>
       <slot />
     </main>
     {flash && <Toast message={flash.message} type={flash.type} />}

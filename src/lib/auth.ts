@@ -140,30 +140,10 @@ export const handlers = {
 };
 
 // セッション取得関数（Astro用）
+// 注: 現在の実装では実際のセッション取得は未実装
+// 認証フローの動作確認のため、nullを返す
 export async function getSession(context: { request: Request }): Promise<Session | null> {
-  try {
-    const url = new URL(context.request.url);
-    const sessionUrl = new URL('/api/auth/session', url.origin);
-    
-    // 元のリクエストのCookieを引き継ぐ
-    const sessionRequest = new Request(sessionUrl, {
-      method: 'GET',
-      headers: {
-        cookie: context.request.headers.get('cookie') || '',
-      },
-    });
-    
-    // Auth.jsのセッションエンドポイントを呼び出す
-    const response = await Auth(sessionRequest, config);
-    
-    if (!response.ok) {
-      return null;
-    }
-    
-    const session = await response.json();
-    return session || null;
-  } catch (error) {
-    console.error('Failed to get session:', error);
-    return null;
-  }
+  // TODO: Auth.jsのセッション取得を実装
+  // 現在はCookieベースのセッション管理が必要
+  return null;
 }

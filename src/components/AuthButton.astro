@@ -1,6 +1,4 @@
 ---
-import styles from './AuthButton.module.scss';
-
 interface Props {
   variant: 'login' | 'logout';
   provider?: 'google' | 'github';
@@ -23,21 +21,11 @@ const action = isLoginVariant ? `/api/auth/signin/${provider}` : '/api/auth/sign
 const buttonLabel = isLoginVariant
   ? `${provider === 'google' ? 'Google' : 'GitHub'}でログイン`
   : 'ログアウト';
-
-const buttonClass = [styles.button, styles[variant], provider ? styles[provider] : '']
-  .filter(Boolean)
-  .join(' ');
 ---
 
 <a 
   href={`${action}?callbackUrl=${encodeURIComponent(targetCallbackUrl)}`}
-  class={buttonClass} 
   data-provider={provider ?? 'logout'}
 >
-  {isLoginVariant && (
-    <span class={styles.providerLabel} aria-hidden="true">
-      {provider === 'google' ? 'G' : 'GH'}
-    </span>
-  )}
-  <span>{buttonLabel}</span>
+  {buttonLabel}
 </a>

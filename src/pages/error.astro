@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import type { AuthUser } from '../lib/auth';
 import { getAuthErrorMessage } from '../lib/error-handler';
-import styles from './_error.module.scss';
 
 const user = (Astro.locals.user as AuthUser | null) ?? null;
 const flash = Astro.locals.flash;
@@ -23,12 +22,10 @@ const loginLink = callbackUrl ? `/login?callbackUrl=${encodeURIComponent(callbac
   currentPath="/error"
   flash={flash}
 >
-  <section class={styles.container}>
+  <section>
     <h1>認証エラーが発生しました</h1>
-    <p class={styles.message}>{message}</p>
-    {errorCode && <p class={styles.code}>エラーコード: {errorCode}</p>}
-    <a href={loginLink} class={styles.link}>
-      ログインページに戻る
-    </a>
+    <p>{message}</p>
+    {errorCode && <p>エラーコード: {errorCode}</p>}
+    <a href={loginLink}>ログインページに戻る</a>
   </section>
 </BaseLayout>
