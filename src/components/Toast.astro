@@ -1,0 +1,47 @@
+---
+import type { FlashMessageType } from '../lib/error-handler';
+import styles from './Toast.module.scss';
+
+export interface ToastProps {
+  message: string;
+  type?: FlashMessageType;
+  duration?: number;
+}
+
+const { message, type = 'info', duration = 4000 }: ToastProps = Astro.props;
+const hiddenClassName = styles.hidden;
+---
+
+{message && (
+  <div class={[styles.toast, styles[type]].join(' ')} data-toast>
+    <span class={styles.message}>{message}</span>
+    <button type="button" class={styles.closeButton} aria-label="閉じる">
+      ×
+    </button>
+  </div>
+)}
+
+<script is:inline>
+  const hiddenClass = '${hiddenClassName}';
+  const hideDelay = ${duration};
+
+  const toast = document.querySelector('[data-toast]');
+  if (toast) {
+    const hide = () => {
+      toast.classList.add(hiddenClass);
+      window.setTimeout(() => {
+        toast.remove();
+      }, 250);
+    };
+
+    const button = toast.querySelector('button');
+    button?.addEventListener('click', hide);
+
+    window.setTimeout(hide, hideDelay);
+
+    const url = new URL(window.location.href);
+    url.searchParams.delete('error');
+    url.searchParams.delete('success');
+    window.history.replaceState(null, '', url);
+  }
+</script>
