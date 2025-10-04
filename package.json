@@ -8,6 +8,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "microcms-js-sdk": "^3.2.0",
     "next": "^15.5.4",
     "next-auth": "^4.24.11",
     "react": "^19.2.0",
