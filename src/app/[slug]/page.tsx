@@ -5,9 +5,9 @@ import { authOptions } from "@/lib/auth";
 import { ReportArticleView } from "./_parts/view";
 
 type ReportDetailPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export default async function ReportDetailPage({ params }: ReportDetailPageProps) {
@@ -17,7 +17,7 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
     notFound();
   }
 
-  const { slug } = params;
+  const { slug } = await params;
 
   try {
     const report = await getReportById(slug);
