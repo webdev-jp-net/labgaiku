@@ -18,8 +18,8 @@ export const authOptions: NextAuthOptions = {
       if (requestedDomain && allowedDomains.includes(requestedDomain)) {
         return true
       }
-      // 未許可のドメインの場合はログインできない
-      return false
+      // ログインできない場合
+      return '/?error=unauthorized'
     },
     async jwt({ token, account, profile }) {
       // 初回ログイン時
