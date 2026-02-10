@@ -3,6 +3,8 @@ import GoogleProvider from 'next-auth/providers/google'
 
 // ログインを許可するドメイン
 const allowedDomains = ['tam-tam.co.jp']
+// ドメインに関わらず個別に許可するメールアドレス
+const allowedEmails: string[] = []
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -13,8 +15,11 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ user }) {
-      const requestedDomain = user.email?.split('@')[1]
+      if (user.email && allowedEmails.includes(user.email)) {
+        return true
+      }
 
+      const requestedDomain = user.email?.split('@')[1]
       if (requestedDomain && allowedDomains.includes(requestedDomain)) {
         return true
       }
