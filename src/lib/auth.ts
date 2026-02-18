@@ -1,47 +1,54 @@
-import type { NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import type { NextAuthOptions } from 'next-auth'
+import GoogleProvider from 'next-auth/providers/google'
+
+// ログインを許可するドメイン
+const allowedDomains = ['tam-tam.co.jp']
+// ドメインに関わらず個別に許可するメールアドレス
+const allowedEmails: string[] = []
 
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+      clientId: process.env.GOOGLE_CLIENT_ID ?? '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
     }),
   ],
   callbacks: {
-    async jwt({ token, account, profile }) {
-      if (account && profile) {
-        if (profile.email) {
-          token.email = profile.email;
-        }
-        if (profile.name) {
-          token.name = profile.name;
-        }
-        const picture = (profile as { picture?: string }).picture;
-        if (picture) {
-          token.picture = picture;
-        }
+    async signIn({ user }) {
+      if (user.email && allowedEmails.includes(user.email)) {
+        return true
       }
-      return token;
+
+      const requestedDomain = user.email?.split('@')[1]
+      if (requestedDomain && allowedDomains.includes(requestedDomain)) {
+        return true
+      }
+      // ログインできない場合
+      return '/?error=unauthorized'
+    },
+    async jwt({ token, account, profile }) {
+      // 初回ログイン時
+      if (account && profile) {
+        token.email = profile.email
+        token.name = profile.name
+        token.image = (profile as { picture?: string }).picture
+      }
+      return token
     },
     async session({ session, token }) {
       if (session.user) {
-        if (token.email) {
-          session.user.email = token.email as string;
-        }
-        if (token.name) {
-          session.user.name = token.name as string;
-        }
-        if (token.picture) {
-          session.user.image = token.picture as string;
-        }
+        session.user.email = token.email as string
+        session.user.name = token.name as string
+        session.user.image = token.image as string
       }
-      return session;
+      return session
     },
   },
+  pages: {
+    signIn: '/',
+  },
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
   secret: process.env.NEXTAUTH_SECRET,
-};
-
+}
