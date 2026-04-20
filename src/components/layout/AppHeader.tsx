@@ -29,11 +29,3 @@ export function AppHeader() {
     </header>
   )
 }
-
-"
-ポイントのところ
-本実装に転用可能かどうか
-
-TBS様で、他の理由があって
-
-"
