@@ -52,7 +52,7 @@ lab-ga-iku/
 ## 主要ファイル
 
 ### 設定ファイル
-- `astro.config.mjs`: Astro設定（SSRモード、Vercelアダプタ）
+- `astro.config.mjs`: Astro設定（SSRモード、Vercelアダプター）
 - `auth.config.ts`: Auth.js設定
 - `tsconfig.json`: TypeScript設定
 - `package.json`: 依存関係・スクリプト
@@ -102,7 +102,7 @@ lab-ga-iku/
 
 ### TypeScript
 - **変数・関数**: camelCase（例: `articleList`, `getArticles`）
-- **型・インターフェース**: PascalCase（例: `Article`, `AuthUser`）
+- **型・インターフェイス**: PascalCase（例: `Article`, `AuthUser`）
 - **定数**: UPPER_SNAKE_CASE（例: `MAX_ARTICLES`）
 
 ## SCSS Modules 使用例

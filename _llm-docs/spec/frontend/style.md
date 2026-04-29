@@ -103,7 +103,7 @@ TSXでの実装：
 - 割合を示す場合は % で表現
 
 #### カラーの管理
-色は CSS Variablesを使用する。既存の `src/styles/_variable/_semantic.scss` 等で定義された変数を優先。
+色はCSS Variablesを使用する。既存の `src/styles/_variable/_semantic.scss` 等で定義された変数を優先。
 
 ## 参考資料
 - [Next.js CSS Modules](https://nextjs.org/docs/app/building-your-application/styling/css-modules)
