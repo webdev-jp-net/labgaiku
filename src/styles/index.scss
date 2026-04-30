@@ -108,7 +108,7 @@ body {
   min-height: 100%;
   margin: 0;
   font-family:
-    'Noto Sans JP',
+    var(--font-line-seed-jp),
     'Hiragino Kaku Gothic ProN',
     -apple-system,
     BlinkMacSystemFont,
