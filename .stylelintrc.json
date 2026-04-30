@@ -69,6 +69,7 @@
     "scss/double-slash-comment-inline": null,
     "scss/double-slash-comment-whitespace-inside": null,
     "scss/at-mixin-pattern": null,
+    "scss/dollar-variable-pattern": null,
     "selector-pseudo-class-no-unknown": [
       true,
       {
