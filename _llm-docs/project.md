@@ -6,9 +6,9 @@ alwaysApply: true
 
 # プロジェクト概要
 
-**tamsan-lab-reports** - TAMSAN Lab「Labが行く」レポート管理システム
+**labgaiku** -「Labが行く」レポート管理システム
 
-TAMSAN Labのインタビュー活動のレポート記事を管理・プレビューできるWebアプリケーション。
+Labのインタビュー活動のレポート記事を管理・プレビューできるWebアプリケーション。
 
 ## 詳細設計へのリンク
 

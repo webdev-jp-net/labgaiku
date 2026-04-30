@@ -21,7 +21,7 @@ export function AppHeader() {
   return (
     <header className={styles.header}>
       <Link href="/" className={styles.siteName}>
-        TAMSAN Lab
+        Labが行く
       </Link>
       <button type="button" onClick={handleClick} className={styles.login}>
         {label}
