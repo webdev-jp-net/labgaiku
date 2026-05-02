@@ -1,0 +1,9 @@
+@use '@/styles/_variable' as *;
+
+.title {
+  @include hd-lg;
+}
+
+.date {
+  @include txt-description;
+}

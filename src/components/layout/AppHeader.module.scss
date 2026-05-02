@@ -10,12 +10,11 @@
 }
 
 .siteName {
-  font-size: rem(24);
+  @include hd-md;
 }
 
 .login {
   font-size: rem(16);
-  font-weight: 600;
   appearance: none;
   cursor: pointer;
   background: none;
