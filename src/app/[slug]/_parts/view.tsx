@@ -1,16 +1,16 @@
-"use client";
+'use client'
 
-import type { Report } from "@/lib/api/microcms";
-import { sanitizeHtml } from "@/lib/sanitize";
-import styles from "./view.module.scss";
+import type { Report } from '@/lib/api/microcms'
+import { sanitizeHtml } from '@/lib/sanitize'
+import styles from './view.module.scss'
 
 type ReportArticleViewProps = {
-  report: Report;
-};
+  report: Report
+}
 
 export function ReportArticleView({ report }: ReportArticleViewProps) {
   return (
-    <article>
+    <article className={styles.article}>
       <header>
         <h1 className={styles.title}>{report.title ?? report.guest}</h1>
         {report.date && (
@@ -22,11 +22,10 @@ export function ReportArticleView({ report }: ReportArticleViewProps) {
       <section>
         <div
           dangerouslySetInnerHTML={{
-            __html: sanitizeHtml(report.content ?? ""),
+            __html: sanitizeHtml(report.content ?? ''),
           }}
         />
       </section>
     </article>
-  );
+  )
 }
-

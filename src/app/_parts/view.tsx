@@ -19,7 +19,7 @@ export function HomeView({ session, reports }: HomeViewProps) {
 
   if (!isAuthenticated) {
     return (
-      <section>
+      <section className={styles.section}>
         <h1 className={styles.title}>レポート一覧</h1>
         {authError === 'unauthorized' && (
           <p className={styles.body}>
@@ -32,7 +32,7 @@ export function HomeView({ session, reports }: HomeViewProps) {
   }
 
   return (
-    <section>
+    <section className={styles.section}>
       <h1 className={styles.title}>レポート一覧</h1>
       <p className={styles.body}>ログインユーザー: {session?.user?.name}</p>
       <ul>

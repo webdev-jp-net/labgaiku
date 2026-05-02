@@ -1,5 +1,9 @@
 @use '@/styles/_variable' as *;
 
+.article {
+  @include tmp-container;
+}
+
 .title {
   @include hd-lg;
 }

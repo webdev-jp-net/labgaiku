@@ -11,6 +11,9 @@
 
 .siteName {
   @include hd-md;
+
+  color: currentColor;
+  text-decoration: none;
 }
 
 .login {
