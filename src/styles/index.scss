@@ -87,6 +87,7 @@ body {
   font-size: 1rem; // 幅375pxのアートボードで16px相当
   font-kerning: normal;
   line-height: 1.75;
+  color: var(--text-primary);
   word-wrap: break-word;
   overflow-wrap: break-word;
   background-color: var(--bg-primary);
