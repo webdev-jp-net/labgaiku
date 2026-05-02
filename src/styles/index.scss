@@ -11,8 +11,6 @@
   --accent-ink: #0a0a0a; /* 差し色（インクブラック） */
   --border-subtle: #e4e2dc; /* 罫線 */
 
-  /* 階調 5段階グレースケール（--fg-1 〜 --fg-4）: design-system.md に値の明示なし、TODO */
-
   /* スペーシング */
   --spacing-xs: #{rem(4)};
   --spacing-sm: #{rem(8)};
@@ -41,7 +39,7 @@
   --border-radius: #{rem(2)};
 
   /* transition */
-  --transition: 250ms ease;
+  --transition: 150ms ease-out;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -55,11 +53,11 @@ html {
   height: 100%;
   min-height: 100%;
   font-size: math.div(16, 375) * 100vw; // 幅375pxのアートボードで16px相当
-  background-color: var(--bg-body);
+  background-color: var(--bg-primary);
 
   // 画面幅430を超えたらリキッドを解除してセンタリング
-  @media screen and (width > 430px) {
-    font-size: 18.3467px;
+  @media screen and (width > 422px) {
+    font-size: 18px;
   }
 
   // スクロールを停止

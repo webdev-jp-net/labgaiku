@@ -9,8 +9,8 @@
 
   @include mq(fromWide) {
     width: 100%;
-    max-width: 50ch;
-    padding: 0 var(--spacing-md);
+    max-width: 58ch;
+    padding: 0 4ch;
     margin-inline: auto;
   }
 }
