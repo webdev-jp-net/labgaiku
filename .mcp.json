@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "npmPackageScanner": {
-      "url": "https://www.package-scanner.dev/api/mcp",
+      "url": "https://www.package-scanner.dev/api/mcp"
     },
     "playwright": {
       "command": "npx",
