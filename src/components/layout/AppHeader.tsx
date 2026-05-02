@@ -1,31 +1,31 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { useSession } from "next-auth/react";
-import { signIn, signOut } from "next-auth/react";
+import Link from 'next/link'
+import { useSession } from 'next-auth/react'
+import { signIn, signOut } from 'next-auth/react'
+import styles from './AppHeader.module.scss'
 
 export function AppHeader() {
-  const { status } = useSession();
+  const { status } = useSession()
 
   const handleClick = () => {
-    if (status === "authenticated") {
-      void signOut({ callbackUrl: "/" });
+    if (status === 'authenticated') {
+      void signOut({ callbackUrl: '/' })
     } else {
-      void signIn("google", { callbackUrl: "/" });
+      void signIn('google', { callbackUrl: '/' })
     }
-  };
+  }
 
-  const label = status === "authenticated" ? "ログアウト" : "ログイン";
+  const label = status === 'authenticated' ? 'ログアウト' : 'ログイン'
 
   return (
-    <header>
-      <nav aria-label="グローバルナビゲーション">
-        <Link href="/">TAMSAN Lab</Link>
-        <button type="button" onClick={handleClick}>
-          {label}
-        </button>
-      </nav>
+    <header className={styles.header}>
+      <Link href="/" className={styles.siteName}>
+        Labが行く
+      </Link>
+      <button type="button" onClick={handleClick} className={styles.login}>
+        {label}
+      </button>
     </header>
-  );
+  )
 }
- 

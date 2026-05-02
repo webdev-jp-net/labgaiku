@@ -89,7 +89,7 @@ pnpm test:watch             # テスト監視
 ---
 title: "インタビュー記事タイトル"
 date: 2025-01-15
-author: "TAMSAN Lab"
+author: "Labが行く"
 tags: ["インタビュー", "技術"]
 ---
 ```

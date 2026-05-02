@@ -1,0 +1,13 @@
+@use '@/styles/_variable' as *;
+
+.section {
+  @include tmp-container;
+}
+
+.title {
+  @include hd-lg;
+}
+
+.body {
+  @include txt-paragraph;
+}

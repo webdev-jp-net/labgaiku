@@ -8,18 +8,18 @@
 
 `.env.local`に以下を定義する。
 
-- `MICROCMS_SERVICE_DOMAIN`: サービスドメイン（例: `tamsan-lab`）
+- `MICROCMS_SERVICE_DOMAIN`: サービスドメイン（例: `labgaiku`）
 - `MICROCMS_API_KEY`: APIキー（サーバー側のみで使用）
 
 ## コンテンツモデル（report）
 
-| フィールドID | 表示名   | 型           | 必須 | 備考 |
-|--------------|----------|--------------|:----:|------|
-| `visibility` | 公開範囲 | select       |  ○  | 初期値 `secret`。選択肢: `secret`, `limited`, `public` |
-| `guest`      | ゲスト   | text         |  ○  | 一意制約あり |
-| `date`       | 開催日   | date         | ー  | 日付形式で保存 |
-| `title`      | タイトル | text         | ー  |  |
-| `content`    | 本文     | richEditorV2 | ー  | 見出し/段落/装飾/表などが利用可能 |
+| フィールドID | 表示名   | 型           | 必須  | 備考                                                   |
+| ------------ | -------- | ------------ | :---: | ------------------------------------------------------ |
+| `visibility` | 公開範囲 | select       |   ○   | 初期値 `secret`。選択肢: `secret`, `limited`, `public` |
+| `guest`      | ゲスト   | text         |   ○   | 一意制約あり                                           |
+| `date`       | 開催日   | date         |  ー   | 日付形式で保存                                         |
+| `title`      | タイトル | text         |  ー   |                                                        |
+| `content`    | 本文     | richEditorV2 |  ー   | 見出し/段落/装飾/表などが利用可能                      |
 
 ## 実装ディレクトリ構成
 

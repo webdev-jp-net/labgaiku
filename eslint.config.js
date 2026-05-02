@@ -8,20 +8,14 @@ export default [
     rules: {
       '@typescript-eslint/no-unused-vars': [
         'warn',
-        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
       '@typescript-eslint/no-explicit-any': 'warn',
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'prefer-const': 'warn',
-    }
+    },
   },
   {
-    ignores: [
-      'dist/',
-      'node_modules/',
-      '*.config.js',
-      '*.config.mjs',
-      'pnpm-lock.yaml'
-    ]
-  }
+    ignores: ['dist/', 'node_modules/', '*.config.js', '*.config.mjs', 'pnpm-lock.yaml'],
+  },
 ]
