@@ -6,10 +6,13 @@
 
 :root {
   /* カラー */
-  --bg-primary: #fafaf7; /* 紙色背景 */
-  --text-primary: #1a1a1a; /* 前景（本文） */
-  --accent-ink: #0a0a0a; /* 差し色（インクブラック） */
-  --border-subtle: #e4e2dc; /* 罫線 */
+  --bg-basic: #fafaf7;
+  --bg-accent: #1a1a1a;
+  --txt-basic: #1a1a1a;
+  --txt-muted: #85827a;
+  --txt-on-fill: #fafaf7;
+  --txt-accent: #0a0a0a;
+  --border-basic: #b8b5ac;
 
   /* スペーシング */
   --spacing-xs: #{rem(4)};
@@ -28,15 +31,15 @@
   --font-size-lg: #{rem(18)};
   --font-size-xl: #{rem(24)};
   --font-size-2xl: #{rem(32)};
-  --font-size-3xl: #{rem(48)};
-  --font-size-4xl: #{rem(64)};
+  --font-size-3xl: #{rem(56)};
+  --font-size-4xl: #{rem(80)};
 
   /* フォントウェイト */
   --font-weight-thin: 100;
   --font-weight-regular: 400;
 
   /* radius */
-  --border-radius: #{rem(2)};
+  --radius-sm: #{rem(2)};
 
   /* transition */
   --transition: 150ms ease-out;
@@ -44,8 +47,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-primary: #12120f; /* 紙色背景（ダーク） */
-    --text-primary: #e8e6df; /* 前景（ダーク） */
+    --bg-basic: #12120f;
+    --bg-accent: #e8e6df;
+    --txt-basic: #e8e6df;
+    --txt-on-fill: #12120f;
   }
 }
 
@@ -53,7 +58,7 @@ html {
   height: 100%;
   min-height: 100%;
   font-size: math.div(16, 375) * 100vw; // 幅375pxのアートボードで16px相当
-  background-color: var(--bg-primary);
+  background-color: var(--bg-basic);
 
   // 画面幅430を超えたらリキッドを解除してセンタリング
   @media screen and (width > 422px) {
@@ -85,12 +90,14 @@ body {
     Roboto,
     sans-serif;
   font-size: 1rem; // 幅375pxのアートボードで16px相当
+  font-weight: var(--font-weight-thin);
+  font-feature-settings: 'palt' 1;
   font-kerning: normal;
   line-height: 1.75;
-  color: var(--text-primary);
+  color: var(--txt-basic);
   word-wrap: break-word;
   overflow-wrap: break-word;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-basic);
   -webkit-font-smoothing: subpixel-antialiased;
   -moz-osx-font-smoothing: auto;
 }
@@ -100,5 +107,5 @@ body {
   display: grid;
   grid-template-rows: auto 1fr;
   min-height: 100svh;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-basic);
 }
