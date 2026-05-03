@@ -5,7 +5,7 @@
 - React 19 + TypeScript
 - SCSS Modules（グローバルスタイルは`src/styles/index.scss`）
 - 認証: NextAuth.js（Google OAuth）
-- データ取得: microCMS（reportsコンテンツ）
+- データ取得: microCMS（interviewsコンテンツ）
 
 ## ディレクトリ概要
 - `src/app`: App Routerページ・レイアウト

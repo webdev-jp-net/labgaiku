@@ -6,15 +6,15 @@ Next.js App Router（`src/app`）を利用したルーティング構成。
 
 ## ルート構成
 
-| ルート | 認証 | 説明 |
-|--------|------|------|
-| `/` | 不要 | レポート一覧（誰でもアクセス可。`limited` は非該当ユーザに伏せ字表示、`secret` は非該当ユーザから完全除外） |
-| `/{slug}` | `visibility` による | レポート詳細（`public` は誰でも、`limited` / `secret` は記事ごとの `allowList` 判定で非該当は 404） |
-| `/api/auth/*` | - | NextAuthエンドポイント |
+| ルート        | 認証                | 説明                                                                                                            |
+| ------------- | ------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `/`           | 不要                | インタビュー一覧（誰でもアクセス可。`limited` は非該当ユーザに伏せ字表示、`secret` は非該当ユーザから完全除外） |
+| `/{slug}`     | `visibility` による | インタビュー詳細（`public` は誰でも、`limited` / `secret` は記事ごとの `allowList` 判定で非該当は 404）         |
+| `/api/auth/*` | -                   | NextAuthエンドポイント                                                                                          |
 
 ## 認証フロー
 - 一覧 (`/`) は未ログイン状態でも閲覧可能
-- 各レポートの `visibility` と記事ごとの `allowList` で閲覧可否を判定
+- 各インタビューの `visibility` と記事ごとの `allowList` で閲覧可否を判定
   - `secret`: `allowList` 該当ログインユーザは一覧で通常表示＋リンク有効、詳細閲覧可。非該当ユーザ（未認証含む）は一覧から完全除外、詳細URL直アクセス時は `notFound()`
   - `limited`: 一覧では伏せ字＋非リンク表示。`allowList` 該当ログインユーザのみ伏せ字解除＋リンク有効、詳細閲覧可。非該当ユーザの詳細URL直アクセスは `notFound()`
   - `public`: 一覧で通常表示。詳細は誰でも閲覧可
@@ -23,9 +23,10 @@ Next.js App Router（`src/app`）を利用したルーティング構成。
 詳細は [認証仕様](../backend/next-auth.md) を参照。
 
 ## ディレクトリ構造
-- `src/app/page.tsx`: レポート一覧（サーバーコンポーネント）
-- `src/app/reports/_parts/`: 一覧・詳細のビュー／フック
-- `src/app/[slug]/page.tsx`: レポート詳細
+- `src/app/page.tsx`: インタビュー一覧（サーバーコンポーネント）
+- `src/app/_parts/`: 一覧ページのビュー／フック
+- `src/app/[slug]/page.tsx`: インタビュー詳細
+- `src/app/[slug]/_parts/`: 詳細ページのビュー
 - `src/app/api/auth/[...nextauth]/route.ts`: NextAuth API
 
 ## エラーハンドリング
