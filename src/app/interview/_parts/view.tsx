@@ -28,7 +28,7 @@ export function HomeView({ session, itemList }: HomeViewProps) {
         {list.map(item => (
           <li key={item.id}>
             {item.canView ? (
-              <Link href={`/${item.id}`}>{item.title ?? item.guest}</Link>
+              <Link href={`/interview/${item.id}`}>{item.title ?? item.guest}</Link>
             ) : (
               <span>{item.title ?? item.guest}</span>
             )}
