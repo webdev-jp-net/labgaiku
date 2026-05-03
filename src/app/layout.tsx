@@ -6,8 +6,8 @@ import '@/styles/index.scss'
 
 const lineSeedJP = localFont({
   src: [
-    { path: './fonts/LINESeedJP_OTF_Th.woff2', weight: '100', style: 'normal' },
-    { path: './fonts/LINESeedJP_OTF_Rg.woff2', weight: '400', style: 'normal' },
+    { path: './_parts/font/LINESeedJP_OTF_Th.woff2', weight: '100', style: 'normal' },
+    { path: './_parts/font/LINESeedJP_OTF_Rg.woff2', weight: '400', style: 'normal' },
   ],
   variable: '--font-line-seed-jp',
   display: 'swap',
