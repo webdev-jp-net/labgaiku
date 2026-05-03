@@ -22,7 +22,7 @@ export function InterviewIndexView({ session, itemList }: InterviewIndexViewProp
 
   return (
     <section className={styles.section}>
-      <h1 className={styles.title}>インタビュー一覧</h1>
+      <h1 className={styles.title}>インタビュー</h1>
       {isAuthenticated && <p className={styles.body}>ログインユーザー: {session?.user?.name}</p>}
       <ul>
         {list.map(item => (
