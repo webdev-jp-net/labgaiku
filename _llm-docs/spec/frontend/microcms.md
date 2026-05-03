@@ -28,7 +28,7 @@
 - `limited`: 限定公開。一覧では伏せ字（`*****`）＋非リンクで表示、`allowList` に該当するログインユーザのみ伏せ字解除＋リンク有効、詳細閲覧可。非該当ユーザの詳細URL直アクセスは404
 - `public`: 全公開。一覧で通常表示＋リンク有効、詳細は誰でも閲覧可（認証不要）
 
-判定ロジックは `src/lib/permissions.ts` の `canViewInterview(interview, session)` に集約。
+判定ロジックは `src/lib/permission.ts` の `canViewInterview(interview, session)` に集約。
 
 ### `allowList` の判定ルール
 

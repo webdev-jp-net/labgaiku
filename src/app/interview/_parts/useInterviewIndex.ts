@@ -1,12 +1,12 @@
 import type { Session } from 'next-auth'
 import type { InterviewListItem } from './view'
 
-type UseHomeArgs = {
+type UseInterviewIndexArgs = {
   session: Session | null
   itemList: InterviewListItem[]
 }
 
-export const useHome = ({ session, itemList }: UseHomeArgs) => {
+export const useInterviewIndex = ({ session, itemList }: UseInterviewIndexArgs) => {
   return {
     isAuthenticated: Boolean(session),
     itemList,

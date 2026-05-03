@@ -2,7 +2,7 @@ import { getServerSession } from 'next-auth'
 import { notFound } from 'next/navigation'
 import { getInterviewById } from '@/lib/api/microcms'
 import { authOptions } from '@/lib/auth'
-import { canViewInterview } from '@/lib/permissions'
+import { canViewInterview } from '@/lib/permission'
 import { InterviewArticleView } from './_parts/view'
 import type { PublicInterview } from './_parts/view'
 

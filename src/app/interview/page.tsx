@@ -1,11 +1,11 @@
 import { getServerSession } from 'next-auth'
 import { getInterviewList } from '@/lib/api/microcms'
 import { authOptions } from '@/lib/auth'
-import { canViewInterview, MASK_PLACEHOLDER } from '@/lib/permissions'
-import { HomeView } from './_parts/view'
+import { canViewInterview, MASK_PLACEHOLDER } from '@/lib/permission'
+import { InterviewIndexView } from './_parts/view'
 import type { InterviewListItem } from './_parts/view'
 
-export default async function HomePage() {
+export default async function InterviewIndexPage() {
   const session = await getServerSession(authOptions)
 
   try {
@@ -26,8 +26,8 @@ export default async function HomePage() {
           canView,
         }
       })
-    return <HomeView session={session} itemList={itemList} />
+    return <InterviewIndexView session={session} itemList={itemList} />
   } catch {
-    return <HomeView session={session} itemList={[]} />
+    return <InterviewIndexView session={session} itemList={[]} />
   }
 }

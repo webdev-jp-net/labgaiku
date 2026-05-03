@@ -2,7 +2,7 @@
 
 import type { Session } from 'next-auth'
 import Link from 'next/link'
-import { useHome } from './useHome'
+import { useInterviewIndex } from './useInterviewIndex'
 import styles from './view.module.scss'
 
 export type InterviewListItem = {
@@ -12,13 +12,13 @@ export type InterviewListItem = {
   canView: boolean
 }
 
-type HomeViewProps = {
+type InterviewIndexViewProps = {
   session: Session | null
   itemList: InterviewListItem[]
 }
 
-export function HomeView({ session, itemList }: HomeViewProps) {
-  const { isAuthenticated, itemList: list } = useHome({ session, itemList })
+export function InterviewIndexView({ session, itemList }: InterviewIndexViewProps) {
+  const { isAuthenticated, itemList: list } = useInterviewIndex({ session, itemList })
 
   return (
     <section className={styles.section}>
