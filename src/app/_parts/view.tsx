@@ -2,43 +2,38 @@
 
 import type { Session } from 'next-auth'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
-import type { Report } from '@/lib/api/microcms'
 import { useHome } from './useHome'
 import styles from './view.module.scss'
 
-type HomeViewProps = {
-  session: Session | null
-  reports: Report[]
+export type ReportListItem = {
+  id: string
+  title?: string
+  guest: string
+  canView: boolean
 }
 
-export function HomeView({ session, reports }: HomeViewProps) {
-  const searchParams = useSearchParams()
-  const authError = searchParams.get('error')
-  const { isAuthenticated, reports: reportList } = useHome({ session, reports })
+type HomeViewProps = {
+  session: Session | null
+  itemList: ReportListItem[]
+}
 
-  if (!isAuthenticated) {
-    return (
-      <section className={styles.section}>
-        <h1 className={styles.title}>レポート一覧</h1>
-        {authError === 'unauthorized' && (
-          <p className={styles.body}>
-            このアカウントではログインできません。許可されたドメインのアカウントをご利用ください。
-          </p>
-        )}
-        <p className={styles.body}>閲覧するにはログインしてください。</p>
-      </section>
-    )
-  }
+export function HomeView({ session, itemList }: HomeViewProps) {
+  const { isAuthenticated, itemList: list } = useHome({ session, itemList })
 
   return (
     <section className={styles.section}>
       <h1 className={styles.title}>レポート一覧</h1>
-      <p className={styles.body}>ログインユーザー: {session?.user?.name}</p>
+      {isAuthenticated && (
+        <p className={styles.body}>ログインユーザー: {session?.user?.name}</p>
+      )}
       <ul>
-        {reportList.map(report => (
-          <li key={report.id}>
-            <Link href={`/${report.id}`}>{report.title ?? report.guest}</Link>
+        {list.map(item => (
+          <li key={item.id}>
+            {item.canView ? (
+              <Link href={`/${item.id}`}>{item.title ?? item.guest}</Link>
+            ) : (
+              <span>{item.title ?? item.guest}</span>
+            )}
           </li>
         ))}
       </ul>

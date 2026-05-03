@@ -16,6 +16,15 @@ export default [
     },
   },
   {
-    ignores: ['dist/', 'node_modules/', '*.config.js', '*.config.mjs', 'pnpm-lock.yaml'],
+    ignores: [
+      'dist/',
+      'node_modules/',
+      '.next/',
+      '.scaffdog/',
+      'next-env.d.ts',
+      '*.config.js',
+      '*.config.mjs',
+      'pnpm-lock.yaml',
+    ],
   },
 ]

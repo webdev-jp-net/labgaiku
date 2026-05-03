@@ -1,15 +1,14 @@
 import type { Session } from "next-auth";
-import type { Report } from "@/lib/api/microcms";
+import type { ReportListItem } from "./view";
 
 type UseHomeArgs = {
   session: Session | null;
-  reports: Report[];
+  itemList: ReportListItem[];
 };
 
-export const useHome = ({ session, reports }: UseHomeArgs) => {
+export const useHome = ({ session, itemList }: UseHomeArgs) => {
   return {
     isAuthenticated: Boolean(session),
-    reports,
+    itemList,
   };
 };
-

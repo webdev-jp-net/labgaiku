@@ -9,11 +9,12 @@ export type Report = {
   updatedAt: string;
   publishedAt: string;
   revisedAt: string;
-  visibility: ReportVisibility;
+  visibility: ReportVisibility[];
   guest: string;
   date?: string;
   title?: string;
   content?: string;
+  allowList?: string;
 };
 
 const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
@@ -32,8 +33,10 @@ export const client = createClient({
   apiKey,
 });
 
-export const getReports = async (queries?: MicroCMSQueries) =>
-  client.getList<Report>({ endpoint: "report", queries });
+export const getReportList = async (queries?: MicroCMSQueries): Promise<Report[]> => {
+  const response = await client.getList<Report>({ endpoint: "report", queries });
+  return response.contents;
+};
 
 export const getReportById = async (id: string, queries?: MicroCMSQueries) =>
   client.get<Report>({ endpoint: "report", contentId: id, queries });
