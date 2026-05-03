@@ -1,5 +1,5 @@
-import Link from 'next/link'
+import { HomeView } from './_parts/view'
 
 export default function HomePage() {
-  return <Link href="/interview">インタビュー</Link>
+  return <HomeView />
 }
