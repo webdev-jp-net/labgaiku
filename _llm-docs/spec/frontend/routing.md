@@ -24,12 +24,17 @@ Next.js App Router（`src/app`）を利用したルーティング構成。
 詳細は [認証仕様](../backend/next-auth.md) を参照。
 
 ## ディレクトリ構造
-- `src/app/page.tsx`: トップページ（現状は空）
-- `src/app/interview/page.tsx`: インタビュー一覧（サーバーコンポーネント）
-- `src/app/interview/_parts/`: 一覧ページのビュー／フック
-- `src/app/interview/[slug]/page.tsx`: インタビュー詳細
-- `src/app/interview/[slug]/_parts/`: 詳細ページのビュー
+- `src/app/layout.tsx`: ルート layout（html/body/SessionWrapper のみ。AppHeader は含まない）
+- `src/app/page.tsx`: トップページ（Home。AppHeader は表示されない）
+- `src/app/_parts/`: Home のビュー／フック
+- `src/app/(contents)/layout.tsx`: コンテンツ用 layout（AppHeader と `<main>` を提供）
+- `src/app/(contents)/interview/page.tsx`: インタビュー一覧（サーバーコンポーネント）
+- `src/app/(contents)/interview/_parts/`: 一覧ページのビュー／フック
+- `src/app/(contents)/interview/[slug]/page.tsx`: インタビュー詳細
+- `src/app/(contents)/interview/[slug]/_parts/`: 詳細ページのビュー
 - `src/app/api/auth/[...nextauth]/route.ts`: NextAuth API
+
+> route group `(contents)` は URL に出ないため、URL パス（`/interview`, `/interview/{slug}`）は変わりません。
 
 ## エラーハンドリング
 - 存在しないスラッグは `notFound()` を返し404扱い

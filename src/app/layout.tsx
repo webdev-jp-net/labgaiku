@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import { SessionWrapper } from '@/components/auth/SessionWrapper'
-import { AppHeader } from '@/components/layout/AppHeader'
 import '@/styles/index.scss'
 
 const lineSeedJP = localFont({
@@ -23,10 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ja" className={lineSeedJP.variable}>
       <body>
         <SessionWrapper>
-          <div id="root">
-            <AppHeader />
-            <main>{children}</main>
-          </div>
+          <div id="root">{children}</div>
         </SessionWrapper>
       </body>
     </html>

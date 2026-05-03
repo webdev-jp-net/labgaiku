@@ -24,23 +24,26 @@ Next.js App Router + React 19 + TypeScriptを前提としたコンポーネン�
 ```
 src/
 ├── app/
-│   ├── layout.tsx                          # Root layout（フォント/SessionWrapper/AppHeader）
-│   ├── page.tsx                            # Home（サーバーコンポーネント）
+│   ├── layout.tsx                          # Root layout（フォント/SessionWrapper のみ。AppHeaderなし）
+│   ├── page.tsx                            # Home（サーバーコンポーネント、AppHeaderなし）
 │   ├── _parts/
 │   │   ├── view.tsx                        # HomeView（クライアント）
 │   │   ├── useHome.ts                      # Home向けフック
-│   │   └── page.module.scss
-│   ├── interview/
-│   │   ├── page.tsx                        # InterviewIndexPage（一覧、サーバー）
-│   │   ├── _parts/
-│   │   │   ├── view.tsx                    # InterviewIndexView（クライアント）
-│   │   │   ├── useInterviewIndex.ts        # 一覧向けフック
-│   │   │   └── view.module.scss
-│   │   └── [slug]/
-│   │       ├── page.tsx                    # InterviewDetailPage（詳細、サーバー）
-│   │       └── _parts/
-│   │           ├── view.tsx                # InterviewArticleView（クライアント）
-│   │           └── view.module.scss
+│   │   ├── page.module.scss
+│   │   └── font/                           # next/font/local の woff2
+│   ├── (contents)/
+│   │   ├── layout.tsx                      # Contents layout（AppHeader と <main> を提供）
+│   │   └── interview/
+│   │       ├── page.tsx                    # InterviewIndexPage（一覧、サーバー）
+│   │       ├── _parts/
+│   │       │   ├── view.tsx                # InterviewIndexView（クライアント）
+│   │       │   ├── useInterviewIndex.ts    # 一覧向けフック
+│   │       │   └── view.module.scss
+│   │       └── [slug]/
+│   │           ├── page.tsx                # InterviewDetailPage（詳細、サーバー）
+│   │           └── _parts/
+│   │               ├── view.tsx            # InterviewArticleView（クライアント）
+│   │               └── view.module.scss
 │   └── api/
 │       └── auth/[...nextauth]/route.ts     # NextAuth API
 ├── components/
