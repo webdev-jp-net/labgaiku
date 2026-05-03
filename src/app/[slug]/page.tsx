@@ -27,7 +27,6 @@ export default async function ReportDetailPage({ params }: ReportDetailPageProps
       updatedAt: report.updatedAt,
       publishedAt: report.publishedAt,
       revisedAt: report.revisedAt,
-      visibility: report.visibility,
       guest: report.guest,
       date: report.date,
       title: report.title,
