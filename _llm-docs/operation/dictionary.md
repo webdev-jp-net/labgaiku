@@ -27,6 +27,10 @@
 | ログイン   | login      | NextAuthの`signIn`/UI文言  |
 | ログアウト | logout     | NextAuthの`signOut`/UI文言 |
 
+## フロントエンド命名規則
+
+複数形を表す際は、末尾に`s`をつけず接尾辞として`List`を使用してください。
+
 ## コンポーネント命名
 - **形式**: PascalCase（例: `HomeView`, `ReportDetailView`）
 - 役割に応じて `_parts/view.tsx`（表示）と `use*.ts`（ロジック）に分割

@@ -1,11 +1,6 @@
 import type { NextAuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 
-// ログインを許可するドメイン
-const allowedDomains = ['tam-tam.co.jp']
-// ドメインに関わらず個別に許可するメールアドレス
-const allowedEmails: string[] = []
-
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
@@ -14,20 +9,10 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user }) {
-      if (user.email && allowedEmails.includes(user.email)) {
-        return true
-      }
-
-      const requestedDomain = user.email?.split('@')[1]
-      if (requestedDomain && allowedDomains.includes(requestedDomain)) {
-        return true
-      }
-      // ログインできない場合
-      return '/?error=unauthorized'
+    async signIn() {
+      return true
     },
     async jwt({ token, account, profile }) {
-      // 初回ログイン時
       if (account && profile) {
         token.email = profile.email
         token.name = profile.name

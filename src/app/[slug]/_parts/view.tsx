@@ -4,8 +4,10 @@ import type { Report } from '@/lib/api/microcms'
 import { sanitizeHtml } from '@/lib/sanitize'
 import styles from './view.module.scss'
 
+export type PublicReport = Omit<Report, 'allowList'>
+
 type ReportArticleViewProps = {
-  report: Report
+  report: PublicReport
 }
 
 export function ReportArticleView({ report }: ReportArticleViewProps) {
