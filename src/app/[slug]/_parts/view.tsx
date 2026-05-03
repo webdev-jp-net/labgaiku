@@ -1,30 +1,30 @@
 'use client'
 
-import type { Report } from '@/lib/api/microcms'
+import type { Interview } from '@/lib/api/microcms'
 import { sanitizeHtml } from '@/lib/sanitize'
 import styles from './view.module.scss'
 
-export type PublicReport = Omit<Report, 'allowList' | 'visibility'>
+export type PublicInterview = Omit<Interview, 'allowList' | 'visibility'>
 
-type ReportArticleViewProps = {
-  report: PublicReport
+type InterviewArticleViewProps = {
+  interview: PublicInterview
 }
 
-export function ReportArticleView({ report }: ReportArticleViewProps) {
+export function InterviewArticleView({ interview }: InterviewArticleViewProps) {
   return (
     <article className={styles.article}>
       <header>
-        <h1 className={styles.title}>{report.title ?? report.guest}</h1>
-        {report.date && (
-          <time className={styles.date} dateTime={report.date}>
-            {report.date}
+        <h1 className={styles.title}>{interview.title ?? interview.guest}</h1>
+        {interview.date && (
+          <time className={styles.date} dateTime={interview.date}>
+            {interview.date}
           </time>
         )}
       </header>
       <section>
         <div
           dangerouslySetInnerHTML={{
-            __html: sanitizeHtml(report.content ?? ''),
+            __html: sanitizeHtml(interview.content ?? ''),
           }}
         />
       </section>

@@ -1,28 +1,28 @@
 import { getServerSession } from 'next-auth'
-import { getReportList } from '@/lib/api/microcms'
+import { getInterviewList } from '@/lib/api/microcms'
 import { authOptions } from '@/lib/auth'
-import { canViewReport, MASK_PLACEHOLDER } from '@/lib/permissions'
+import { canViewInterview, MASK_PLACEHOLDER } from '@/lib/permissions'
 import { HomeView } from './_parts/view'
-import type { ReportListItem } from './_parts/view'
+import type { InterviewListItem } from './_parts/view'
 
 export default async function HomePage() {
   const session = await getServerSession(authOptions)
 
   try {
-    const reportList = await getReportList()
-    const itemList: ReportListItem[] = reportList
-      .filter(report => {
-        if (report.visibility.includes('secret')) {
-          return canViewReport(report, session)
+    const interviewList = await getInterviewList()
+    const itemList: InterviewListItem[] = interviewList
+      .filter(interview => {
+        if (interview.visibility.includes('secret')) {
+          return canViewInterview(interview, session)
         }
         return true
       })
-      .map(report => {
-        const canView = canViewReport(report, session)
+      .map(interview => {
+        const canView = canViewInterview(interview, session)
         return {
-          id: report.id,
-          title: canView ? report.title : MASK_PLACEHOLDER,
-          guest: canView ? report.guest : MASK_PLACEHOLDER,
+          id: interview.id,
+          title: canView ? interview.title : MASK_PLACEHOLDER,
+          guest: canView ? interview.guest : MASK_PLACEHOLDER,
           canView,
         }
       })

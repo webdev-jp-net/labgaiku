@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useHome } from './useHome'
 import styles from './view.module.scss'
 
-export type ReportListItem = {
+export type InterviewListItem = {
   id: string
   title?: string
   guest: string
@@ -14,7 +14,7 @@ export type ReportListItem = {
 
 type HomeViewProps = {
   session: Session | null
-  itemList: ReportListItem[]
+  itemList: InterviewListItem[]
 }
 
 export function HomeView({ session, itemList }: HomeViewProps) {
@@ -22,10 +22,8 @@ export function HomeView({ session, itemList }: HomeViewProps) {
 
   return (
     <section className={styles.section}>
-      <h1 className={styles.title}>レポート一覧</h1>
-      {isAuthenticated && (
-        <p className={styles.body}>ログインユーザー: {session?.user?.name}</p>
-      )}
+      <h1 className={styles.title}>インタビュー一覧</h1>
+      {isAuthenticated && <p className={styles.body}>ログインユーザー: {session?.user?.name}</p>}
       <ul>
         {list.map(item => (
           <li key={item.id}>
