@@ -42,14 +42,14 @@
   - microCMSクライアントの生成
   - `interview`用TypeScript型の定義（フィールド一覧に準じる）
   - 一覧取得や詳細取得などのラッパー関数
-- `src/app/page.tsx` / `src/app/[slug]/page.tsx`
+- `src/app/interview/page.tsx` / `src/app/interview/[slug]/page.tsx`
   - サーバーコンポーネントで`getInterviewList`／`getInterviewById`を呼び出し、データを`_parts`の表示コンポーネントへ渡す
-- `src/app/_parts/` / `src/app/[slug]/_parts/`
+- `src/app/interview/_parts/` / `src/app/interview/[slug]/_parts/`
   - クライアントコンポーネント側で描画とユーザー操作を担当
 
 ## 取得処理の方針
 
-1. App Routerのサーバーコンポーネント（`src/app/page.tsx`／`src/app/[slug]/page.tsx`）で`getInterviewList()`／`getInterviewById()`を呼び出す。
+1. App Routerのサーバーコンポーネント（`src/app/interview/page.tsx`／`src/app/interview/[slug]/page.tsx`）で`getInterviewList()`／`getInterviewById()`を呼び出す。
 2. 取得結果を`_parts/view.tsx`に渡し、一覧表示やフィルタリングを実装する。
 3. 公開範囲や詳細表示などの応用が必要になった場合は、追加の取得関数やAPI Routeを`src/lib/api/microcms.ts`/`src/app/api/...`に追加する。
 
@@ -57,7 +57,7 @@
 
 - `interview.content`は`richEditorV2`形式でHTML文字列が返る。
 - クライアント側でHTMLを描画する場合は`isomorphic-dompurify`を利用し、`sanitizeHtml(interview.content ?? "")`のようにサニタイズしてから`dangerouslySetInnerHTML`に渡す。
-- サニタイズ処理は`src/lib/sanitize.ts`で定義し、クライアント用ビュー（例: `src/app/[slug]/_parts/view.tsx`）から利用する。
+- サニタイズ処理は`src/lib/sanitize.ts`で定義し、クライアント用ビュー（例: `src/app/interview/[slug]/_parts/view.tsx`）から利用する。
 
 ## 今後の拡張メモ
 
