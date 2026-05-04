@@ -33,6 +33,44 @@ export const HomeView: FC = () => {
         </p>
         <p className={styles.paragraph}>ここでは、そんな「Labが行く」の一部をご紹介しています。</p>
       </section>
+      <article className={styles.article}>
+        <header className={styles.articleHeader}>
+          <small className={styles.articleShoulderCopy}>インタビュー</small>
+          <h2 className={styles.articleTitle}>Labが聞く</h2>
+        </header>
+        <div className={styles.articleBody}>
+          <p className={styles.articleDescription}>
+            人の話をしっかり聞く、それがただただ深い。
+            考えていることや感じていること、そこには生き方や人となりが息づいています。形式知にはおさまらないソフトスキルの学びへようこそ。
+          </p>
+        </div>
+        <footer className={styles.articleFooter}>
+          <Link className={styles.moreLink} href="/interview">
+            詳しく見る
+          </Link>
+        </footer>
+      </article>
+      <article className={styles.article}>
+        <header className={styles.articleHeader}>
+          <small className={styles.articleShoulderCopy}>いきおいで作ったZINE</small>
+          <h2 className={styles.articleTitle}>人と働く仕組みは設計する</h2>
+        </header>
+        <div className={styles.articleBody}>
+          <p className={styles.articleDescription}>コミットメントと成長は共存するのか？</p>
+          <p className={styles.articleDescription}>
+            この本では、クリエイティブエージェンシー（いわゆる受託開発会社）のエンジニアチームで実践したチーム運営について解説しています。
+          </p>
+          <p className={styles.articleDescription}>
+            エンジニアに限らずクリエイター界隈では、成長環境とチーム運営の持続性は切り離して考えにくいテーマです。
+          </p>
+          <p className={styles.articleDescription}>
+            そして、ライフ・ワーク・バランスが目新しい言葉ではなくなっている昨今、「働く時間」の質をなおざりにしないマインドはクリエイターだけでなく全ての人が注目するテーマではないでしょうか。
+          </p>
+          <p className={styles.articleDescription}>
+            チームが順調と感じる瞬間、その背景にはLogic（仕組み）が存在しているはずです。そんなエンジニアならではの視点でマニアックに再現性を分析した「働く仕組みの設計」は、思いがけないヒントになるかもしれません。
+          </p>
+        </div>
+      </article>
     </main>
   )
 }
