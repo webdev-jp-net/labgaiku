@@ -11,10 +11,10 @@
   align-items: center;
 
   @include mq(narrow) {
-    @include rect(100vmin, 150vmin);
+    @include rect(100vmin, 120vmin);
 
     gap: var(--spacing-2xl);
-    padding: 0 var(--spacing-xl);
+    padding: 0 var(--spacing-xl) var(--spacing-4xl);
   }
 
   @include mq(fromWide) {
@@ -88,13 +88,17 @@
   > * {
     pointer-events: none;
     opacity: 0;
-    transition: opacity var(--transition);
+    filter: blur(0.1rem);
+    transition:
+      opacity var(--transition),
+      filter var(--transition);
   }
 
   @container scroll-state(stuck: top) {
     > * {
       pointer-events: auto;
       opacity: 1;
+      filter: blur(0);
     }
   }
 }
@@ -102,7 +106,13 @@
 .section {
   @include tmp-container;
 
-  margin: var(--spacing-4xl) auto;
+  @include mq(narrow) {
+    margin: var(--spacing-2xl) auto;
+  }
+
+  @include mq(fromWide) {
+    margin: var(--spacing-4xl) auto;
+  }
 }
 
 .paragraph {

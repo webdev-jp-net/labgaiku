@@ -5,19 +5,22 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: rem(48);
-  padding: 0 rem(16);
+  padding: var(--spacing-md) var(--spacing-md);
+  background-color: color-mix(in srgb, var(--bg-basic), transparent 10%);
+  backdrop-filter: blur(0.4rem);
 }
 
 .siteName {
   @include hd-md;
 
+  font-weight: var(--font-weight-regular);
   color: currentColor;
   text-decoration: none;
 }
 
 .login {
-  font-size: rem(16);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
   appearance: none;
   cursor: pointer;
   background: none;
