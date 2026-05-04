@@ -2,22 +2,35 @@
 
 import Link from 'next/link'
 import type { FC } from 'react'
-import { AppHeader } from '@/components/layout/AppHeader'
-import styles from './page.module.scss'
+// import { AppHeader } from '@/components/layout/AppHeader'
+// import { AppFooter } from '@/components/layout/AppFooter'
+import styles from './Home.module.scss'
 
 export const HomeView: FC = () => {
   return (
     <main className={styles.home} data-testid="home">
       <div className={styles.hero}>
-        <h1 className={styles.title}>Labが行く</h1>
-        <span className={styles.kana}>LAB GA IKU</span>
+        <header className={styles.heroHeader}>
+          <h1 className={styles.title}>Labが行く</h1>
+          <span className={styles.kana}>LAB GA IKU</span>
+        </header>
         <nav className={styles.nav}>
-          <Link className={styles.link} href="/interview">
-            インタビュー
-          </Link>
+          <ul className={styles.navList}>
+            <li className={styles.navItem}>
+              <Link className={styles.navLink} href="/interview">
+                <small className={styles.navShoulderCopy}>インタビュー</small>
+                <span className={styles.navTitle}>Labが聞く</span>
+              </Link>
+            </li>
+            {/* <li className={styles.navItem}>
+              <Link className={styles.navLink} href="/interview">
+                <small className={styles.navShoulderCopy}>ZINE</small>
+                <span className={styles.navTitle}>人と働く仕組みは設計する</span>
+              </Link>
+            </li> */}
+          </ul>
         </nav>
       </div>
-      <AppHeader className={styles.appHeader} />
       <section className={styles.section}>
         <p className={styles.paragraph}>「Labが行く」は、雑談をするための勉強会です。</p>
         <p className={styles.paragraph}>
@@ -31,8 +44,9 @@ export const HomeView: FC = () => {
           成果に近い応用研究ではなく、知識そのものに近い基礎研究へ夢中になる体験、これは、緊急度が低いけれど重要度は高いことなのかもしれません。
           Labは、すぐさま役に立つことのないbuffer（アソビ）でplay（遊び）の時間なのですが、そうしたていねいな余白やノイズは&ldquo;無意味の意味&rdquo;にふと気づく時間でもあるよう思えてしかたがないのです。
         </p>
-        <p className={styles.paragraph}>ここでは、そんな「Labが行く」の一部をご紹介しています。</p>
+        <p className={styles.paragraph}>ここでは、そんな「Labが行く」の一部を紹介しています。</p>
       </section>
+      {/* <AppHeader className={styles.appHeader} /> */}
       <article className={styles.article}>
         <header className={styles.articleHeader}>
           <small className={styles.articleShoulderCopy}>インタビュー</small>
@@ -50,7 +64,7 @@ export const HomeView: FC = () => {
           </Link>
         </footer>
       </article>
-      <article className={styles.article}>
+      {/* <article className={styles.article}>
         <header className={styles.articleHeader}>
           <small className={styles.articleShoulderCopy}>いきおいで作ったZINE</small>
           <h2 className={styles.articleTitle}>人と働く仕組みは設計する</h2>
@@ -70,7 +84,8 @@ export const HomeView: FC = () => {
             チームが順調と感じる瞬間、その背景にはLogic（仕組み）が存在しているはずです。そんなエンジニアならではの視点でマニアックに再現性を分析した「働く仕組みの設計」は、思いがけないヒントになるかもしれません。
           </p>
         </div>
-      </article>
+      </article> */}
+      {/* <AppFooter className={styles.appFooter} /> */}
     </main>
   )
 }

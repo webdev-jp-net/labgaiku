@@ -9,7 +9,8 @@
   --bg-basic: #fafaf7;
   --bg-accent: #1a1a1a;
   --txt-basic: #1a1a1a;
-  --txt-muted: #85827a;
+  --txt-muted: #4a4845;
+  --txt-subtle: #85827a;
   --txt-on-fill: #fafaf7;
   --txt-accent: #0a0a0a;
   --border-basic: #b8b5ac;
@@ -17,9 +18,9 @@
   /* スペーシング */
   --spacing-xs: #{rem(4)};
   --spacing-sm: #{rem(8)};
-  --spacing-md: #{rem(16)};
-  --spacing-lg: #{rem(24)};
-  --spacing-xl: #{rem(32)};
+  --spacing-md: #{rem(24)};
+  --spacing-lg: #{rem(32)};
+  --spacing-xl: #{rem(40)};
   --spacing-2xl: #{rem(48)};
   --spacing-3xl: #{rem(64)};
   --spacing-4xl: #{rem(96)};
@@ -31,8 +32,9 @@
   --font-size-lg: #{rem(18)};
   --font-size-xl: #{rem(24)};
   --font-size-2xl: #{rem(32)};
-  --font-size-3xl: #{rem(56)};
-  --font-size-4xl: #{rem(80)};
+  --font-size-3xl: #{rem(48)};
+  --font-size-4xl: #{rem(56)};
+  --font-size-5xl: #{rem(80)};
 
   /* フォントウェイト */
   --font-weight-thin: 100;
@@ -93,13 +95,11 @@ body {
   font-weight: var(--font-weight-thin);
   font-feature-settings: 'palt' 1;
   font-kerning: normal;
-  line-height: 1.75;
+  line-height: 2;
   color: var(--txt-basic);
   word-wrap: break-word;
   overflow-wrap: break-word;
   background-color: var(--bg-basic);
-  -webkit-font-smoothing: subpixel-antialiased;
-  -moz-osx-font-smoothing: auto;
 }
 
 [id='root'] {

@@ -3,7 +3,7 @@
 import type { Session } from 'next-auth'
 import Link from 'next/link'
 import { useInterviewIndex } from './useInterviewIndex'
-import styles from './view.module.scss'
+import styles from './InterviewIndex.module.scss'
 
 export type InterviewListItem = {
   id: string

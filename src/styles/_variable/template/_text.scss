@@ -2,26 +2,40 @@
 @use '../mixin/mq' as *;
 
 @mixin txt-paragraph {
-  font-size: var(--font-size-base);
   font-weight: var(--font-weight-regular);
-  line-height: 2;
-  letter-spacing: 0.03em;
+  text-align: justify;
+  letter-spacing: 0.04em;
   text-box: trim-both cap alphabetic;
 
+  @include mq(narrow) {
+    font-size: var(--font-size-md);
+    line-height: 2;
+  }
+
+  @include mq(fromWide) {
+    font-size: var(--font-size-md);
+    line-height: 2.5;
+  }
+
   &:not(:first-child) {
-    margin-top: 2.5em;
+    @include mq(narrow) {
+      margin-top: 3em;
+    }
+
+    @include mq(fromWide) {
+      margin-top: 4em;
+    }
   }
 }
 
 @mixin txt-lead {
   font-size: var(--font-size-lg);
-  line-height: 1.9;
   letter-spacing: 0.03em;
 }
 
 @mixin txt-description {
   font-size: var(--font-size-sm);
-  line-height: 1.9;
+  color: var(--txt-subtle);
   letter-spacing: 0.03em;
 }
 
@@ -47,16 +61,8 @@
 }
 
 @mixin hd-lg {
-  font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-thin);
   line-height: 1.4;
-  letter-spacing: 0.02em;
-  text-box: trim-both cap alphabetic;
-}
-
-@mixin hd-display {
-  font-weight: var(--font-weight-thin);
-  line-height: 1.3;
   letter-spacing: 0.02em;
   text-box: trim-both cap alphabetic;
 
@@ -66,5 +72,20 @@
 
   @include mq(fromWide) {
     font-size: var(--font-size-4xl);
+  }
+}
+
+@mixin hd-display {
+  font-weight: var(--font-weight-thin);
+  line-height: 1.3;
+  letter-spacing: 0.025em;
+  text-box: trim-both cap alphabetic;
+
+  @include mq(narrow) {
+    font-size: var(--font-size-4xl);
+  }
+
+  @include mq(fromWide) {
+    font-size: var(--font-size-5xl);
   }
 }
