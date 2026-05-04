@@ -5,7 +5,11 @@ import { useSession } from 'next-auth/react'
 import { signIn, signOut } from 'next-auth/react'
 import styles from './AppHeader.module.scss'
 
-export function AppHeader() {
+interface AppHeaderProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  className?: string
+}
+
+export function AppHeader({ className, ...props }: AppHeaderProps) {
   const { status } = useSession()
 
   const handleClick = () => {
@@ -19,7 +23,7 @@ export function AppHeader() {
   const label = status === 'authenticated' ? 'ログアウト' : 'ログイン'
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${className}`} {...props}>
       <Link href="/" className={styles.siteName}>
         Labが行く
       </Link>

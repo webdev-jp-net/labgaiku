@@ -1,0 +1,37 @@
+@use '@/styles/_variable' as *;
+
+.footer {
+  @include tmp-container;
+
+  @include mq(narrow) {
+    margin: var(--spacing-4xl) auto var(--spacing-2xl);
+  }
+
+  @include mq(fromWide) {
+    margin: var(--spacing-4xl) auto var(--spacing-3xl);
+  }
+}
+
+.siteName {
+  font-weight: var(--font-weight-regular);
+  color: currentColor;
+  text-decoration: none;
+
+  @include mq(narrow) {
+    @include hd-lg;
+  }
+
+  @include mq(fromWide) {
+    @include hd-md;
+  }
+}
+
+.login {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  color: currentColor;
+  appearance: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+}

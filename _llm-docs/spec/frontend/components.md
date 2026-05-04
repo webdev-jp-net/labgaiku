@@ -24,23 +24,42 @@ Next.js App Router + React 19 + TypeScriptを前提としたコンポーネン�
 ```
 src/
 ├── app/
-│   ├── page.tsx                # Home（サーバーコンポーネント）
+│   ├── layout.tsx                          # Root layout（フォント/SessionWrapper のみ。AppHeaderなし）
+│   ├── page.tsx                            # Home（サーバーコンポーネント、AppHeaderなし）
 │   ├── _parts/
-│   │   ├── view.tsx            # HomeView（クライアント）
-│   │   └── useHome.ts          # Home向けフック
-│   └── (authenticated)/app/
-│       ├── page.tsx
-│       └── _parts/
-│           ├── view.tsx
-│           └── useApp.ts
+│   │   ├── view.tsx                        # HomeView（クライアント）
+│   │   ├── useHome.ts                      # Home向けフック
+│   │   ├── page.module.scss
+│   │   └── font/                           # next/font/local の woff2
+│   ├── (contents)/
+│   │   ├── layout.tsx                      # Contents layout（AppHeader と <main> を提供）
+│   │   └── interview/
+│   │       ├── page.tsx                    # InterviewIndexPage（一覧、サーバー）
+│   │       ├── _parts/
+│   │       │   ├── view.tsx                # InterviewIndexView（クライアント）
+│   │       │   ├── useInterviewIndex.ts    # 一覧向けフック
+│   │       │   └── view.module.scss
+│   │       └── [slug]/
+│   │           ├── page.tsx                # InterviewDetailPage（詳細、サーバー）
+│   │           └── _parts/
+│   │               ├── view.tsx            # InterviewArticleView（クライアント）
+│   │               └── view.module.scss
+│   └── api/
+│       └── auth/[...nextauth]/route.ts     # NextAuth API
 ├── components/
-│   └── auth/                   # 共通利用コンポーネント
-│       ├── SessionWrapper.tsx
-│       ├── SignIn.tsx
-│       └── SignOut.tsx
+│   ├── auth/                               # 認証系共通コンポーネント
+│   │   ├── SessionWrapper.tsx
+│   │   ├── SignIn.tsx
+│   │   └── SignOut.tsx
+│   └── layout/                             # レイアウト共通コンポーネント
+│       ├── AppHeader.tsx
+│       └── AppHeader.module.scss
 └── lib/
+    ├── auth.ts                             # NextAuth authOptions
+    ├── permission.ts                       # canViewInterview など閲覧可否判定
+    ├── sanitize.ts                         # HTML サニタイズ
     └── api/
-        └── microcms.ts
+        └── microcms.ts                     # microCMS クライアント / 取得ラッパー
 ```
 
 ## scaffdog テンプレート

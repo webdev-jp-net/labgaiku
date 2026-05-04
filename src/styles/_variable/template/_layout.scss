@@ -4,13 +4,13 @@
 @mixin tmp-container {
   @include mq(narrow) {
     width: 100%;
-    padding: 0 var(--spacing-md);
+    padding: 0 var(--spacing-xl);
   }
 
   @include mq(fromWide) {
     width: 100%;
-    max-width: 58ch;
-    padding: 0 4ch;
+    max-width: rem(600);
+    padding: 0 var(--spacing-xl);
     margin-inline: auto;
   }
 }
