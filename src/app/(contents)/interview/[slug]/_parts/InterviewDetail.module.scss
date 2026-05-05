@@ -45,6 +45,16 @@
     @include txt-paragraph;
   }
 
+  p ~ p {
+    @include mq(narrow) {
+      margin-top: 3em;
+    }
+
+    @include mq(fromWide) {
+      margin-top: 4em;
+    }
+  }
+
   h2 {
     @include hd-md;
 

@@ -16,16 +16,6 @@
     font-size: var(--font-size-md);
     line-height: 2.5;
   }
-
-  &:not(:first-child) {
-    @include mq(narrow) {
-      margin-top: 3em;
-    }
-
-    @include mq(fromWide) {
-      margin-top: 4em;
-    }
-  }
 }
 
 @mixin txt-lead {
@@ -48,7 +38,6 @@
 }
 
 @mixin hd-md {
-  font-weight: var(--font-weight-thin);
   line-height: 1.5;
   color: var(--txt-accent);
   letter-spacing: 0.02em;
@@ -56,10 +45,12 @@
 
   @include mq(narrow) {
     font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-regular);
   }
 
   @include mq(fromWide) {
     font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-thin);
   }
 }
 

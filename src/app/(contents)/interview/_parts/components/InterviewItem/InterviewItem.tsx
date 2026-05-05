@@ -15,7 +15,10 @@ export const InterviewItem: FC<InterviewItemProps> = ({ id, title, guest, date, 
   const body = (
     <>
       <span className={styles.title}>{title}</span>
-      <span className={styles.guest}>{`${guest}さん`}</span>
+      <span className={styles.guest}>
+        {guest}
+        <small className={styles.suffix}>さん</small>
+      </span>
       {date && (
         <time className={styles.date} dateTime={date}>
           {formatJaDate(date)}
@@ -26,10 +29,10 @@ export const InterviewItem: FC<InterviewItemProps> = ({ id, title, guest, date, 
 
   if (canView) {
     return (
-      <Link href={`/interview/${id}`} className={styles.link}>
+      <Link href={`/interview/${id}`} className={styles.item}>
         {body}
       </Link>
     )
   }
-  return <div className={styles.masked}>{body}</div>
+  return <div className={styles.item}>{body}</div>
 }

@@ -251,6 +251,16 @@
   @include mq(fromWide) {
     max-width: rem(560);
   }
+
+  .paragraph ~ & {
+    @include mq(narrow) {
+      margin-top: 3em;
+    }
+
+    @include mq(fromWide) {
+      margin-top: 4em;
+    }
+  }
 }
 
 .article {
