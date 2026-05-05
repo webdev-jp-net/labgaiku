@@ -37,7 +37,7 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
     }
 
     const $ = cheerio.load(interview.content ?? '')
-    const toc: InterviewTocItem[] = $('h1, h2, h3')
+    const toc: InterviewTocItem[] = $('h2')
       .toArray()
       .map(el => ({
         id: el.attribs.id,
