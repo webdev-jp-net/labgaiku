@@ -56,6 +56,12 @@
   }
 
   h2 {
+    @include hd-lg;
+
+    margin-top: var(--spacing-4xl);
+  }
+
+  h3 {
     @include hd-md;
 
     margin-top: var(--spacing-4xl);
