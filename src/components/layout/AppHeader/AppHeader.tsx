@@ -15,9 +15,9 @@ export function AppHeader({ session, className, ...props }: AppHeaderProps) {
 
   const handleClick = () => {
     if (isAuthenticated) {
-      void signOut({ callbackUrl: '/' })
+      void signOut()
     } else {
-      void signIn('google', { callbackUrl: '/' })
+      void signIn('google')
     }
   }
 
