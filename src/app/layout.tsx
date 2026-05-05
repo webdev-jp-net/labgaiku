@@ -12,8 +12,28 @@ const lineSeedJP = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Labが行く',
-  description: '',
+  metadataBase: new URL('https://labgaiku.org'),
+  title: {
+    default: 'Labが行く',
+    template: '%s | Labが行く',
+  },
+  description: '「Labが行く」は、雑談をするための勉強会です。',
+  openGraph: {
+    title: 'Labが行く',
+    description: '「Labが行く」は、雑談をするための勉強会です。',
+    url: '/',
+    siteName: 'Labが行く',
+    locale: 'ja_JP',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Labが行く',
+    description: '「Labが行く」は、雑談をするための勉強会です。',
+  },
+  alternates: {
+    canonical: '/',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
