@@ -22,26 +22,32 @@ export function InterviewIndexView({ itemList }: InterviewIndexViewProps) {
   return (
     <section className={styles.section}>
       <header className={styles.header}>
-        <small className={styles.shoulderCopy}>インタビュー</small>
-        <h1 className={styles.title}>Labが聞く</h1>
+        <div className={styles.headerInner}>
+          <h1 className={styles.title}>Labが聞く</h1>
+          <small className={styles.kana}>interview</small>
+          <p className={styles.description}>
+            人の話をしっかり聞く、それがただただ深い。
+            <br />
+            考えていることや感じていること、そこには生き方や人となりが息づいています。
+            形式知にはおさまらないソフトスキルの学びへようこそ。
+          </p>
+        </div>
       </header>
-      <p className={styles.description}>
-        人の話をしっかり聞く、それがただただ深い。
-        考えていることや感じていること、そこには生き方や人となりが息づいています。形式知にはおさまらないソフトスキルの学びへようこそ。
-      </p>
-      <ul className={styles.list}>
-        {items.map(item => (
-          <li key={item.id} className={styles.item}>
-            <InterviewItem
-              id={item.id}
-              title={item.heading}
-              guest={item.guest}
-              date={item.date}
-              canView={item.canView}
-            />
-          </li>
-        ))}
-      </ul>
+      <div className={styles.body}>
+        <ul className={styles.list}>
+          {items.map(item => (
+            <li key={item.id} className={styles.item}>
+              <InterviewItem
+                id={item.id}
+                title={item.heading}
+                guest={item.guest}
+                date={item.date}
+                canView={item.canView}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   )
 }

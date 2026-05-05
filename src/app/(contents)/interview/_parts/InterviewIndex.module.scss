@@ -1,45 +1,83 @@
 @use '@/styles/_variable' as *;
 
 .section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2xl);
-
   @include mq(narrow) {
     @include tmp-container;
 
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3xl);
     margin-top: var(--spacing-3xl);
   }
 
   @include mq(fromWide) {
+    display: grid;
+    grid-template-columns: rem(630 - 64 - 64) 1fr;
     max-width: rem(1280);
-    padding: var(--spacing-3xl) var(--spacing-3xl) 0;
     margin-inline: auto;
   }
 }
 
 .header {
+  @include mq(narrow) {
+    gap: var(--spacing-md);
+  }
+
+  @include mq(fromWide) {
+    padding: 0 var(--spacing-3xl);
+  }
+}
+
+.headerInner {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+
+  @include mq(fromWide) {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: var(--spacing-3xl) 0 0;
+  }
+}
+
+.title {
+  @include hd-display;
+
+  white-space: nowrap;
+}
+
+.kana {
+  @include txt-kana;
+
+  @include mq(narrow) {
+    margin: var(--spacing-md) 0 0;
+    font-size: var(--font-size-lg);
+  }
+
+  @include mq(fromWide) {
+    margin: var(--spacing-lg) 0 0;
+    font-size: var(--font-size-xl);
+  }
 }
 
 .description {
   @include txt-paragraph;
 
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-sm);
+
+  @include mq(narrow) {
+    margin: var(--spacing-xl) 0 0;
+  }
+
+  @include mq(fromWide) {
+    margin: var(--spacing-3xl) 0 0;
+  }
 }
 
-.shoulderCopy {
-  @include hd-sm;
-
-  font-weight: var(--font-weight-regular);
-  color: var(--border-basic);
-  letter-spacing: 0.2em;
-}
-
-.title {
-  @include hd-lg;
+.body {
+  @include mq(fromWide) {
+    padding: var(--spacing-3xl) var(--spacing-3xl) 0;
+  }
 }
 
 .list {
