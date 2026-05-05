@@ -3,6 +3,14 @@ import type { MicroCMSQueries } from 'microcms-js-sdk'
 
 export type InterviewVisibility = 'secret' | 'limited' | 'public'
 
+export type InterviewMember = {
+  fieldId: 'member'
+  name: string
+  roll: string
+  isGuest: boolean
+  isFacilitator: boolean
+}
+
 export type Interview = {
   id: string
   createdAt: string
@@ -14,6 +22,7 @@ export type Interview = {
   date?: string
   title?: string
   content?: string
+  member?: InterviewMember[]
   allowList?: string
 }
 

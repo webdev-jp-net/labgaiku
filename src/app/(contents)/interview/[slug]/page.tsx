@@ -34,6 +34,7 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
       date: interview.date,
       title: interview.title,
       content: interview.content,
+      member: interview.member,
     }
 
     const $ = cheerio.load(interview.content ?? '')

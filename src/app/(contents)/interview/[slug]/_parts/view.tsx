@@ -23,7 +23,8 @@ export function InterviewDetailView({ interview, toc }: InterviewDetailViewProps
     dateTime,
     formattedDate,
     sanitizedContent,
-    toc: tocItems,
+    toc: tocList,
+    memberList,
   } = useInterviewDetail({ interview, toc })
 
   return (
@@ -37,8 +38,21 @@ export function InterviewDetailView({ interview, toc }: InterviewDetailViewProps
           </time>
         )}
       </header>
+      {memberList.length > 0 && (
+        <ul>
+          {memberList.map(member => (
+            <li key={member.name}>
+              <span>{member.name}</span>
+              <span>{member.roll}</span>
+              {member.tagList.map(tag => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </li>
+          ))}
+        </ul>
+      )}
       <ul>
-        {tocItems.map(item => (
+        {tocList.map(item => (
           <li key={item.id}>
             <a href={`#${item.id}`}>{item.text}</a>
           </li>
