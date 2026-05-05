@@ -90,3 +90,23 @@
     font-size: var(--font-size-5xl);
   }
 }
+
+@mixin txt-link {
+  color: currentColor;
+  text-decoration: none;
+  background: repeating-linear-gradient(
+      to right,
+      currentColor,
+      currentColor 3px,
+      transparent 3px,
+      transparent 5px
+    )
+    left bottom 1px / 100% 1px no-repeat;
+  transition: background-position var(--transition);
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-position: right bottom 0;
+    }
+  }
+}

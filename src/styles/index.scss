@@ -109,3 +109,7 @@ body {
   min-height: 100svh;
   background-color: var(--bg-basic);
 }
+
+a:not([class]) {
+  @include txt-link;
+}
