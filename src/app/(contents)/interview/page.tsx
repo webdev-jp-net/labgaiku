@@ -9,7 +9,7 @@ export default async function InterviewIndexPage() {
   const session = await getServerSession(authOptions)
 
   try {
-    const interviewList = await getInterviewList()
+    const interviewList = await getInterviewList({ orders: '-date' })
     const itemList: InterviewListItem[] = interviewList
       .filter(interview => {
         if (interview.visibility.includes('secret')) {
