@@ -22,7 +22,7 @@ export function InterviewIndexView({ itemList }: InterviewIndexViewProps) {
   return (
     <section className={styles.section}>
       <header className={styles.header}>
-        <div className={styles.headerInner}>
+        <div className={styles.sticky}>
           <h1 className={styles.title}>Labが聞く</h1>
           <small className={styles.kana}>interview</small>
           <p className={styles.description}>
