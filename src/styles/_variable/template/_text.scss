@@ -114,3 +114,8 @@
     }
   }
 }
+
+@mixin txt-marker {
+  background: linear-gradient(to bottom, var(--border-marker), var(--border-marker)) left bottom
+    0.4em / 100% 0.8em no-repeat;
+}

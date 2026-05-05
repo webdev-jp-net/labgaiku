@@ -187,6 +187,12 @@
   }
 }
 
+.highlight {
+  @include txt-marker;
+
+  padding: 0 0.2em;
+}
+
 .sectionTitle {
   font-size: var(--font-size-sm);
   color: var(--txt-subtle);
