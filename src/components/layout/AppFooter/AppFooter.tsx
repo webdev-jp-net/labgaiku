@@ -11,7 +11,7 @@ interface AppFooterProps extends React.HTMLAttributes<HTMLHeadingElement> {
 }
 
 export function AppFooter({ session, className, ...props }: AppFooterProps) {
-  const { handleClick, label } = useAppFooter({ session })
+  const { handleClick, handleKeyDown, label } = useAppFooter({ session })
 
   return (
     <footer className={`${styles.footer} ${className ?? ''}`} {...props}>
@@ -19,9 +19,15 @@ export function AppFooter({ session, className, ...props }: AppFooterProps) {
         Labが行く
       </Link>
       <p className={styles.domain}>labgaiku.org</p>
-      <button type="button" onClick={handleClick} className={styles.login}>
+      <span
+        role="button"
+        tabIndex={0}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        className={styles.login}
+      >
         {label}
-      </button>
+      </span>
     </footer>
   )
 }

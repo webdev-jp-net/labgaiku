@@ -22,7 +22,7 @@
   }
 
   @include mq(fromWide) {
-    @include hd-sm;
+    @include hd-md;
   }
 }
 

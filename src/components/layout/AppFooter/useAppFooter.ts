@@ -1,3 +1,4 @@
+import type { KeyboardEvent } from 'react'
 import type { Session } from 'next-auth'
 import { signIn, signOut } from 'next-auth/react'
 
@@ -16,7 +17,13 @@ export const useAppFooter = ({ session }: UseAppFooterArgs) => {
     }
   }
 
+  const handleKeyDown = (event: KeyboardEvent<HTMLSpanElement>) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return
+    event.preventDefault()
+    handleClick()
+  }
+
   const label = isAuthenticated ? 'ログアウト' : 'ログイン'
 
-  return { handleClick, label }
+  return { handleClick, handleKeyDown, label }
 }
