@@ -18,20 +18,22 @@
   text-decoration: none;
 
   @include mq(narrow) {
-    @include hd-lg;
+    @include hd-sm;
   }
 
   @include mq(fromWide) {
-    @include hd-md;
+    @include hd-sm;
   }
 }
 
-.login {
+.domain {
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-regular);
-  color: currentColor;
-  appearance: none;
-  cursor: pointer;
-  background: none;
-  border: none;
+  color: var(--txt-subtle);
+  letter-spacing: 0.05em;
+}
+
+.login {
+  @include txt-link;
+
+  font-size: var(--font-size-sm);
 }
