@@ -28,7 +28,7 @@
 
   /* フォントサイズ */
   --font-size-sm: #{rem(14)};
-  --font-size-base: #{rem(16)};
+  --font-size-md: #{rem(16)};
   --font-size-lg: #{rem(18)};
   --font-size-xl: #{rem(24)};
   --font-size-2xl: #{rem(32)};
@@ -108,4 +108,8 @@ body {
   grid-template-rows: auto 1fr;
   min-height: 100svh;
   background-color: var(--bg-basic);
+}
+
+a:not([class]) {
+  @include txt-link;
 }

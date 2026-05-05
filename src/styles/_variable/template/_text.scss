@@ -47,6 +47,7 @@
 }
 
 @mixin hd-md {
+  font-weight: var(--font-weight-thin);
   line-height: 1.5;
   letter-spacing: 0.02em;
   text-box: trim-both cap alphabetic;
@@ -67,11 +68,11 @@
   text-box: trim-both cap alphabetic;
 
   @include mq(narrow) {
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-2xl);
   }
 
   @include mq(fromWide) {
-    font-size: var(--font-size-4xl);
+    font-size: var(--font-size-3xl);
   }
 }
 
@@ -87,5 +88,25 @@
 
   @include mq(fromWide) {
     font-size: var(--font-size-5xl);
+  }
+}
+
+@mixin txt-link {
+  color: currentColor;
+  text-decoration: none;
+  background: repeating-linear-gradient(
+      to right,
+      currentColor,
+      currentColor 3px,
+      transparent 3px,
+      transparent 5px
+    )
+    left bottom 1px / 100% 1px no-repeat;
+  transition: background-position var(--transition);
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-position: right bottom 0;
+    }
   }
 }

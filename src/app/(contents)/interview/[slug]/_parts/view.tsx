@@ -1,33 +1,50 @@
 'use client'
 
 import type { Interview } from '@/lib/api/microcms'
-import { sanitizeHtml } from '@/lib/sanitize'
-import styles from './view.module.scss'
+import { useInterviewDetail } from './useInterviewDetail'
+import styles from './InterviewDetail.module.scss'
 
 export type PublicInterview = Omit<Interview, 'allowList' | 'visibility'>
 
-type InterviewArticleViewProps = {
-  interview: PublicInterview
+export type InterviewTocItem = {
+  id: string
+  text: string
 }
 
-export function InterviewArticleView({ interview }: InterviewArticleViewProps) {
+type InterviewDetailViewProps = {
+  interview: PublicInterview
+  toc: InterviewTocItem[]
+}
+
+export function InterviewDetailView({ interview, toc }: InterviewDetailViewProps) {
+  const {
+    heading,
+    guestLine,
+    dateTime,
+    formattedDate,
+    sanitizedContent,
+    toc: tocItems,
+  } = useInterviewDetail({ interview, toc })
+
   return (
     <article className={styles.article}>
-      <header>
-        <h1 className={styles.title}>{interview.title ?? interview.guest}</h1>
-        {interview.date && (
-          <time className={styles.date} dateTime={interview.date}>
-            {interview.date}
+      <header className={styles.header}>
+        <h1 className={styles.title}>{heading}</h1>
+        <p className={styles.guest}>{guestLine}</p>
+        {formattedDate && (
+          <time className={styles.date} dateTime={dateTime}>
+            {formattedDate}
           </time>
         )}
       </header>
-      <section>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: sanitizeHtml(interview.content ?? ''),
-          }}
-        />
-      </section>
+      <ul>
+        {tocItems.map(item => (
+          <li key={item.id}>
+            <a href={`#${item.id}`}>{item.text}</a>
+          </li>
+        ))}
+      </ul>
+      <div className={styles.body} dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
     </article>
   )
 }

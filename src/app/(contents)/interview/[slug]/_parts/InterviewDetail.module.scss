@@ -1,14 +1,11 @@
 @use '@/styles/_variable' as *;
 
-.section {
+.article {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2xl);
 
   @include mq(narrow) {
-    @include tmp-container;
-
-    padding-bottom: var(--spacing-5xl);
     margin-top: var(--spacing-3xl);
   }
 
@@ -20,32 +17,43 @@
 }
 
 .header {
+  @include tmp-container;
+
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
-}
-
-.shoulderCopy {
-  @include hd-sm;
-
-  font-weight: var(--font-weight-regular);
-  color: var(--border-basic);
-  letter-spacing: 0.2em;
+  gap: var(--spacing-lg);
 }
 
 .title {
   @include hd-lg;
 }
 
-.list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2xl);
-  padding: 0;
+.guest {
+  @include hd-md;
+
   margin: 0;
-  list-style: none;
 }
 
-.item {
-  position: relative;
+.date {
+  @include txt-description;
+}
+
+.body {
+  @include tmp-container;
+
+  p {
+    @include txt-paragraph;
+  }
+
+  h2 {
+    @include hd-md;
+
+    margin-top: var(--spacing-4xl);
+  }
+
+  hr {
+    margin: var(--spacing-2xl) 0;
+    border: none;
+    border-top: 1px solid var(--border-basic);
+  }
 }

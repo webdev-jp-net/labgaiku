@@ -48,11 +48,13 @@ GOOGLE_CLIENT_SECRET=your-google-client-secret
 ### 3. OAuth設定
 
 #### Google OAuth
+
 1. [Google Cloud Console](https://console.cloud.google.com/)でプロジェクトを作成
 2. OAuth 2.0クライアントIDを作成
 3. 承認済みのリダイレクトURIに`http://localhost:4321/api/auth/callback/google`を追加
 
 #### GitHub OAuth
+
 1. [GitHub Developer Settings](https://github.com/settings/developers)でOAuth Appを作成
 2. Authorization callback URLに`http://localhost:4321/api/auth/callback/github`を設定
 

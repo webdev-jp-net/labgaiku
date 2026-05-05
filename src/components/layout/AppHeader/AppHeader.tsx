@@ -1,29 +1,30 @@
 'use client'
 
-import Link from 'next/link'
-import { useSession } from 'next-auth/react'
+import type { Session } from 'next-auth'
 import { signIn, signOut } from 'next-auth/react'
+import Link from 'next/link'
 import styles from './AppHeader.module.scss'
 
 interface AppHeaderProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  session: Session | null
   className?: string
 }
 
-export function AppHeader({ className, ...props }: AppHeaderProps) {
-  const { status } = useSession()
+export function AppHeader({ session, className, ...props }: AppHeaderProps) {
+  const isAuthenticated = Boolean(session)
 
   const handleClick = () => {
-    if (status === 'authenticated') {
-      void signOut({ callbackUrl: '/' })
+    if (isAuthenticated) {
+      void signOut()
     } else {
-      void signIn('google', { callbackUrl: '/' })
+      void signIn('google')
     }
   }
 
-  const label = status === 'authenticated' ? 'ログアウト' : 'ログイン'
+  const label = isAuthenticated ? 'ログアウト' : 'ログイン'
 
   return (
-    <header className={`${styles.header} ${className}`} {...props}>
+    <header className={`${styles.header} ${className ?? ''}`} {...props}>
       <Link href="/" className={styles.siteName}>
         Labが行く
       </Link>

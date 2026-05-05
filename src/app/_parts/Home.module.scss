@@ -299,7 +299,7 @@
 }
 
 .moreLink {
-  @include txt-paragraph;
+  @include txt-link;
 
   color: var(--txt-accent);
   text-decoration: none;

@@ -1,4 +1,3 @@
-import DOMPurify from "isomorphic-dompurify";
+import DOMPurify from 'isomorphic-dompurify'
 
-export const sanitizeHtml = (html: string) => DOMPurify.sanitize(html);
-
+export const sanitizeHtml = (html: string) => DOMPurify.sanitize(html)

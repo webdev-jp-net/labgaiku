@@ -1,7 +1,6 @@
 'use client'
 
-import type { Session } from 'next-auth'
-import Link from 'next/link'
+import { InterviewItem } from './components/InterviewItem'
 import { useInterviewIndex } from './useInterviewIndex'
 import styles from './InterviewIndex.module.scss'
 
@@ -9,29 +8,37 @@ export type InterviewListItem = {
   id: string
   title?: string
   guest: string
+  date?: string
   canView: boolean
 }
 
 type InterviewIndexViewProps = {
-  session: Session | null
   itemList: InterviewListItem[]
 }
 
-export function InterviewIndexView({ session, itemList }: InterviewIndexViewProps) {
-  const { isAuthenticated, itemList: list } = useInterviewIndex({ session, itemList })
+export function InterviewIndexView({ itemList }: InterviewIndexViewProps) {
+  const { items } = useInterviewIndex({ itemList })
 
   return (
     <section className={styles.section}>
-      <h1 className={styles.title}>インタビュー</h1>
-      {isAuthenticated && <p className={styles.body}>ログインユーザー: {session?.user?.name}</p>}
-      <ul>
-        {list.map(item => (
-          <li key={item.id}>
-            {item.canView ? (
-              <Link href={`/interview/${item.id}`}>{item.title ?? item.guest}</Link>
-            ) : (
-              <span>{item.title ?? item.guest}</span>
-            )}
+      <header className={styles.header}>
+        <small className={styles.shoulderCopy}>インタビュー</small>
+        <h1 className={styles.title}>Labが聞く</h1>
+      </header>
+      <p className={styles.articleDescription}>
+        人の話をしっかり聞く、それがただただ深い。
+        考えていることや感じていること、そこには生き方や人となりが息づいています。形式知にはおさまらないソフトスキルの学びへようこそ。
+      </p>
+      <ul className={styles.list}>
+        {items.map(item => (
+          <li key={item.id} className={styles.item}>
+            <InterviewItem
+              id={item.id}
+              title={item.heading}
+              guest={item.guest}
+              date={item.date}
+              canView={item.canView}
+            />
           </li>
         ))}
       </ul>

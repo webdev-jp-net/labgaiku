@@ -9,7 +9,7 @@ export default async function InterviewIndexPage() {
   const session = await getServerSession(authOptions)
 
   try {
-    const interviewList = await getInterviewList()
+    const interviewList = await getInterviewList({ orders: '-date' })
     const itemList: InterviewListItem[] = interviewList
       .filter(interview => {
         if (interview.visibility.includes('secret')) {
@@ -23,11 +23,12 @@ export default async function InterviewIndexPage() {
           id: interview.id,
           title: canView ? interview.title : MASK_PLACEHOLDER,
           guest: canView ? interview.guest : MASK_PLACEHOLDER,
+          date: interview.date,
           canView,
         }
       })
-    return <InterviewIndexView session={session} itemList={itemList} />
+    return <InterviewIndexView itemList={itemList} />
   } catch {
-    return <InterviewIndexView session={session} itemList={[]} />
+    return <InterviewIndexView itemList={[]} />
   }
 }

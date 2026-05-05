@@ -1,10 +1,12 @@
+import * as cheerio from 'cheerio'
 import { getServerSession } from 'next-auth'
 import { notFound } from 'next/navigation'
 import { getInterviewById } from '@/lib/api/microcms'
 import { authOptions } from '@/lib/auth'
 import { canViewInterview } from '@/lib/permission'
-import { InterviewArticleView } from './_parts/view'
-import type { PublicInterview } from './_parts/view'
+import { LoginPrompt } from './_parts/components/LoginPrompt'
+import { InterviewDetailView } from './_parts/view'
+import type { InterviewTocItem, PublicInterview } from './_parts/view'
 
 type InterviewDetailPageProps = {
   params: Promise<{
@@ -19,7 +21,8 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
   try {
     const interview = await getInterviewById(slug)
     if (!canViewInterview(interview, session)) {
-      notFound()
+      const callbackUrl = `/interview/${slug}`
+      return <LoginPrompt callbackUrl={callbackUrl} />
     }
     const publicInterview: PublicInterview = {
       id: interview.id,
@@ -32,7 +35,16 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
       title: interview.title,
       content: interview.content,
     }
-    return <InterviewArticleView interview={publicInterview} />
+
+    const $ = cheerio.load(interview.content ?? '')
+    const toc: InterviewTocItem[] = $('h1, h2, h3')
+      .toArray()
+      .map(el => ({
+        id: el.attribs.id,
+        text: $(el).text(),
+      }))
+
+    return <InterviewDetailView interview={publicInterview} toc={toc} />
   } catch (error) {
     console.error(error)
     notFound()
