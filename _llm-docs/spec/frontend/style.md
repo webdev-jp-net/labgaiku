@@ -118,7 +118,7 @@ TSXでの実装：
 
 #### カラーの管理
 
-色はCSS Variablesを使用する。既存の `src/styles/_variable/_semantic.scss` 等で定義された変数を優先。
+色はCSS Variablesを使用する。`src/styles/index.scss`の`:root`で定義されているトークン（`--bg-*`/`--txt-*`/`--border-*`等）を優先。
 
 ## 参考資料
 

@@ -34,9 +34,10 @@ parts-componentテンプレートは以下を生成します：
 [ComponentName]/
 ├── index.ts
 ├── [ComponentName].tsx
-├── use[ComponentName].ts
 └── [ComponentName].module.scss
 ```
+
+ロジックを分離する必要が出た場合は、生成後に`use[ComponentName].ts`を同階層に追加する（テンプレートには含まれない）。
 
 ## 前提条件
 

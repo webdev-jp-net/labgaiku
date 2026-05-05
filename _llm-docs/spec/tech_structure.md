@@ -2,27 +2,34 @@
 
 ## フロントエンド
 
-- Next.js 15 App Router
+- Next.js 16 App Router
 - React 19 + TypeScript
 - SCSS Modules（グローバルスタイルは`src/styles/index.scss`）
-- 認証: NextAuth.js（Google OAuth）
-- データ取得: microCMS（interviewsコンテンツ）
+- 認証: NextAuth.js v4（Google OAuth）
+- データ取得: microCMS（`interview`コンテンツ）
+
+## 主要ライブラリ
+
+- `microcms-js-sdk`: microCMSクライアント
+- `isomorphic-dompurify`:本文HTMLのサニタイズ
+- `cheerio`:本文HTMLから見出しを抽出して目次を生成
+- `dayjs`:開催日の`YYYY年M月D日`整形
 
 ## ディレクトリ概要
 
 - `src/app`: App Routerページ・レイアウト
-- `src/components`: 再利用可能なUI（認証コンポーネントなど）
-- `src/lib`: APIクライアント、ユーティリティ
-- `src/styles`: グローバルSCSS/変数
-- `_llm-docs`: ドキュメント一式
+- `src/components`:共通レイアウトコンポーネント（`layout/`）
+- `src/lib`: APIクライアント・権限判定・サニタイズ・日付整形
+- `src/styles`:グローバルSCSS/変数
+- `_llm-docs`:ドキュメント一式
 
 ## 環境変数
 
 - `NEXTAUTH_URL`, `NEXTAUTH_SECRET`
 - `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`
-- `NEXT_PUBLIC_MICROCMS_SERVICE_KEY`, `NEXT_PUBLIC_MICROCMS_API_KEY`
+- `MICROCMS_SERVICE_DOMAIN`, `MICROCMS_API_KEY`（サーバー専用、`NEXT_PUBLIC_`プレフィックスを付けない）
 
 ## 補足
 
-- 現時点ではバックエンド/DBは無し（microCMSでコンテンツ取得）
+- バックエンド／DBは持たず、コンテンツ取得はmicroCMSのみ
 - 拡張方針は各仕様書（routing, components, microcms等）を参照
