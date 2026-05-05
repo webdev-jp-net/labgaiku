@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { getInterviewById } from '@/lib/api/microcms'
 import { authOptions } from '@/lib/auth'
 import { canViewInterview } from '@/lib/permission'
+import { LoginPrompt } from './_parts/components/LoginPrompt'
 import { InterviewDetailView } from './_parts/view'
 import type { InterviewTocItem, PublicInterview } from './_parts/view'
 
@@ -20,7 +21,8 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
   try {
     const interview = await getInterviewById(slug)
     if (!canViewInterview(interview, session)) {
-      notFound()
+      const callbackUrl = `/interview/${slug}`
+      return <LoginPrompt callbackUrl={callbackUrl} />
     }
     const publicInterview: PublicInterview = {
       id: interview.id,

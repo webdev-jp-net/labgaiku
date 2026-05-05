@@ -1,0 +1,18 @@
+@use '@/styles/_variable' as *;
+
+.section {
+  @include tmp-container;
+
+  margin: var(--spacing-2xl) 0;
+}
+
+.paragraph {
+  @include txt-paragraph;
+}
+
+.link {
+  @include txt-link;
+
+  cursor: pointer;
+  border: none;
+}
