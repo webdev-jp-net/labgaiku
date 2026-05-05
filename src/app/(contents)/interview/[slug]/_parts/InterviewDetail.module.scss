@@ -1,27 +1,46 @@
 @use '@/styles/_variable' as *;
 
 .article {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2xl);
-
   @include mq(narrow) {
+    @include tmp-container;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
     margin-top: var(--spacing-3xl);
   }
 
   @include mq(fromWide) {
+    display: grid;
+    grid-template-columns: rem(630 - 64 - 64) 1fr;
     max-width: rem(1280);
-    padding: var(--spacing-3xl) var(--spacing-3xl) var(--spacing-5xl);
     margin-inline: auto;
   }
 }
 
 .header {
-  @include tmp-container;
+  @include mq(narrow) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
 
+  @include mq(fromWide) {
+    padding: 0 var(--spacing-3xl);
+  }
+}
+
+.sticky {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
+
+  @include mq(fromWide) {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: var(--spacing-3xl) 0 0;
+  }
 }
 
 .title {
@@ -39,7 +58,13 @@
 }
 
 .body {
-  @include tmp-container;
+  @include mq(narrow) {
+    @include tmp-container;
+  }
+
+  @include mq(fromWide) {
+    padding: var(--spacing-3xl) var(--spacing-3xl) var(--spacing-5xl);
+  }
 
   p {
     @include txt-paragraph;

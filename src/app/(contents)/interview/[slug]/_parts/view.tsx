@@ -32,17 +32,18 @@ export function InterviewDetailView({ interview, toc }: InterviewDetailViewProps
   return (
     <article className={styles.article}>
       <header className={styles.header}>
-        <h1 className={styles.title}>{heading}</h1>
-        <p className={styles.guest}>{guestLine}</p>
-        {formattedDate && (
-          <time className={styles.date} dateTime={dateTime}>
-            {formattedDate}
-          </time>
-        )}
+        <div className={styles.sticky}>
+          <h1 className={styles.title}>{heading}</h1>
+          <p className={styles.guest}>{guestLine}</p>
+          {formattedDate && (
+            <time className={styles.date} dateTime={dateTime}>
+              {formattedDate}
+            </time>
+          )}
+          <MemberList memberList={memberList} />
+          <IndexNavigation tocList={tocList} />
+        </div>
       </header>
-      <MemberList memberList={memberList} />
-      <IndexNavigation tocList={tocList} />
-
       <div className={styles.body} dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
     </article>
   )
