@@ -24,12 +24,12 @@ export const HomeView: FC = () => {
                     <small className={styles.navShoulderKana}>interview</small>
                   </Link>
                 </li>
-                <li className={styles.navItem}>
+                {/* <li className={styles.navItem}>
                   <Link className={styles.navLink} href="/zine">
                     <span className={styles.navTitle}>人と働く仕組みは設計する</span>
                     <small className={styles.navShoulderKana}>ZINE</small>
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </nav>
           </div>
