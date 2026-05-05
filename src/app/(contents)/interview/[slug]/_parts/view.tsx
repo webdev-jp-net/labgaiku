@@ -1,6 +1,8 @@
 'use client'
 
 import type { Interview } from '@/lib/api/microcms'
+import { MemberList } from './components/MemberList'
+import { IndexNavigation } from './components/IndexNavigation'
 import { useInterviewDetail } from './useInterviewDetail'
 import styles from './InterviewDetail.module.scss'
 
@@ -38,26 +40,9 @@ export function InterviewDetailView({ interview, toc }: InterviewDetailViewProps
           </time>
         )}
       </header>
-      {memberList.length > 0 && (
-        <ul>
-          {memberList.map(member => (
-            <li key={member.name}>
-              <span>{member.name}</span>
-              <span>{member.roll}</span>
-              {member.tagList.map(tag => (
-                <span key={tag}>{tag}</span>
-              ))}
-            </li>
-          ))}
-        </ul>
-      )}
-      <ul>
-        {tocList.map(item => (
-          <li key={item.id}>
-            <a href={`#${item.id}`}>{item.text}</a>
-          </li>
-        ))}
-      </ul>
+      <MemberList memberList={memberList} />
+      <IndexNavigation tocList={tocList} />
+
       <div className={styles.body} dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
     </article>
   )
