@@ -68,7 +68,7 @@
   text-box: trim-both cap alphabetic;
 
   @include mq(narrow) {
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-2xl);
   }
 
   @include mq(fromWide) {

@@ -81,14 +81,12 @@ PC向けワイドスクリーンレイアウトのみ対象とする。タブレ
   gap: 1rem;
 
   .heading {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-top: var(--spacing-md);
   }
 
   .body {
-    padding: 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-basic);
   }
 }
 ```

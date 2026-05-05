@@ -6,14 +6,25 @@ import styles from './InterviewDetail.module.scss'
 
 export type PublicInterview = Omit<Interview, 'allowList' | 'visibility'>
 
-type InterviewDetailViewProps = {
-  interview: PublicInterview
+export type InterviewTocItem = {
+  id: string
+  text: string
 }
 
-export function InterviewDetailView({ interview }: InterviewDetailViewProps) {
-  const { heading, guestLine, dateTime, formattedDate, sanitizedContent } = useInterviewDetail({
-    interview,
-  })
+type InterviewDetailViewProps = {
+  interview: PublicInterview
+  toc: InterviewTocItem[]
+}
+
+export function InterviewDetailView({ interview, toc }: InterviewDetailViewProps) {
+  const {
+    heading,
+    guestLine,
+    dateTime,
+    formattedDate,
+    sanitizedContent,
+    toc: tocItems,
+  } = useInterviewDetail({ interview, toc })
 
   return (
     <article className={styles.article}>
@@ -26,6 +37,13 @@ export function InterviewDetailView({ interview }: InterviewDetailViewProps) {
           </time>
         )}
       </header>
+      <ul>
+        {tocItems.map(item => (
+          <li key={item.id}>
+            <a href={`#${item.id}`}>{item.text}</a>
+          </li>
+        ))}
+      </ul>
       <div className={styles.body} dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
     </article>
   )
