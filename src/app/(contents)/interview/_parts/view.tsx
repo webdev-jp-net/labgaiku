@@ -19,7 +19,7 @@ type InterviewIndexViewProps = {
 }
 
 export function InterviewIndexView({ session, itemList }: InterviewIndexViewProps) {
-  const { isAuthenticated, itemList: list } = useInterviewIndex({ session, itemList })
+  const { isAuthenticated, signedInUserName, items } = useInterviewIndex({ session, itemList })
 
   return (
     <section className={styles.section}>
@@ -28,14 +28,14 @@ export function InterviewIndexView({ session, itemList }: InterviewIndexViewProp
         <h1 className={styles.title}>Labが聞く</h1>
       </header>
       {isAuthenticated && (
-        <p className={styles.signedInUser}>ログインユーザー: {session?.user?.name}</p>
+        <p className={styles.signedInUser}>ログインユーザー: {signedInUserName}</p>
       )}
       <ul className={styles.list}>
-        {list.map(item => (
+        {items.map(item => (
           <li key={item.id} className={styles.item}>
             <InterviewItem
               id={item.id}
-              title={item.title ?? item.guest}
+              title={item.heading}
               guest={item.guest}
               date={item.date}
               canView={item.canView}
