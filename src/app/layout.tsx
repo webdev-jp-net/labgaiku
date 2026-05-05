@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Plaster } from 'next/font/google'
 import localFont from 'next/font/local'
 import '@/styles/index.scss'
 
@@ -8,6 +9,13 @@ const lineSeedJP = localFont({
     { path: './_parts/font/LINESeedJP_OTF_Rg.woff2', weight: '400', style: 'normal' },
   ],
   variable: '--font-line-seed-jp',
+  display: 'swap',
+})
+
+const plaster = Plaster({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-plaster',
   display: 'swap',
 })
 
@@ -38,7 +46,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja" className={lineSeedJP.variable}>
+    <html lang="ja" className={`${lineSeedJP.variable} ${plaster.variable}`}>
       <body>
         <div id="root">{children}</div>
       </body>

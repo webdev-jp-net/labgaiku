@@ -38,7 +38,7 @@
   }
 
   @include mq(fromWide) {
-    gap: var(--spacing-2xl);
+    gap: var(--spacing-xl);
   }
 }
 
@@ -46,7 +46,6 @@
   @include hd-display;
 
   padding-top: 1em;
-  color: currentColor;
   text-indent: -0.1em;
 }
 
@@ -54,9 +53,19 @@
   @include hd-md;
 
   position: relative;
-  font-weight: var(--font-weight-regular);
-  color: var(--border-basic);
-  letter-spacing: 0.2em;
+  font-family: var(--font-plaster);
+  color: var(--txt-subtle);
+  letter-spacing: 0;
+
+  &::after {
+    display: inline-block;
+    margin-left: rem(16);
+    font-family: var(--font-line-seed-jp);
+    font-weight: var(--font-weight-thin);
+    vertical-align: middle;
+    letter-spacing: -0.3em;
+    content: 'ー→';
+  }
 }
 
 .nav {

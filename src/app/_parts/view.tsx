@@ -12,7 +12,7 @@ export const HomeView: FC = () => {
       <div className={styles.hero}>
         <header className={styles.heroHeader}>
           <h1 className={styles.title}>Labが行く</h1>
-          <span className={styles.kana}>LAB GA IKU</span>
+          <span className={styles.kana}>lab ga iku</span>
         </header>
         <nav className={styles.nav}>
           <ul className={styles.navList}>
