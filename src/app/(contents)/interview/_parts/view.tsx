@@ -25,6 +25,10 @@ export function InterviewIndexView({ itemList }: InterviewIndexViewProps) {
         <small className={styles.shoulderCopy}>インタビュー</small>
         <h1 className={styles.title}>Labが聞く</h1>
       </header>
+      <p className={styles.articleDescription}>
+        人の話をしっかり聞く、それがただただ深い。
+        考えていることや感じていること、そこには生き方や人となりが息づいています。形式知にはおさまらないソフトスキルの学びへようこそ。
+      </p>
       <ul className={styles.list}>
         {items.map(item => (
           <li key={item.id} className={styles.item}>
