@@ -11,7 +11,7 @@ interface AppFooterProps extends React.HTMLAttributes<HTMLHeadingElement> {
 }
 
 export function AppFooter({ session, className, ...props }: AppFooterProps) {
-  const { handleClick, handleKeyDown, label } = useAppFooter({ session })
+  const { handleClick, handleKeyDown, label, description } = useAppFooter({ session })
 
   return (
     <footer className={`${styles.footer} ${className ?? ''}`} {...props}>
@@ -34,7 +34,7 @@ export function AppFooter({ session, className, ...props }: AppFooterProps) {
         </li> */}
       </ul>
       <div className={styles.console}>
-        <p className={styles.consoleDescription}>一部、認証による限定公開コンテンツがあります。</p>
+        <p className={styles.consoleDescription}>{description}</p>
         <span
           role="button"
           tabIndex={0}
