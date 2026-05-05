@@ -1,10 +1,15 @@
 @use '@/styles/_variable' as *;
 
 .article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+
   @include mq(narrow) {
     @include tmp-container;
 
-    margin: var(--spacing-3xl) auto var(--spacing-5xl);
+    padding-bottom: var(--spacing-5xl);
+    margin-top: var(--spacing-3xl);
   }
 
   @include mq(fromWide) {
@@ -15,10 +20,11 @@
 }
 
 .header {
+  @include tmp-container;
+
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
-  margin-bottom: var(--spacing-2xl);
 }
 
 .title {
@@ -36,9 +42,9 @@
 }
 
 .body {
-  @include txt-paragraph;
+  @include tmp-container;
 
-  @include mq(fromWide) {
-    max-width: rem(720);
+  p {
+    @include txt-paragraph;
   }
 }
