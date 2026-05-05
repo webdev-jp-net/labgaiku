@@ -74,7 +74,7 @@
   font-weight: var(--font-weight-thin);
   line-height: 1.3;
   color: var(--txt-accent);
-  letter-spacing: 0.025em;
+  letter-spacing: 0.02em;
   text-box: trim-both cap alphabetic;
 
   @include mq(narrow) {
@@ -109,4 +109,10 @@
 @mixin txt-marker {
   background: linear-gradient(to bottom, var(--border-marker), var(--border-marker)) left bottom
     0.4em / 100% 0.8em no-repeat;
+}
+
+@mixin txt-kana {
+  font-family: var(--font-plaster);
+  text-box: trim-both cap alphabetic;
+  color: var(--txt-subtle);
 }
