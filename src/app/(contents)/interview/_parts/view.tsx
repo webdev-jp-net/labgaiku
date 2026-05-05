@@ -1,6 +1,5 @@
 'use client'
 
-import type { Session } from 'next-auth'
 import { InterviewItem } from './components/InterviewItem'
 import { useInterviewIndex } from './useInterviewIndex'
 import styles from './InterviewIndex.module.scss'
@@ -14,12 +13,11 @@ export type InterviewListItem = {
 }
 
 type InterviewIndexViewProps = {
-  session: Session | null
   itemList: InterviewListItem[]
 }
 
-export function InterviewIndexView({ session, itemList }: InterviewIndexViewProps) {
-  const { isAuthenticated, signedInUserName, items } = useInterviewIndex({ session, itemList })
+export function InterviewIndexView({ itemList }: InterviewIndexViewProps) {
+  const { items } = useInterviewIndex({ itemList })
 
   return (
     <section className={styles.section}>
@@ -27,9 +25,6 @@ export function InterviewIndexView({ session, itemList }: InterviewIndexViewProp
         <small className={styles.shoulderCopy}>インタビュー</small>
         <h1 className={styles.title}>Labが聞く</h1>
       </header>
-      {isAuthenticated && (
-        <p className={styles.signedInUser}>ログインユーザー: {signedInUserName}</p>
-      )}
       <ul className={styles.list}>
         {items.map(item => (
           <li key={item.id} className={styles.item}>

@@ -37,10 +37,6 @@
   @include hd-lg;
 }
 
-.signedInUser {
-  @include txt-description;
-}
-
 .list {
   display: flex;
   flex-direction: column;

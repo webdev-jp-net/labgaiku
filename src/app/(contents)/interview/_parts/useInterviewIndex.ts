@@ -1,8 +1,6 @@
-import type { Session } from 'next-auth'
 import type { InterviewListItem } from './view'
 
 type UseInterviewIndexArgs = {
-  session: Session | null
   itemList: InterviewListItem[]
 }
 
@@ -14,10 +12,8 @@ export type InterviewIndexItem = {
   canView: boolean
 }
 
-export const useInterviewIndex = ({ session, itemList }: UseInterviewIndexArgs) => {
+export const useInterviewIndex = ({ itemList }: UseInterviewIndexArgs) => {
   return {
-    isAuthenticated: Boolean(session),
-    signedInUserName: session?.user?.name ?? null,
     items: itemList.map<InterviewIndexItem>(item => ({
       id: item.id,
       heading: item.title ?? item.guest,

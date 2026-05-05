@@ -27,8 +27,8 @@ export default async function InterviewIndexPage() {
           canView,
         }
       })
-    return <InterviewIndexView session={session} itemList={itemList} />
+    return <InterviewIndexView itemList={itemList} />
   } catch {
-    return <InterviewIndexView session={session} itemList={[]} />
+    return <InterviewIndexView itemList={[]} />
   }
 }
