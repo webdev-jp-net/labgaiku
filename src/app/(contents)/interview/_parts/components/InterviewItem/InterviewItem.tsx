@@ -1,7 +1,6 @@
 import type { FC } from 'react'
 import Link from 'next/link'
 import { formatJaDate } from '@/lib/date'
-import { MASK_PLACEHOLDER } from '@/lib/permission'
 import styles from './InterviewItem.module.scss'
 
 type InterviewItemProps = {
@@ -17,9 +16,11 @@ export const InterviewItem: FC<InterviewItemProps> = ({ id, title, guest, date, 
     <>
       <span className={styles.title}>{title}</span>
       <span className={styles.guest}>{`${guest}さん`}</span>
-      <time className={styles.date} dateTime={canView ? date : undefined}>
-        {canView ? formatJaDate(date) : MASK_PLACEHOLDER}
-      </time>
+      {date && (
+        <time className={styles.date} dateTime={date}>
+          {formatJaDate(date)}
+        </time>
+      )}
     </>
   )
 
