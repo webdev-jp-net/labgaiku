@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { getInterviewById } from '@/lib/api/microcms'
 import { authOptions } from '@/lib/auth'
 import { canViewInterview } from '@/lib/permission'
-import { InterviewArticleView } from './_parts/view'
+import { InterviewDetailView } from './_parts/view'
 import type { PublicInterview } from './_parts/view'
 
 type InterviewDetailPageProps = {
@@ -32,7 +32,7 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
       title: interview.title,
       content: interview.content,
     }
-    return <InterviewArticleView interview={publicInterview} />
+    return <InterviewDetailView interview={publicInterview} />
   } catch (error) {
     console.error(error)
     notFound()

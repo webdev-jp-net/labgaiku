@@ -11,6 +11,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "dayjs": "^1.11.20",
     "isomorphic-dompurify": "^2.36.0",
     "microcms-js-sdk": "^3.4.0",
     "modern-css-reset": "^1.4.0",

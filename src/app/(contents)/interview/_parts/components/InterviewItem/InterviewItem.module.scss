@@ -1,0 +1,39 @@
+@use '@/styles/_variable' as *;
+
+.link,
+.masked {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  color: currentColor;
+  text-decoration: none;
+}
+
+.link {
+  transition: color var(--transition);
+
+  @media (any-hover: hover) {
+    &:hover {
+      color: var(--txt-accent);
+    }
+  }
+}
+
+.masked {
+  color: var(--txt-subtle);
+}
+
+.title {
+  @include hd-md;
+}
+
+.guest {
+  font-size: var(--font-size-md);
+  letter-spacing: 0.04em;
+}
+
+.date {
+  @include txt-description;
+
+  line-height: 1.3;
+}

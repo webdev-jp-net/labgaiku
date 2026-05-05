@@ -23,6 +23,7 @@ export default async function InterviewIndexPage() {
           id: interview.id,
           title: canView ? interview.title : MASK_PLACEHOLDER,
           guest: canView ? interview.guest : MASK_PLACEHOLDER,
+          date: canView ? interview.date : undefined,
           canView,
         }
       })

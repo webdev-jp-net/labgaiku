@@ -1,7 +1,7 @@
 import type { Session } from 'next-auth'
 import type { Interview } from '@/lib/api/microcms'
 
-export const MASK_PLACEHOLDER = '*****'
+export const MASK_PLACEHOLDER = '＊＊＊＊＊'
 
 const parseAllowList = (text: string | undefined): string[] =>
   (text ?? '')
