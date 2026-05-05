@@ -1,9 +1,8 @@
-"use client";
+'use client'
 
-import type { PropsWithChildren } from "react";
-import { SessionProvider } from "next-auth/react";
+import type { PropsWithChildren } from 'react'
+import { SessionProvider } from 'next-auth/react'
 
 export function SessionWrapper({ children }: PropsWithChildren) {
-  return <SessionProvider>{children}</SessionProvider>;
+  return <SessionProvider>{children}</SessionProvider>
 }
-

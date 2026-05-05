@@ -41,15 +41,18 @@
 ### 重要なドキュメント
 
 **プロジェクト仕様**
+
 - [プロジェクト概要](_llm-docs/project.md) - 全体像・要件定義
 - [システム全体仕様](_llm-docs/spec/index.md) - 機能仕様
 
 **技術仕様**
+
 - [技術構成](_llm-docs/spec/tech_structure.md)
 - [データベース設計](_llm-docs/spec/db_structure.md)
 - [スタイリング方針](_llm-docs/spec/style.md)
 
 **開発ガイド**
+
 - [コンポーネント生成](_llm-docs/operation/generate-component.md)
 - [命名規約](_llm-docs/operation/dictionary.md)
 - [Amplify Gen2 セットアップ](_llm-docs/operation/amplify-gen2-setup.md)
@@ -94,4 +97,3 @@ pnpm scaffold               # scaffdog実行
 - **初期開発方針**: Lint・テストは省略し、基本機能実装に集中
 - **MVP優先**: 最小限の機能で早期リリース
 - **段階的改善**: 機能追加は段階的に実施
-
