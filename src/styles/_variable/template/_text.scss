@@ -47,6 +47,7 @@
 }
 
 @mixin hd-md {
+  font-weight: var(--font-weight-thin);
   line-height: 1.5;
   letter-spacing: 0.02em;
   text-box: trim-both cap alphabetic;
@@ -71,7 +72,7 @@
   }
 
   @include mq(fromWide) {
-    font-size: var(--font-size-4xl);
+    font-size: var(--font-size-3xl);
   }
 }
 
