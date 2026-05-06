@@ -33,7 +33,7 @@
   font-size: var(--font-size-lg);
   line-height: 1.5;
   color: var(--txt-accent);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.05em;
   text-box: trim-both cap alphabetic;
 }
 
@@ -55,7 +55,6 @@
 }
 
 @mixin hd-lg {
-  font-weight: var(--font-weight-thin);
   line-height: 1.4;
   color: var(--txt-accent);
   letter-spacing: 0.02em;
@@ -63,10 +62,12 @@
 
   @include mq(narrow) {
     font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-regular);
   }
 
   @include mq(fromWide) {
     font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-thin);
   }
 }
 
@@ -75,6 +76,7 @@
   line-height: 1.3;
   color: var(--txt-accent);
   text-box: trim-both cap alphabetic;
+  letter-spacing: 0.03em;
 
   @include mq(narrow) {
     font-size: var(--font-size-4xl);

@@ -4,7 +4,7 @@
 @mixin tmp-container {
   @include mq(narrow) {
     width: 100%;
-    padding: 0 var(--spacing-lg);
+    padding: 0 var(--spacing-md);
   }
 
   @include mq(fromWide) {
