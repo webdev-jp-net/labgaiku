@@ -5,6 +5,7 @@ import { MemberList } from './components/MemberList'
 import { IndexNavigation } from './components/IndexNavigation'
 import { useInterviewDetail } from './useInterviewDetail'
 import styles from './InterviewDetail.module.scss'
+import { WordUnit } from '@/components/WordUnit'
 
 export type PublicInterview = Omit<Interview, 'allowList' | 'visibility'>
 
@@ -33,7 +34,9 @@ export function InterviewDetailView({ interview, toc }: InterviewDetailViewProps
     <article className={styles.article}>
       <header className={styles.header}>
         <div className={styles.sticky}>
-          <h1 className={styles.title}>{heading}</h1>
+          <h1 className={styles.title}>
+            <WordUnit>{heading}</WordUnit>
+          </h1>
           <p className={styles.guest}>{guestLine}</p>
           {formattedDate && (
             <time className={styles.date} dateTime={dateTime}>

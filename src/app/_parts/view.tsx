@@ -5,6 +5,7 @@ import type { FC } from 'react'
 // import { AppHeader } from '@/components/layout/AppHeader'
 import { AppFooter } from '@/components/layout/AppFooter'
 import styles from './Home.module.scss'
+// import { WordUnit } from '@/components/WordUnit'
 
 export const HomeView: FC = () => {
   return (
@@ -80,8 +81,7 @@ export const HomeView: FC = () => {
           {/* <article className={styles.article}>
             <header className={styles.articleHeader}>
               <h2 className={styles.articleTitle}>
-                <span>人と働く仕組みは</span>
-                <span>設計する</span>
+                <WordUnit>人と働く仕組みは設計する</WordUnit>
               </h2>
               <small className={styles.articleKana}>ZINE</small>
             </header>

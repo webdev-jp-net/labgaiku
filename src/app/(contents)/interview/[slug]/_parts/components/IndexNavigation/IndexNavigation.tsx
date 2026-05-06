@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import styles from './IndexNavigation.module.scss'
+import { WordUnit } from '@/components/WordUnit'
 
 type IndexNavigationItem = {
   id: string
@@ -17,7 +18,7 @@ export const IndexNavigation: FC<IndexNavigationProps> = ({ tocList }) => (
       {tocList.map(item => (
         <li key={item.id} className={styles.item}>
           <a href={`#${item.id}`} className={styles.link}>
-            {item.text}
+            <WordUnit>{item.text}</WordUnit>
           </a>
         </li>
       ))}
