@@ -9,7 +9,8 @@ import { WordUnit } from '@/components/WordUnit'
 import wordStyles from '@/components/WordUnit/WordUnit.module.scss'
 import { LoginPrompt } from './_parts/components/LoginPrompt'
 import { InterviewDetailView } from './_parts/view'
-import type { InterviewTocItem, PublicInterview } from './_parts/view'
+import type { IndexNavigationItem } from './_parts/components/IndexNavigation/IndexNavigation'
+import type { PublicInterview } from './_parts/view'
 
 const parser = loadDefaultJapaneseParser()
 
@@ -117,7 +118,7 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
       $h3.html(segmentToHtml($h3.text()))
     })
 
-    const toc: InterviewTocItem[] = $('h2')
+    const indexNavigationList: IndexNavigationItem[] = $('h2')
       .toArray()
       .map(el => ({
         id: el.attribs.id,
@@ -139,7 +140,13 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
 
     const heading = buildTitle(publicInterview.title ?? publicInterview.guest)
 
-    return <InterviewDetailView interview={publicInterview} toc={toc} heading={heading} />
+    return (
+      <InterviewDetailView
+        interview={publicInterview}
+        indexNavigationList={indexNavigationList}
+        heading={heading}
+      />
+    )
   } catch (error) {
     console.error(error)
     notFound()

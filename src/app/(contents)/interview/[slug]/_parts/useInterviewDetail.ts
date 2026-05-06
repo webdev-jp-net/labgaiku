@@ -1,13 +1,14 @@
 import { formatJaDate } from '@/lib/date'
 import { sanitizeHtml } from '@/lib/sanitize'
-import type { InterviewTocItem, PublicInterview } from './view'
+import type { IndexNavigationItem } from './components/IndexNavigation/IndexNavigation'
+import type { PublicInterview } from './view'
 
 type UseInterviewDetailArgs = {
   interview: PublicInterview
-  toc: InterviewTocItem[]
+  indexNavigationList: IndexNavigationItem[]
 }
 
-export const useInterviewDetail = ({ interview, toc }: UseInterviewDetailArgs) => {
+export const useInterviewDetail = ({ interview, indexNavigationList }: UseInterviewDetailArgs) => {
   const memberList = (interview.member ?? []).map(m => ({
     name: m.name,
     roll: m.roll,
@@ -19,7 +20,7 @@ export const useInterviewDetail = ({ interview, toc }: UseInterviewDetailArgs) =
     dateTime: interview.date,
     formattedDate: interview.date ? formatJaDate(interview.date) : null,
     sanitizedContent: sanitizeHtml(interview.content ?? ''),
-    toc,
+    indexNavigationList,
     memberList,
   }
 }
