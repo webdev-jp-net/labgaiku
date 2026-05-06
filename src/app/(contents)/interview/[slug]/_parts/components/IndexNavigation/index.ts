@@ -1,0 +1,1 @@
+export { IndexNavigation } from './IndexNavigation'

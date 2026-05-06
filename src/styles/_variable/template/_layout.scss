@@ -1,0 +1,16 @@
+@use '../function/rem' as *;
+@use '../mixin/mq' as *;
+
+@mixin tmp-container {
+  @include mq(narrow) {
+    width: 100%;
+    padding: 0 var(--spacing-md);
+  }
+
+  @include mq(fromWide) {
+    width: 100%;
+    max-width: rem(600);
+    padding: 0 var(--spacing-xl);
+    margin-inline: auto;
+  }
+}

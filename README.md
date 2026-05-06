@@ -1,43 +1,82 @@
-# Astro Starter Kit: Minimal
+# Labが行く
 
-```sh
-pnpm create astro@latest -- --template minimal
+「Labが行く」の活動を公開するWebサイトです。
+
+## コンテンツ
+
+インタビュー：  
+これまでにインタビューした記事を公開範囲にしたがって掲載しています。
+
+## 技術スタック
+
+- **フロントエンド**: Next.js
+- **スタイリング**: SCSS Modules
+- **認証**: SSO（Google）
+- **OAuth**: Google
+- **ホスティング**: 選定中
+- **パッケージマネージャー**: pnpm
+
+## セットアップ
+
+### 1. 依存関係のインストール
+
+```bash
+pnpm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### 2. 環境変数の設定
 
-## 🚀 Project Structure
+`.env.example`をコピーして`.env`ファイルを作成：
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+cp .env.example .env
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+`.env`ファイルを編集して、以下の環境変数を設定：
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```env
+# Auth.js設定
+AUTH_SECRET=your-secret-key-here  # openssl rand -base64 32 で生成
+AUTH_TRUST_HOST=true
+NEXTAUTH_URL=http://localhost:4321
 
-Any static assets, like images, can be placed in the `public/` directory.
+# Google OAuth（Google Cloud Consoleで取得）
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+```
 
-## 🧞 Commands
+### 3. OAuth設定
 
-All commands are run from the root of the project, from a terminal:
+#### Google OAuth
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+1. [Google Cloud Console](https://console.cloud.google.com/)でプロジェクトを作成
+2. OAuth 2.0クライアントIDを作成
+3. 承認済みのリダイレクトURIに`http://localhost:4321/api/auth/callback/google`を追加
 
-## 👀 Want to learn more?
+#### GitHub OAuth
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+1. [GitHub Developer Settings](https://github.com/settings/developers)でOAuth Appを作成
+2. Authorization callback URLに`http://localhost:4321/api/auth/callback/github`を設定
+
+## 開発コマンド
+
+```bash
+# 開発サーバー起動
+pnpm dev
+
+# ビルド
+pnpm build
+
+# プレビュー
+pnpm preview
+
+# 型チェック
+pnpm typecheck
+
+# リント
+pnpm lint
+pnpm lint:fix
+
+# フォーマット
+pnpm format
+```

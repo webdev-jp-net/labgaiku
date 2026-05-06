@@ -1,0 +1,61 @@
+@use '@/styles/_variable' as *;
+
+.item {
+  display: flex;
+  flex-direction: column;
+
+  &[href] {
+    color: currentColor;
+    text-decoration: none;
+  }
+}
+
+.link {
+  transition: color var(--transition);
+
+  @media (any-hover: hover) {
+    &:hover {
+      color: var(--txt-accent);
+    }
+  }
+}
+
+.title {
+  @include hd-md;
+}
+
+.guest {
+  @include txt-lead;
+
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: flex-end;
+  margin: var(--spacing-lg) 0 0;
+}
+
+.suffix {
+  font-size: var(--font-size-md);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  margin: var(--spacing-xl) 0 0;
+}
+
+.date {
+  @include txt-description;
+
+  text-box: trim-both cap alphabetic;
+}
+
+.visibility {
+  @include txt-kana;
+
+  font-size: var(--font-size-sm);
+
+  &::before {
+    margin: 0 0.5em;
+    content: '・';
+  }
+}

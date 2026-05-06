@@ -1,0 +1,216 @@
+@use '@/styles/_variable' as *;
+
+.article {
+  @include mq(narrow) {
+    @include tmp-container;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+    margin-top: var(--spacing-3xl);
+  }
+
+  @include mq(fromWide) {
+    display: grid;
+    grid-template-columns: rem(630 - 64 - 64) 1fr;
+    max-width: rem(1280);
+    margin-inline: auto;
+  }
+}
+
+.header {
+  @include mq(narrow) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  @include mq(fromWide) {
+    padding: 0 0 0 var(--spacing-3xl);
+  }
+}
+
+.sticky {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+
+  @include mq(fromWide) {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: var(--spacing-3xl) 0 0;
+  }
+}
+
+.title {
+  @include hd-md;
+}
+
+.guest {
+  @include txt-lead;
+
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: center;
+  margin: var(--spacing-lg) 0 0;
+}
+
+.suffix {
+  @include mq(narrow) {
+    font-size: var(--font-size-sm);
+  }
+
+  @include mq(fromWide) {
+    font-size: var(--font-size-md);
+  }
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  margin: var(--spacing-lg) 0 0;
+}
+
+.date {
+  @include txt-description;
+
+  font-size: var(--font-size-sm);
+  text-box: trim-both cap alphabetic;
+}
+
+.visibility {
+  @include txt-kana;
+
+  font-size: var(--font-size-sm);
+
+  &::before {
+    margin: 0 0.5em;
+    content: '・';
+  }
+}
+
+.body {
+  @include mq(fromWide) {
+    padding: var(--spacing-3xl) var(--spacing-3xl) var(--spacing-5xl);
+  }
+
+  p {
+    @include txt-paragraph;
+  }
+
+  p ~ p {
+    @include mq(narrow) {
+      margin-top: 3em;
+    }
+
+    @include mq(fromWide) {
+      margin-top: 4em;
+    }
+  }
+
+  dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    @include mq(narrow) {
+      margin-top: var(--spacing-xl);
+    }
+
+    @include mq(fromWide) {
+      gap: 0.5em;
+      margin-top: var(--spacing-2xl);
+      // margin-top: 4em;
+    }
+  }
+
+  dt {
+    @include txt-paragraph;
+
+    &::after {
+      content: '：';
+
+      @include mq(narrow) {
+        margin: 0 0.2em;
+      }
+
+      @include mq(fromWide) {
+        margin: 0 0.5em;
+      }
+    }
+  }
+
+  dd {
+    @include txt-paragraph;
+  }
+
+  h2 {
+    @include hd-md;
+
+    margin-top: var(--spacing-5xl);
+
+    @include mq(narrow) {
+      scroll-margin-top: var(--spacing-2xl);
+    }
+
+    @include mq(fromWide) {
+      scroll-margin-top: var(--spacing-3xl);
+    }
+  }
+
+  hr + h2 {
+    margin-top: var(--spacing-3xl);
+  }
+
+  h3 {
+    @include hd-sm;
+
+    @include mq(narrow) {
+      margin-top: var(--spacing-2xl);
+    }
+
+    @include mq(fromWide) {
+      margin-top: var(--spacing-4xl);
+    }
+
+    span {
+      display: inline-block;
+    }
+  }
+
+  h2 + h3 {
+    margin-top: var(--spacing-2xl);
+  }
+
+  hr {
+    margin: var(--spacing-2xl) 0;
+    border: none;
+    border-top: 1px solid var(--border-basic);
+  }
+}
+
+// 目次
+.dialog[open] {
+  inset: 0;
+  display: grid;
+  gap: var(--spacing-xl);
+  justify-content: center;
+  width: 100%;
+  padding: var(--spacing-xl) var(--spacing-sm);
+  margin: auto;
+  background-color: var(--bg-basic);
+  border: none;
+
+  button {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    color: var(--txt-basic);
+    appearance: none;
+    background-color: transparent;
+    border: 1px solid var(--txt-basic);
+  }
+
+  &::backdrop {
+    background-color: color-mix(in srgb, var(--bg-basic), transparent 90%);
+    backdrop-filter: blur(1rem);
+  }
+}

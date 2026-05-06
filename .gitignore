@@ -7,28 +7,39 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# dependencies
+# Dependencies
 node_modules/
-dist
-dist-ssr
-*.local
-.DS_Store
 
-# Astro
-.astro/
+# Build outputs
+.next/
+.turbo/
+out/
+dist/
+dist-ssr/
 
-# local env files
+# Local env files
 .env
 .env.local
 .env.development
 .env.production
+!.env.example
 
-# cache files
+# Cache / tooling
 .cache/
+.pnpm-store/
 
 # TypeScript build info
 tsconfig.tsbuildinfo
 
-# Vitest
-coverage
+# Testing / coverage
+coverage/
 .vitest-result.json
+
+# OS / editor
+.DS_Store
+
+# claude
+.claude/tmp
+.claude/settings.local.json
+.claude/launch.json
+.claude/worktrees

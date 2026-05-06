@@ -1,0 +1,1 @@
+export { WordUnit } from './WordUnit'

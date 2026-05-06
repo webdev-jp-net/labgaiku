@@ -1,0 +1,18 @@
+@use '@/styles/_variable' as *;
+
+.body {
+  @include mq(fromWide) {
+    padding: var(--spacing-3xl) var(--spacing-3xl) var(--spacing-5xl);
+  }
+}
+
+.paragraph {
+  @include txt-paragraph;
+}
+
+.link {
+  @include txt-link;
+
+  cursor: pointer;
+  border: none;
+}

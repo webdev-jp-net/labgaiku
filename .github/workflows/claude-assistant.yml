@@ -47,7 +47,7 @@ jobs:
         with:
           # Maxプランは APIキー不要。GitHub App(OAuth)で動作
           # trigger_phrase は省略時 @claude。必要なら明示的に指定:
-          trigger_phrase: "@claude"
+          trigger_phrase: '@claude'
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           settings: |
             {

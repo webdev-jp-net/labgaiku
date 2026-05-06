@@ -1,0 +1,65 @@
+@use '@/styles/_variable' as *;
+
+.memberList {
+  position: relative;
+}
+
+.title {
+  @include txt-kana;
+
+  font-size: var(--font-size-lg);
+
+  small {
+    padding: 0 0.5em;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-thin);
+
+    &::before {
+      margin-right: 0.5em;
+      content: '・';
+    }
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: var(--spacing-md) 0 0;
+  list-style: none;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: var(--font-size-sm) 1fr;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-md);
+  list-style: none;
+
+  &::before {
+    @include rect(var(--font-size-sm), 1px);
+
+    display: block;
+    margin-top: 1em;
+    content: '';
+    background: var(--txt-subtle);
+  }
+}
+
+.name {
+  font-weight: var(--font-weight-regular);
+}
+
+.roll {
+  margin: 0 0.5em;
+  font-size: var(--font-size-sm);
+  color: var(--txt-muted);
+}
+
+.tag {
+  @include txt-marker;
+
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  border-radius: var(--border-radius);
+}
