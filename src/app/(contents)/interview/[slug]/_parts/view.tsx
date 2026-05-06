@@ -1,35 +1,39 @@
 'use client'
 
-import type { ReactNode } from 'react'
-import type { Interview } from '@/lib/api/microcms'
+import type { ComponentProps, ReactNode } from 'react'
 import { MemberList } from './components/MemberList'
 import { IndexNavigation } from './components/IndexNavigation'
 import type { IndexNavigationItem } from './components/IndexNavigation/IndexNavigation'
-import { useInterviewDetail } from './useInterviewDetail'
 import styles from './InterviewDetail.module.scss'
 
-export type PublicInterview = Omit<Interview, 'allowList' | 'visibility'>
-
 type InterviewDetailViewProps = {
-  interview: PublicInterview
-  indexNavigationList: IndexNavigationItem[]
   heading: ReactNode
+  guest: string
+  dateTime?: string
+  formattedDate: string | null
+  sanitizedContent: string
+  indexNavigationList: IndexNavigationItem[]
+  memberList: ComponentProps<typeof MemberList>['memberList']
 }
 
 export function InterviewDetailView({
-  interview,
-  indexNavigationList: indexNavigationListProp,
   heading,
+  guest,
+  dateTime,
+  formattedDate,
+  sanitizedContent,
+  indexNavigationList,
+  memberList,
 }: InterviewDetailViewProps) {
-  const { guestLine, dateTime, formattedDate, sanitizedContent, indexNavigationList, memberList } =
-    useInterviewDetail({ interview, indexNavigationList: indexNavigationListProp })
-
   return (
     <article className={styles.article}>
       <header className={styles.header}>
         <div className={styles.sticky}>
           <h1 className={styles.title}>{heading}</h1>
-          <p className={styles.guest}>{guestLine}</p>
+          <p className={styles.guest}>
+            {guest}
+            <small className={styles.suffix}>さん</small>
+          </p>
           {formattedDate && (
             <time className={styles.date} dateTime={dateTime}>
               {formattedDate}

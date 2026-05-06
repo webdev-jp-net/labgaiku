@@ -58,7 +58,21 @@
 .guest {
   @include txt-lead;
 
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: center;
+  justify-content: flex-end;
   margin: 0;
+}
+
+.suffix {
+  @include mq(narrow) {
+    font-size: var(--font-size-sm);
+  }
+
+  @include mq(fromWide) {
+    font-size: var(--font-size-md);
+  }
 }
 
 .date {

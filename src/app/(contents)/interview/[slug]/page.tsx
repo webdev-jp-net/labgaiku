@@ -4,13 +4,14 @@ import { getServerSession } from 'next-auth'
 import { notFound } from 'next/navigation'
 import { getInterviewById } from '@/lib/api/microcms'
 import { authOptions } from '@/lib/auth'
+import { formatJaDate } from '@/lib/date'
 import { canViewInterview } from '@/lib/permission'
+import { sanitizeHtml } from '@/lib/sanitize'
 import { WordUnit } from '@/components/WordUnit'
 import wordStyles from '@/components/WordUnit/WordUnit.module.scss'
 import { LoginPrompt } from './_parts/components/LoginPrompt'
 import { InterviewDetailView } from './_parts/view'
 import type { IndexNavigationItem } from './_parts/components/IndexNavigation/IndexNavigation'
-import type { PublicInterview } from './_parts/view'
 
 const parser = loadDefaultJapaneseParser()
 
@@ -125,26 +126,23 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
         text: buildTitle($(el).text()),
       }))
 
-    const publicInterview: PublicInterview = {
-      id: interview.id,
-      createdAt: interview.createdAt,
-      updatedAt: interview.updatedAt,
-      publishedAt: interview.publishedAt,
-      revisedAt: interview.revisedAt,
-      guest: interview.guest,
-      date: interview.date,
-      title: interview.title,
-      content: $.html(),
-      member: interview.member,
-    }
+    const memberList = (interview.member ?? []).map(m => ({
+      name: m.name,
+      roll: m.roll,
+      tagList: [...(m.isGuest ? ['ゲスト'] : []), ...(m.isFacilitator ? ['ファシリテーター'] : [])],
+    }))
 
-    const heading = buildTitle(publicInterview.title ?? publicInterview.guest)
+    const heading = buildTitle(interview.title ?? interview.guest)
 
     return (
       <InterviewDetailView
-        interview={publicInterview}
-        indexNavigationList={indexNavigationList}
         heading={heading}
+        guest={interview.guest}
+        dateTime={interview.date}
+        formattedDate={interview.date ? formatJaDate(interview.date) : null}
+        sanitizedContent={sanitizeHtml($.html())}
+        indexNavigationList={indexNavigationList}
+        memberList={memberList}
       />
     )
   } catch (error) {
