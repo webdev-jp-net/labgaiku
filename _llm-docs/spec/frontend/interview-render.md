@@ -81,6 +81,19 @@ microCMSから取得したインタビュー記事は、サーバーコンポー
 
 `secret`記事は権限がない閲覧者には一覧から除外されるため、ラベルが見えるのは権限保持者のみ。
 
+## 権限なしアクセス時のログイン促しView
+
+詳細ページで`canViewInterview`が`false`を返した場合、`LoginPrompt`を表示する。レイアウトは`InterviewDetail.module.scss`を直接importして詳細ページと同じ`<article>`/`<header>`/`<sticky>`構造を共有する。
+
+公開範囲別の表示内容:
+
+| visibility | heading（h1） | 日付         | 公開範囲ラベル |
+| ---------- | ------------- | ------------ | -------------- |
+| `secret`   | `＊＊＊＊＊`  | `＊＊＊＊＊` | `secret`       |
+| `limited`  | 通常表示      | 通常表示     | `limited`      |
+
+ゲスト・MemberList・IndexNavigation・本文は表示せず、`<article>`の本文部分にはログイン促しメッセージとログインボタンを表示する。
+
 ## 関連ファイル
 
 - `src/components/WordUnit/`: BudouX文節分割コンポーネント（`.word`クラスを定義）

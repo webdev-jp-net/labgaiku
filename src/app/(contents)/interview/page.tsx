@@ -35,7 +35,7 @@ export default async function InterviewIndexPage() {
         const canView = canViewInterview(interview, session)
         return {
           id: interview.id,
-          title: canView ? buildTitle(interview.title ?? interview.guest) : MASK_PLACEHOLDER,
+          title: buildTitle(interview.title ?? interview.guest),
           guest: canView ? interview.guest : MASK_PLACEHOLDER,
           date: interview.date,
           canView,

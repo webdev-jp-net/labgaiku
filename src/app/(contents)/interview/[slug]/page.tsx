@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import { getInterviewById } from '@/lib/api/microcms'
 import { authOptions } from '@/lib/auth'
 import { formatJaDate } from '@/lib/date'
-import { canViewInterview, getVisibilityLabel } from '@/lib/permission'
+import { canViewInterview, getVisibilityLabel, MASK_PLACEHOLDER } from '@/lib/permission'
 import { sanitizeHtml } from '@/lib/sanitize'
 import { WordUnit } from '@/components/WordUnit'
 import wordStyles from '@/components/WordUnit/WordUnit.module.scss'
@@ -51,7 +51,18 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
     const interview = await getInterviewById(slug)
     if (!canViewInterview(interview, session)) {
       const callbackUrl = `/interview/${slug}`
-      return <LoginPrompt callbackUrl={callbackUrl} />
+      const isSecret = interview.visibility.includes('secret')
+      return (
+        <LoginPrompt
+          callbackUrl={callbackUrl}
+          heading={isSecret ? MASK_PLACEHOLDER : buildTitle(interview.title ?? interview.guest)}
+          dateTime={isSecret ? undefined : interview.date}
+          formattedDate={
+            isSecret ? MASK_PLACEHOLDER : interview.date ? formatJaDate(interview.date) : null
+          }
+          visibility={getVisibilityLabel(interview.visibility)}
+        />
+      )
     }
     const $ = cheerio.load(interview.content ?? '')
 
