@@ -20,7 +20,10 @@
 
 @mixin txt-lead {
   font-size: var(--font-size-lg);
-  letter-spacing: 0.03em;
+  line-height: 1;
+  color: var(--txt-accent);
+  letter-spacing: 0.05em;
+  text-box: trim-both cap alphabetic;
 }
 
 @mixin txt-description {
@@ -29,29 +32,27 @@
   letter-spacing: 0.03em;
 }
 
+@mixin txt-kana {
+  font-family: var(--font-plaster);
+  text-box: trim-both cap alphabetic;
+  color: var(--txt-subtle);
+}
+
 @mixin hd-sm {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-regular);
   line-height: 1.5;
-  color: var(--txt-accent);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   text-box: trim-both cap alphabetic;
 }
 
 @mixin hd-md {
-  line-height: 1.5;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-thin);
+  line-height: 1.4;
   color: var(--txt-accent);
   letter-spacing: 0.02em;
   text-box: trim-both cap alphabetic;
-
-  @include mq(narrow) {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-regular);
-  }
-
-  @include mq(fromWide) {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-thin);
-  }
 }
 
 @mixin hd-lg {
@@ -62,7 +63,7 @@
   text-box: trim-both cap alphabetic;
 
   @include mq(narrow) {
-    font-size: rem(40);
+    font-size: rem(42);
   }
 
   @include mq(fromWide) {
@@ -78,11 +79,11 @@
   text-box: trim-both cap alphabetic;
 
   @include mq(narrow) {
-    font-size: var(--font-size-4xl);
+    font-size: rem(56);
   }
 
   @include mq(fromWide) {
-    font-size: var(--font-size-5xl);
+    font-size: rem(80);
   }
 }
 
@@ -109,10 +110,4 @@
 @mixin txt-marker {
   background: linear-gradient(to bottom, var(--border-marker), var(--border-marker)) left bottom
     0.4em / 100% 0.8em no-repeat;
-}
-
-@mixin txt-kana {
-  font-family: var(--font-plaster);
-  text-box: trim-both cap alphabetic;
-  color: var(--txt-subtle);
 }
