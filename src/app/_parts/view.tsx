@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import type { FC } from 'react'
-// import { AppHeader } from '@/components/layout/AppHeader'
+import { GlobalNavigation } from '@/components/layout/GlobalNavigation'
 import { AppFooter } from '@/components/layout/AppFooter'
 import styles from './Home.module.scss'
 // import { WordUnit } from '@/components/WordUnit'
@@ -60,7 +60,6 @@ export const HomeView: FC = () => {
               ここでは、そんな「Labが行く」の一部を紹介しています。
             </p>
           </section>
-          {/* <AppHeader className={styles.appHeader} /> */}
           <article className={styles.article}>
             <header className={styles.articleHeader}>
               <h2 className={styles.articleTitle}>Labが聞く</h2>
@@ -108,6 +107,7 @@ export const HomeView: FC = () => {
           </article> */}
         </div>
       </section>
+      <GlobalNavigation className={styles.appHeader} />
       <AppFooter className={styles.appFooter} session={null} />
     </main>
   )

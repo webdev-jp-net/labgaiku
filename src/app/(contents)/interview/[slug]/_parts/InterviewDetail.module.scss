@@ -148,6 +148,14 @@
     @include hd-md;
 
     margin-top: var(--spacing-5xl);
+
+    @include mq(narrow) {
+      scroll-margin-top: var(--spacing-2xl);
+    }
+
+    @include mq(fromWide) {
+      scroll-margin-top: var(--spacing-3xl);
+    }
   }
 
   hr + h2 {
@@ -178,5 +186,31 @@
     margin: var(--spacing-2xl) 0;
     border: none;
     border-top: 1px solid var(--border-basic);
+  }
+}
+
+// 目次
+.dialog[open] {
+  inset: 0;
+  display: grid;
+  gap: var(--spacing-xl);
+  justify-content: center;
+  width: 100%;
+  padding: var(--spacing-xl) var(--spacing-sm);
+  margin: auto;
+  background-color: var(--bg-basic);
+  border: none;
+
+  button {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    color: var(--txt-basic);
+    appearance: none;
+    background-color: transparent;
+    border: 1px solid var(--txt-basic);
+  }
+
+  &::backdrop {
+    background-color: color-mix(in srgb, var(--bg-basic), transparent 90%);
+    backdrop-filter: blur(1rem);
   }
 }

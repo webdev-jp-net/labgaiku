@@ -5,16 +5,16 @@ import Link from 'next/link'
 import styles from './AppFooter.module.scss'
 import { useAppFooter } from './useAppFooter'
 
-interface AppFooterProps extends React.HTMLAttributes<HTMLHeadingElement> {
+interface AppFooterProps extends React.HTMLAttributes<HTMLElement> {
   session: Session | null
   className?: string
 }
 
 export function AppFooter({ session, className, ...props }: AppFooterProps) {
-  const { handleClick, handleKeyDown, label, description } = useAppFooter({ session })
+  const { handleClick, handleKeyDown, label, description, ref } = useAppFooter({ session })
 
   return (
-    <footer className={`${styles.footer} ${className ?? ''}`} {...props}>
+    <footer ref={ref} className={`${styles.footer} ${className ?? ''}`} {...props}>
       <Link href="/" className={styles.information}>
         <span className={styles.siteName}>Labが行く</span>
         <small className={styles.domain}>labgaiku.org</small>

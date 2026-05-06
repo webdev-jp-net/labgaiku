@@ -1,0 +1,38 @@
+@use '@/styles/_variable' as *;
+
+.globalNavigation {
+  position: sticky;
+  inset: auto 0 env(safe-area-inset-bottom);
+  z-index: 5;
+  display: grid;
+  width: 100%;
+  margin: 0 auto;
+  background-color: color-mix(in srgb, var(--bg-basic), transparent 10%);
+  backdrop-filter: blur(0.4rem);
+
+  @include mq(narrow) {
+    grid-template-columns: 1fr max(auto, 50%);
+    gap: var(--spacing-xl) var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-md);
+  }
+
+  @include mq(fromWide) {
+    grid-template-columns: rem(630 - 64 - 64) 1fr;
+    gap: var(--spacing-2xl) 0;
+    max-width: rem(1280);
+    padding: var(--spacing-md) var(--spacing-3xl);
+  }
+
+  [data-visible-footer] & {
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+}
+
+.siteName {
+  @include txt-lead;
+
+  color: currentColor;
+  text-decoration: none;
+}

@@ -4,13 +4,13 @@
   display: grid;
   grid-template-areas: 'information nav' 'console console';
   width: 100%;
+  margin: 0 auto;
   border-top: 1px solid var(--border-basic);
 
   @include mq(narrow) {
     grid-template-columns: 1fr max(auto, 50%);
     gap: var(--spacing-xl) var(--spacing-md);
     padding: var(--spacing-2xl) var(--spacing-md) var(--spacing-lg);
-    margin: var(--spacing-6xl) auto 0;
   }
 
   @include mq(fromWide) {
@@ -19,7 +19,6 @@
     width: 100%;
     max-width: rem(1280);
     padding: var(--spacing-3xl) var(--spacing-3xl) var(--spacing-xl);
-    margin: var(--spacing-7xl) auto 0;
   }
 }
 

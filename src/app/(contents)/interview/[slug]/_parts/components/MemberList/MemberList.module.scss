@@ -7,7 +7,7 @@
 .title {
   @include txt-kana;
 
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-lg);
 
   small {
     padding: 0 0.5em;
@@ -26,7 +26,6 @@
   flex-direction: column;
   padding: 0;
   margin: var(--spacing-md) 0 0;
-  font-size: var(--font-size-sm);
   list-style: none;
 }
 
@@ -34,7 +33,7 @@
   display: grid;
   grid-template-columns: var(--font-size-sm) 1fr;
   gap: var(--spacing-sm);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-md);
   list-style: none;
 
   &::before {
@@ -43,7 +42,7 @@
     display: block;
     margin-top: 1em;
     content: '';
-    background: var(--border-basic);
+    background: var(--txt-subtle);
   }
 }
 
@@ -53,14 +52,14 @@
 
 .roll {
   margin: 0 0.5em;
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
   color: var(--txt-muted);
 }
 
 .tag {
   @include txt-marker;
 
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-regular);
   border-radius: var(--border-radius);
 }

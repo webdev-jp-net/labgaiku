@@ -1,6 +1,7 @@
 'use client'
 
-import type { ComponentProps, ReactNode } from 'react'
+import { type ComponentProps, type ReactNode } from 'react'
+// import { useRef, type ComponentProps, type ReactNode } from 'react'
 import type { VisibilityLabel } from '@/lib/permission'
 import { MemberList } from './components/MemberList'
 import { IndexNavigation } from './components/IndexNavigation'
@@ -28,6 +29,10 @@ export function InterviewDetailView({
   memberList,
   visibility,
 }: InterviewDetailViewProps) {
+  // const dialogRef = useRef<HTMLDialogElement>(null)
+  // const handleOpen = () => dialogRef.current?.showModal()
+  // const handleClose = () => dialogRef.current?.close()
+
   return (
     <article className={styles.article}>
       <header className={styles.header}>
@@ -58,6 +63,21 @@ export function InterviewDetailView({
         </div>
       </header>
       <div className={styles.body} dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+      {/* <button type="button" onClick={handleOpen}>
+        目次
+      </button>
+      <dialog
+        ref={dialogRef}
+        className={styles.dialog}
+        onClick={e => {
+          if ((e.target as HTMLElement).closest('a')) handleClose()
+        }}
+      >
+        <IndexNavigation indexNavigationList={indexNavigationList} />
+        <button type="button" onClick={handleClose}>
+          閉じる
+        </button>
+      </dialog> */}
     </article>
   )
 }

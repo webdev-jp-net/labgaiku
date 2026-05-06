@@ -1,4 +1,5 @@
-import type { KeyboardEvent } from 'react'
+import { useEffect, type KeyboardEvent } from 'react'
+import { useIntersectionObserver } from '@uidotdev/usehooks'
 import type { Session } from 'next-auth'
 import { signIn, signOut } from 'next-auth/react'
 
@@ -29,5 +30,19 @@ export const useAppFooter = ({ session }: UseAppFooterArgs) => {
     ? (session?.user?.name ?? '')
     : '一部、認証による限定公開コンテンツがあります。'
 
-  return { handleClick, handleKeyDown, label, description }
+  const [ref, entry] = useIntersectionObserver({ threshold: 0 })
+  const isVisible = Boolean(entry?.isIntersecting)
+
+  useEffect(() => {
+    if (isVisible) {
+      document.documentElement.dataset.visibleFooter = ''
+    } else {
+      delete document.documentElement.dataset.visibleFooter
+    }
+    return () => {
+      delete document.documentElement.dataset.visibleFooter
+    }
+  }, [isVisible])
+
+  return { handleClick, handleKeyDown, label, description, ref }
 }
