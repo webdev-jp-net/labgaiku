@@ -13,7 +13,7 @@
   --txt-subtle: #b8b5ac;
   --txt-on-fill: #fafaf7;
   --txt-accent: #1a1a1a;
-  --border-basic: #b8b5ac;
+  --border-basic: color-mix(in srgb, var(--txt-subtle), transparent 50%);
   --border-marker: color-mix(in srgb, var(--bg-accent), transparent 50%);
 
   /* スペーシング */
@@ -26,6 +26,8 @@
   --spacing-3xl: #{rem(64)};
   --spacing-4xl: #{rem(96)};
   --spacing-5xl: #{rem(128)};
+  --spacing-6xl: #{rem(160)};
+  --spacing-7xl: #{rem(200)};
 
   /* フォントサイズ */
   --font-size-xs: #{rem(12)};
@@ -58,7 +60,7 @@
     --txt-subtle: #4a4845;
     --txt-on-fill: #12120f;
     --txt-accent: #e8e8df;
-    --border-basic: #4a4845;
+    --border-basic: color-mix(in srgb, var(--txt-subtle), transparent 50%);
     --border-marker: color-mix(in srgb, var(--bg-accent), transparent 50%);
   }
 }
@@ -99,7 +101,6 @@ body {
     Roboto,
     sans-serif;
   font-size: 1rem; // 幅375pxのアートボードで16px相当
-  font-weight: var(--font-weight-thin);
   font-feature-settings: 'palt' 1;
   font-kerning: normal;
   line-height: 2;
