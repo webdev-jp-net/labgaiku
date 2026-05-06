@@ -31,6 +31,7 @@
 .sticky {
   display: flex;
   flex-direction: column;
+  gap: var(--spacing-lg);
 
   @include mq(fromWide) {
     position: sticky;
@@ -41,36 +42,31 @@
 }
 
 .title {
-  @include hd-display;
+  @include hd-lg;
 
-  white-space: nowrap;
+  span {
+    white-space: nowrap;
+  }
 }
 
 .kana {
   @include txt-kana;
 
-  @include mq(narrow) {
-    margin: var(--spacing-md) 0 0;
-    font-size: var(--font-size-lg);
-  }
-
-  @include mq(fromWide) {
-    margin: var(--spacing-lg) 0 0;
-    font-size: var(--font-size-xl);
-  }
+  font-size: var(--font-size-xl);
 }
 
 .description {
   @include txt-paragraph;
 
+  margin: var(--spacing-md) 0 0;
   font-size: var(--font-size-sm);
 
   @include mq(narrow) {
-    margin: var(--spacing-xl) 0 0;
+    // margin: var(--spacing-xl) 0 0;
   }
 
   @include mq(fromWide) {
-    margin: var(--spacing-3xl) 0 0;
+    // margin: var(--spacing-3xl) 0 0;
   }
 }
 
