@@ -77,61 +77,48 @@
 }
 
 .memberList {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: var(--spacing-md);
   align-items: flex-start;
   max-width: 100%;
   padding: 0;
-  margin: var(--spacing-md) 0 0;
+  margin: var(--spacing-lg) 0 0;
   list-style: none;
 }
 
 .memberItem {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  gap: var(--spacing-sm);
+  align-items: center;
   font-size: var(--font-size-xs);
   list-style: none;
 }
 
 .memberFigure {
+  @include rect(rem(56));
+
+  margin: 0 auto;
   overflow: hidden;
-  border-radius: var(--border-radius);
+}
 
-  @include mq(narrow) {
-    padding: var(--spacing-sm);
-  }
-
-  @include mq(fromWide) {
-    padding: rem(12);
-  }
-
-  img {
-    @include rect(100%);
-
-    object-fit: contain;
-  }
+.memberImage {
+  @include rect(100%);
 }
 
 .memberName {
   position: relative;
   margin: var(--spacing-sm) 0 0;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-md);
   color: var(--txt-accent);
-  text-align: center;
   text-box: trim-both cap alphabetic;
 
   small {
-    display: block;
+    display: inline-block;
+    margin: 0 0 0 0.5em;
     font-size: var(--font-size-xs);
     line-height: 1.4;
     color: var(--txt-muted);
-
-    // &::before {
-    //   margin: 0 0.2em;
-    //   content: '・';
-    // }
   }
 }
 

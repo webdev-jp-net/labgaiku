@@ -3,14 +3,12 @@
 import type { ReactNode } from 'react'
 import type { VisibilityLabel } from '@/lib/permission'
 import { InterviewItem } from './components/InterviewItem'
+import { Haitani } from './images/Haitani'
+import { Iha } from './images/Iha'
+import { Tsunokawa } from './images/Tsunokawa'
 import { useInterviewIndex } from './useInterviewIndex'
 import styles from './InterviewIndex.module.scss'
 
-import haitani from './images/haitani.svg'
-import iha from './images/iha.svg'
-import tsunokawa from './images/tsunokawa.svg'
-
-import Image from 'next/image'
 export type InterviewListItem = {
   id: string
   title: ReactNode
@@ -43,30 +41,42 @@ export function InterviewIndexView({ itemList }: InterviewIndexViewProps) {
             <ul className={styles.memberList}>
               <li className={styles.memberItem}>
                 <figure className={styles.memberFigure}>
-                  <Image src={haitani} alt="haitani" width={120} height={120} />
+                  <Haitani className={styles.memberImage} />
                 </figure>
-                <div className={styles.memberName}>
-                  灰谷<small>FE・エンジニア</small>
+                <div>
+                  <div className={styles.memberName}>
+                    灰谷<small>FE・エンジニア</small>
+                  </div>
+                  <p className={styles.memberDescription}>
+                    いろいろ思いついて企画をつくる人。話が長い。
+                  </p>
                 </div>
-                <p className={styles.memberDescription}>いろいろ思いつく。話が長い。</p>
               </li>
               <li className={styles.memberItem}>
                 <figure className={styles.memberFigure}>
-                  <Image src={tsunokawa} alt="tsunokawa" width={120} height={120} />
+                  <Tsunokawa className={styles.memberImage} />
                 </figure>
-                <div className={styles.memberName}>
-                  角川<small>FE・エンジニア</small>
+                <div>
+                  <div className={styles.memberName}>
+                    角川<small>FE・エンジニア</small>
+                  </div>
+                  <p className={styles.memberDescription}>
+                    あいずち番長。絶妙なところで「うん」と言う。
+                  </p>
                 </div>
-                <p className={styles.memberDescription}>絶妙なところで「うん」と言う。</p>
               </li>
               <li className={styles.memberItem}>
                 <figure className={styles.memberFigure}>
-                  <Image src={iha} alt="iha" width={120} height={120} />
+                  <Iha className={styles.memberImage} />
                 </figure>
-                <div className={styles.memberName}>
-                  伊波<small>SRE・エンジニア</small>
+                <div>
+                  <div className={styles.memberName}>
+                    伊波<small>SRE・エンジニア</small>
+                  </div>
+                  <p className={styles.memberDescription}>
+                    知りたがりでアツい。トークが一番うまい。
+                  </p>
                 </div>
-                <p className={styles.memberDescription}>アツい。一番ファシりがうまい。</p>
               </li>
             </ul>
           </div>
