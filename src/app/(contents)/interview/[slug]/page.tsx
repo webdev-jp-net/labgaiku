@@ -1,3 +1,4 @@
+import { loadDefaultJapaneseParser } from 'budoux'
 import * as cheerio from 'cheerio'
 import { getServerSession } from 'next-auth'
 import { notFound } from 'next/navigation'
@@ -5,9 +6,21 @@ import { getInterviewById } from '@/lib/api/microcms'
 import { authOptions } from '@/lib/auth'
 import { canViewInterview } from '@/lib/permission'
 import { WordUnit } from '@/components/WordUnit'
+import wordStyles from '@/components/WordUnit/WordUnit.module.scss'
 import { LoginPrompt } from './_parts/components/LoginPrompt'
 import { InterviewDetailView } from './_parts/view'
 import type { InterviewTocItem, PublicInterview } from './_parts/view'
+
+const parser = loadDefaultJapaneseParser()
+
+const escapeHtml = (s: string) =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+
+const segmentToHtml = (text: string) =>
+  parser
+    .parse(text)
+    .map(s => `<span class="${wordStyles.word}">${escapeHtml(s)}</span>`)
+    .join('')
 
 const buildTitle = (raw: string) => {
   const i = raw.indexOf('——')
@@ -92,9 +105,16 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
       const $h2 = $(el)
       const text = $h2.text()
       const i = text.indexOf('——')
-      if (i < 0) return
-      $h2.text(text.slice(0, i))
-      $h2.append($('<small>').text(text.slice(i)))
+      if (i < 0) {
+        $h2.html(segmentToHtml(text))
+        return
+      }
+      $h2.html(`${segmentToHtml(text.slice(0, i))}<small>${segmentToHtml(text.slice(i))}</small>`)
+    })
+
+    $('h3').each((_, el) => {
+      const $h3 = $(el)
+      $h3.html(segmentToHtml($h3.text()))
     })
 
     const toc: InterviewTocItem[] = $('h2')

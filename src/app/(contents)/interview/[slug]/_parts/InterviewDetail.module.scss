@@ -147,6 +147,10 @@
     @include mq(fromWide) {
       margin-top: var(--spacing-4xl);
     }
+
+    span {
+      display: inline-block;
+    }
   }
 
   h2 + h3 {
