@@ -1,27 +1,46 @@
 @use '@/styles/_variable' as *;
 
 .article {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2xl);
-
   @include mq(narrow) {
+    @include tmp-container;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
     margin-top: var(--spacing-3xl);
   }
 
   @include mq(fromWide) {
+    display: grid;
+    grid-template-columns: rem(630 - 64 - 64) 1fr;
     max-width: rem(1280);
-    padding: var(--spacing-3xl) var(--spacing-3xl) var(--spacing-5xl);
     margin-inline: auto;
   }
 }
 
 .header {
-  @include tmp-container;
+  @include mq(narrow) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
 
+  @include mq(fromWide) {
+    padding: 0 var(--spacing-3xl);
+  }
+}
+
+.sticky {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
+
+  @include mq(fromWide) {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: var(--spacing-3xl) 0 0;
+  }
 }
 
 .title {
@@ -39,14 +58,59 @@
 }
 
 .body {
-  @include tmp-container;
+  @include mq(fromWide) {
+    padding: var(--spacing-3xl) var(--spacing-3xl) var(--spacing-5xl);
+  }
 
   p {
     @include txt-paragraph;
   }
 
+  p ~ p {
+    @include mq(narrow) {
+      margin-top: 3em;
+    }
+
+    @include mq(fromWide) {
+      margin-top: 4em;
+    }
+  }
+
+  dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    @include mq(narrow) {
+      margin-top: 3em;
+    }
+
+    @include mq(fromWide) {
+      gap: 0.5em;
+      margin-top: 4em;
+    }
+  }
+
+  dt {
+    @include txt-paragraph;
+
+    &::after {
+      margin: 0 0.5em;
+      content: '：';
+    }
+  }
+
+  dd {
+    @include txt-paragraph;
+  }
+
   h2 {
     @include hd-md;
+
+    margin-top: var(--spacing-4xl);
+  }
+
+  h3 {
+    @include hd-sm;
 
     margin-top: var(--spacing-4xl);
   }

@@ -16,16 +16,6 @@
     font-size: var(--font-size-md);
     line-height: 2.5;
   }
-
-  &:not(:first-child) {
-    @include mq(narrow) {
-      margin-top: 3em;
-    }
-
-    @include mq(fromWide) {
-      margin-top: 4em;
-    }
-  }
 }
 
 @mixin txt-lead {
@@ -35,35 +25,39 @@
 
 @mixin txt-description {
   font-size: var(--font-size-sm);
-  color: var(--txt-subtle);
+  color: var(--txt-muted);
   letter-spacing: 0.03em;
 }
 
 @mixin hd-sm {
   font-size: var(--font-size-lg);
   line-height: 1.5;
+  color: var(--txt-accent);
   letter-spacing: 0.12em;
   text-box: trim-both cap alphabetic;
 }
 
 @mixin hd-md {
-  font-weight: var(--font-weight-thin);
   line-height: 1.5;
+  color: var(--txt-accent);
   letter-spacing: 0.02em;
   text-box: trim-both cap alphabetic;
 
   @include mq(narrow) {
     font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-regular);
   }
 
   @include mq(fromWide) {
     font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-thin);
   }
 }
 
 @mixin hd-lg {
   font-weight: var(--font-weight-thin);
   line-height: 1.4;
+  color: var(--txt-accent);
   letter-spacing: 0.02em;
   text-box: trim-both cap alphabetic;
 
@@ -72,14 +66,14 @@
   }
 
   @include mq(fromWide) {
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-2xl);
   }
 }
 
 @mixin hd-display {
   font-weight: var(--font-weight-thin);
   line-height: 1.3;
-  letter-spacing: 0.025em;
+  color: var(--txt-accent);
   text-box: trim-both cap alphabetic;
 
   @include mq(narrow) {
@@ -109,4 +103,15 @@
       background-position: right bottom 0;
     }
   }
+}
+
+@mixin txt-marker {
+  background: linear-gradient(to bottom, var(--border-marker), var(--border-marker)) left bottom
+    0.4em / 100% 0.8em no-repeat;
+}
+
+@mixin txt-kana {
+  font-family: var(--font-plaster);
+  text-box: trim-both cap alphabetic;
+  color: var(--txt-subtle);
 }

@@ -1,6 +1,8 @@
 'use client'
 
 import type { Interview } from '@/lib/api/microcms'
+import { MemberList } from './components/MemberList'
+import { IndexNavigation } from './components/IndexNavigation'
 import { useInterviewDetail } from './useInterviewDetail'
 import styles from './InterviewDetail.module.scss'
 
@@ -23,27 +25,25 @@ export function InterviewDetailView({ interview, toc }: InterviewDetailViewProps
     dateTime,
     formattedDate,
     sanitizedContent,
-    toc: tocItems,
+    toc: tocList,
+    memberList,
   } = useInterviewDetail({ interview, toc })
 
   return (
     <article className={styles.article}>
       <header className={styles.header}>
-        <h1 className={styles.title}>{heading}</h1>
-        <p className={styles.guest}>{guestLine}</p>
-        {formattedDate && (
-          <time className={styles.date} dateTime={dateTime}>
-            {formattedDate}
-          </time>
-        )}
+        <div className={styles.sticky}>
+          <h1 className={styles.title}>{heading}</h1>
+          <p className={styles.guest}>{guestLine}</p>
+          {formattedDate && (
+            <time className={styles.date} dateTime={dateTime}>
+              {formattedDate}
+            </time>
+          )}
+          <MemberList memberList={memberList} />
+          <IndexNavigation tocList={tocList} />
+        </div>
       </header>
-      <ul>
-        {tocItems.map(item => (
-          <li key={item.id}>
-            <a href={`#${item.id}`}>{item.text}</a>
-          </li>
-        ))}
-      </ul>
       <div className={styles.body} dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
     </article>
   )

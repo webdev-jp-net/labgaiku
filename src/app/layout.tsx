@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Plaster } from 'next/font/google'
 import localFont from 'next/font/local'
 import '@/styles/index.scss'
 
@@ -11,14 +12,41 @@ const lineSeedJP = localFont({
   display: 'swap',
 })
 
+const plaster = Plaster({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-plaster',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
-  title: 'Labが行く',
-  description: '',
+  metadataBase: new URL('https://labgaiku.org'),
+  title: {
+    default: 'Labが行く',
+    template: '%s | Labが行く',
+  },
+  description: '「Labが行く」は、雑談をするための勉強会です。',
+  openGraph: {
+    title: 'Labが行く',
+    description: '「Labが行く」は、雑談をするための勉強会です。',
+    url: '/',
+    siteName: 'Labが行く',
+    locale: 'ja_JP',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Labが行く',
+    description: '「Labが行く」は、雑談をするための勉強会です。',
+  },
+  alternates: {
+    canonical: '/',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja" className={lineSeedJP.variable}>
+    <html lang="ja" className={`${lineSeedJP.variable} ${plaster.variable}`}>
       <body>
         <div id="root">{children}</div>
       </body>

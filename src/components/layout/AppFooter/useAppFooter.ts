@@ -25,5 +25,9 @@ export const useAppFooter = ({ session }: UseAppFooterArgs) => {
 
   const label = isAuthenticated ? 'ログアウト' : 'ログイン'
 
-  return { handleClick, handleKeyDown, label }
+  const description = isAuthenticated
+    ? (session?.user?.name ?? '')
+    : '一部、認証による限定公開コンテンツがあります。'
+
+  return { handleClick, handleKeyDown, label, description }
 }

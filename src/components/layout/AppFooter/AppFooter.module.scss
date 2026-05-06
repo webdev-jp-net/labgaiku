@@ -1,15 +1,31 @@
 @use '@/styles/_variable' as *;
 
 .footer {
-  @include tmp-container;
+  display: grid;
+  grid-template-areas: 'information nav' 'console console';
+  grid-template-columns: 1fr max(auto, 50%);
+  width: 100%;
+  margin: var(--spacing-3xl) auto 0;
 
   @include mq(narrow) {
-    margin: var(--spacing-4xl) auto var(--spacing-2xl);
+    gap: var(--spacing-xl) var(--spacing-md);
+    padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-lg);
   }
 
   @include mq(fromWide) {
-    margin: var(--spacing-4xl) auto var(--spacing-3xl);
+    gap: var(--spacing-2xl) var(--spacing-md);
+    width: 100%;
+    max-width: rem(1280);
+    padding: var(--spacing-3xl) var(--spacing-3xl) var(--spacing-xl);
   }
+}
+
+.information {
+  display: grid;
+  grid-area: information;
+  gap: var(--spacing-sm);
+  align-self: flex-start;
+  text-decoration: none;
 }
 
 .siteName {
@@ -27,13 +43,73 @@
 }
 
 .domain {
-  font-size: var(--font-size-sm);
-  color: var(--txt-subtle);
+  font-size: var(--font-size-xs);
+  color: var(--txt-muted);
   letter-spacing: 0.05em;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  grid-area: nav;
+  gap: var(--spacing-md);
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+
+.navItem {
+  display: grid;
+  grid-template-columns: rem(12) 1fr;
+  gap: var(--spacing-sm);
+  list-style: none;
+
+  &::before {
+    @include rect(rem(12), 1px);
+
+    display: block;
+    margin-top: 0.5em;
+    content: '';
+    background: var(--border-basic);
+  }
+}
+
+.navLink {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  width: fit-content;
+  font-size: var(--font-size-sm);
+  color: currentColor;
+  text-decoration: none;
+}
+
+.navTitle {
+  font-weight: var(--font-weight-regular);
+}
+
+.navKana {
+  @include txt-kana;
+
+  font-size: rem(12);
+}
+
+.console {
+  display: flex;
+  grid-area: console;
+  gap: var(--spacing-sm);
+  align-items: center;
+  justify-self: flex-end;
+}
+
+.consoleDescription {
+  font-size: var(--font-size-xs);
+  color: var(--txt-muted);
 }
 
 .login {
   @include txt-link;
 
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
 }

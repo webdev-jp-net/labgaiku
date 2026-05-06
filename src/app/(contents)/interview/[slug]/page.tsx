@@ -24,6 +24,63 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
       const callbackUrl = `/interview/${slug}`
       return <LoginPrompt callbackUrl={callbackUrl} />
     }
+    const $ = cheerio.load(interview.content ?? '')
+
+    const namePattern = /^([^\x00-\x7F]+?)[:：](.*)$/s
+    const colonPattern = /^[:：]\s*/
+    $('p').each((_, el) => {
+      const $p = $(el)
+      const nodes = $p.contents().toArray()
+      if (nodes.length === 0) return
+      const first = nodes[0]
+
+      // ケース1: 先頭が text node で「名前 + コロン」を含む
+      if (first.type === 'text') {
+        const match = first.data.match(namePattern)
+        if (!match) return
+        const [, name, rest] = match
+        first.data = rest.replace(/^\s+/, '')
+        const ddHtml = $p.html() ?? ''
+        $p.replaceWith(`<dl><dt>${name}</dt><dd>${ddHtml}</dd></dl>`)
+        return
+      }
+
+      // ケース2: 先頭 element の text がマルチバイト文字のみ + 直後 text がコロンで始まる
+      if (first.type === 'tag') {
+        const elText = $(first).text()
+
+        // ケース3: 先頭 element 内に「名前 + コロン」がすべて入っている
+        const elInnerMatch = elText.match(/^([^\x00-\x7F]+?)[:：]\s*$/)
+        if (elInnerMatch) {
+          const [, name] = elInnerMatch
+          $(first).remove()
+          const remaining = $p.contents().first()
+          if (remaining.length > 0 && remaining[0].type === 'text') {
+            remaining[0].data = remaining[0].data.replace(/^\s+/, '')
+          }
+          const ddHtml = $p.html() ?? ''
+          $p.replaceWith(`<dl><dt>${name}</dt><dd>${ddHtml}</dd></dl>`)
+          return
+        }
+
+        if (!/^[^\x00-\x7F]+$/.test(elText)) return
+        const second = nodes[1]
+        if (!second || second.type !== 'text') return
+        if (!colonPattern.test(second.data)) return
+        second.data = second.data.replace(colonPattern, '')
+        $(first).remove()
+        const ddHtml = $p.html() ?? ''
+        $p.replaceWith(`<dl><dt>${elText}</dt><dd>${ddHtml}</dd></dl>`)
+      }
+    })
+
+    const toc: InterviewTocItem[] = $('h2')
+      .toArray()
+      .map(el => ({
+        id: el.attribs.id,
+        text: $(el).text(),
+      }))
+
     const publicInterview: PublicInterview = {
       id: interview.id,
       createdAt: interview.createdAt,
@@ -33,16 +90,9 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
       guest: interview.guest,
       date: interview.date,
       title: interview.title,
-      content: interview.content,
+      content: $.html(),
+      member: interview.member,
     }
-
-    const $ = cheerio.load(interview.content ?? '')
-    const toc: InterviewTocItem[] = $('h1, h2, h3')
-      .toArray()
-      .map(el => ({
-        id: el.attribs.id,
-        text: $(el).text(),
-      }))
 
     return <InterviewDetailView interview={publicInterview} toc={toc} />
   } catch (error) {

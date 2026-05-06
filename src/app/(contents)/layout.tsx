@@ -7,7 +7,7 @@ export default async function ContentsLayout({ children }: { children: React.Rea
   const session = await getServerSession(authOptions)
   return (
     <>
-      <AppHeader session={session} />
+      <AppHeader />
       <main>{children}</main>
       <AppFooter session={session} />
     </>

@@ -8,6 +8,12 @@ type UseInterviewDetailArgs = {
 }
 
 export const useInterviewDetail = ({ interview, toc }: UseInterviewDetailArgs) => {
+  const memberList = (interview.member ?? []).map(m => ({
+    name: m.name,
+    roll: m.roll,
+    tagList: [...(m.isGuest ? ['ゲスト'] : []), ...(m.isFacilitator ? ['ファシリテーター'] : [])],
+  }))
+
   return {
     heading: interview.title ?? interview.guest,
     guestLine: `${interview.guest}さん`,
@@ -15,5 +21,6 @@ export const useInterviewDetail = ({ interview, toc }: UseInterviewDetailArgs) =
     formattedDate: interview.date ? formatJaDate(interview.date) : null,
     sanitizedContent: sanitizeHtml(interview.content ?? ''),
     toc,
+    memberList,
   }
 }

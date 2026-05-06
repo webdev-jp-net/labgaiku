@@ -7,13 +7,14 @@
 :root {
   /* カラー */
   --bg-basic: #fafaf7;
-  --bg-accent: #1a1a1a;
-  --txt-basic: #1a1a1a;
-  --txt-muted: #4a4845;
-  --txt-subtle: #85827a;
+  --bg-accent: #90d5cc;
+  --txt-basic: #4a4845;
+  --txt-muted: #85827a;
+  --txt-subtle: #b8b5ac;
   --txt-on-fill: #fafaf7;
-  --txt-accent: #0a0a0a;
+  --txt-accent: #1a1a1a;
   --border-basic: #b8b5ac;
+  --border-marker: color-mix(in srgb, var(--bg-accent), transparent 50%);
 
   /* スペーシング */
   --spacing-xs: #{rem(4)};
@@ -27,6 +28,7 @@
   --spacing-5xl: #{rem(128)};
 
   /* フォントサイズ */
+  --font-size-xs: #{rem(12)};
   --font-size-sm: #{rem(14)};
   --font-size-md: #{rem(16)};
   --font-size-lg: #{rem(18)};
@@ -50,9 +52,14 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-basic: #12120f;
-    --bg-accent: #e8e6df;
-    --txt-basic: #e8e6df;
+    --bg-accent: #427e8a;
+    --txt-basic: #c1c0b8;
+    --txt-muted: #77756e;
+    --txt-subtle: #4a4845;
     --txt-on-fill: #12120f;
+    --txt-accent: #e8e8df;
+    --border-basic: #4a4845;
+    --border-marker: color-mix(in srgb, var(--bg-accent), transparent 50%);
   }
 }
 
