@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import styles from './IndexNavigation.module.scss'
 
 type IndexNavigationItem = {
   id: string
@@ -10,11 +11,16 @@ type IndexNavigationProps = {
 }
 
 export const IndexNavigation: FC<IndexNavigationProps> = ({ tocList }) => (
-  <ul>
-    {tocList.map(item => (
-      <li key={item.id}>
-        <a href={`#${item.id}`}>{item.text}</a>
-      </li>
-    ))}
-  </ul>
+  <div className={styles.indexNavigation}>
+    <h2 className={styles.title}>INDEX</h2>
+    <ul className={styles.list}>
+      {tocList.map(item => (
+        <li key={item.id} className={styles.item}>
+          <a href={`#${item.id}`} className={styles.link}>
+            {item.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
 )

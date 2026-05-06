@@ -1,5 +1,45 @@
-@use 'style/_variable' as *;
+@use '@/styles/_variable' as *;
 
-.toc {
-  //
+.indexNavigation {
+  position: relative;
+}
+
+.title {
+  @include txt-kana;
+
+  font-size: var(--font-size-sm);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: 0;
+  margin: var(--spacing-md) 0 0;
+  font-size: var(--font-size-xs);
+  list-style: none;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: var(--font-size-xs) 1fr;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  list-style: none;
+
+  &::before {
+    @include rect(var(--font-size-xs), 1px);
+
+    display: block;
+    margin-top: 0.75em;
+    content: '';
+    background: var(--border-basic);
+  }
+}
+
+.link {
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  color: currentColor;
+  text-decoration: none;
 }
