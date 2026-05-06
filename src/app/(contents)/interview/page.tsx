@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth'
 import { getInterviewList } from '@/lib/api/microcms'
 import { authOptions } from '@/lib/auth'
-import { canViewInterview, MASK_PLACEHOLDER } from '@/lib/permission'
+import { canViewInterview, getVisibilityLabel, MASK_PLACEHOLDER } from '@/lib/permission'
 import { WordUnit } from '@/components/WordUnit'
 import { InterviewIndexView } from './_parts/view'
 import type { InterviewListItem } from './_parts/view'
@@ -39,6 +39,7 @@ export default async function InterviewIndexPage() {
           guest: canView ? interview.guest : MASK_PLACEHOLDER,
           date: interview.date,
           canView,
+          visibility: getVisibilityLabel(interview.visibility),
         }
       })
     return <InterviewIndexView itemList={itemList} />

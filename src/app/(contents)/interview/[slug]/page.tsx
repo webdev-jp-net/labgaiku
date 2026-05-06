@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import { getInterviewById } from '@/lib/api/microcms'
 import { authOptions } from '@/lib/auth'
 import { formatJaDate } from '@/lib/date'
-import { canViewInterview } from '@/lib/permission'
+import { canViewInterview, getVisibilityLabel } from '@/lib/permission'
 import { sanitizeHtml } from '@/lib/sanitize'
 import { WordUnit } from '@/components/WordUnit'
 import wordStyles from '@/components/WordUnit/WordUnit.module.scss'
@@ -143,6 +143,7 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
         sanitizedContent={sanitizeHtml($.html())}
         indexNavigationList={indexNavigationList}
         memberList={memberList}
+        visibility={getVisibilityLabel(interview.visibility)}
       />
     )
   } catch (error) {

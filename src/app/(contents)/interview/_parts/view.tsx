@@ -1,6 +1,7 @@
 'use client'
 
 import type { ReactNode } from 'react'
+import type { VisibilityLabel } from '@/lib/permission'
 import { InterviewItem } from './components/InterviewItem'
 import { useInterviewIndex } from './useInterviewIndex'
 import styles from './InterviewIndex.module.scss'
@@ -11,6 +12,7 @@ export type InterviewListItem = {
   guest: string
   date?: string
   canView: boolean
+  visibility: VisibilityLabel | null
 }
 
 type InterviewIndexViewProps = {
@@ -44,6 +46,7 @@ export function InterviewIndexView({ itemList }: InterviewIndexViewProps) {
                 guest={item.guest}
                 date={item.date}
                 canView={item.canView}
+                visibility={item.visibility}
               />
             </li>
           ))}

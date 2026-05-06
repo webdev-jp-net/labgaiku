@@ -1,6 +1,7 @@
 'use client'
 
 import type { ComponentProps, ReactNode } from 'react'
+import type { VisibilityLabel } from '@/lib/permission'
 import { MemberList } from './components/MemberList'
 import { IndexNavigation } from './components/IndexNavigation'
 import type { IndexNavigationItem } from './components/IndexNavigation/IndexNavigation'
@@ -14,6 +15,7 @@ type InterviewDetailViewProps = {
   sanitizedContent: string
   indexNavigationList: IndexNavigationItem[]
   memberList: ComponentProps<typeof MemberList>['memberList']
+  visibility: VisibilityLabel | null
 }
 
 export function InterviewDetailView({
@@ -24,21 +26,33 @@ export function InterviewDetailView({
   sanitizedContent,
   indexNavigationList,
   memberList,
+  visibility,
 }: InterviewDetailViewProps) {
   return (
     <article className={styles.article}>
       <header className={styles.header}>
         <div className={styles.sticky}>
-          <h1 className={styles.title}>{heading}</h1>
-          <p className={styles.guest}>
-            {guest}
-            <small className={styles.suffix}>さん</small>
-          </p>
-          {formattedDate && (
-            <time className={styles.date} dateTime={dateTime}>
-              {formattedDate}
-            </time>
-          )}
+          <div>
+            <h1 className={styles.title}>{heading}</h1>
+            <p className={styles.guest}>
+              {guest}
+              <small className={styles.suffix}>さん</small>
+            </p>
+            {(formattedDate || visibility) && (
+              <div className={styles.meta}>
+                {formattedDate && (
+                  <time className={styles.date} dateTime={dateTime}>
+                    {formattedDate}
+                  </time>
+                )}
+                {visibility && (
+                  <span className={styles.visibility} aria-label={visibility.ariaLabel}>
+                    {visibility.label}
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
           <MemberList memberList={memberList} />
           <IndexNavigation indexNavigationList={indexNavigationList} />
         </div>

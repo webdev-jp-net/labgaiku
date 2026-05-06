@@ -23,12 +23,27 @@
 .title {
   @include hd-md;
 
+  @include mq(narrow) {
+    font-weight: var(--font-weight-regular);
+  }
+
+  @include mq(fromWide) {
+    font-weight: var(--font-weight-thin);
+  }
+
   small {
     @include hd-sm;
 
     display: inline-block;
     margin: var(--spacing-sm) 0 0;
-    font-weight: var(--font-weight-thin);
+
+    @include mq(narrow) {
+      font-weight: var(--font-weight-regular);
+    }
+
+    @include mq(fromWide) {
+      font-weight: var(--font-weight-thin);
+    }
   }
 }
 
@@ -37,24 +52,33 @@
 
   display: flex;
   gap: var(--spacing-xs);
-  align-items: center;
-  justify-content: flex-end;
+  align-items: flex-end;
   margin: var(--spacing-lg) 0 0;
 }
 
 .suffix {
-  @include mq(narrow) {
-    font-size: var(--font-size-sm);
-  }
+  font-size: var(--font-size-md);
+}
 
-  @include mq(fromWide) {
-    font-size: var(--font-size-md);
-  }
+.meta {
+  display: flex;
+  align-items: center;
+  margin: var(--spacing-xl) 0 0;
 }
 
 .date {
   @include txt-description;
 
-  margin: var(--spacing-lg) 0 0;
   text-box: trim-both cap alphabetic;
+}
+
+.visibility {
+  @include txt-kana;
+
+  font-size: var(--font-size-sm);
+
+  &::before {
+    margin: 0 0.5em;
+    content: '・';
+  }
 }

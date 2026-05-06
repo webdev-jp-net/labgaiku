@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import type { VisibilityLabel } from '@/lib/permission'
 import type { InterviewListItem } from './view'
 
 type UseInterviewIndexArgs = {
@@ -11,6 +12,7 @@ export type InterviewIndexItem = {
   guest: string
   date?: string
   canView: boolean
+  visibility: VisibilityLabel | null
 }
 
 export const useInterviewIndex = ({ itemList }: UseInterviewIndexArgs) => {
@@ -21,6 +23,7 @@ export const useInterviewIndex = ({ itemList }: UseInterviewIndexArgs) => {
       guest: item.guest,
       date: item.date,
       canView: item.canView,
+      visibility: item.visibility,
     })),
   }
 }

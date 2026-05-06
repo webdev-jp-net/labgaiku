@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from 'react'
 import Link from 'next/link'
 import { formatJaDate } from '@/lib/date'
+import type { VisibilityLabel } from '@/lib/permission'
 import styles from './InterviewItem.module.scss'
 
 type InterviewItemProps = {
@@ -9,9 +10,17 @@ type InterviewItemProps = {
   guest: string
   date?: string
   canView: boolean
+  visibility: VisibilityLabel | null
 }
 
-export const InterviewItem: FC<InterviewItemProps> = ({ id, title, guest, date, canView }) => {
+export const InterviewItem: FC<InterviewItemProps> = ({
+  id,
+  title,
+  guest,
+  date,
+  canView,
+  visibility,
+}) => {
   const body = (
     <>
       <span className={styles.title}>{title}</span>
@@ -19,10 +28,19 @@ export const InterviewItem: FC<InterviewItemProps> = ({ id, title, guest, date, 
         {guest}
         <small className={styles.suffix}>さん</small>
       </span>
-      {date && (
-        <time className={styles.date} dateTime={date}>
-          {formatJaDate(date)}
-        </time>
+      {(date || visibility) && (
+        <div className={styles.meta}>
+          {date && (
+            <time className={styles.date} dateTime={date}>
+              {formatJaDate(date)}
+            </time>
+          )}
+          {visibility && (
+            <span className={styles.visibility} aria-label={visibility.ariaLabel}>
+              {visibility.label}
+            </span>
+          )}
+        </div>
       )}
     </>
   )
