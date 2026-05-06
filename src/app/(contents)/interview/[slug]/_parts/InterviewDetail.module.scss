@@ -148,6 +148,14 @@
     @include hd-md;
 
     margin-top: var(--spacing-5xl);
+
+    @include mq(narrow) {
+      scroll-margin-top: var(--spacing-2xl);
+    }
+
+    @include mq(fromWide) {
+      scroll-margin-top: var(--spacing-3xl);
+    }
   }
 
   hr + h2 {
