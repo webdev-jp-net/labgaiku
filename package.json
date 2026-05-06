@@ -41,5 +41,11 @@
     "stylelint-order": "^7.0.0",
     "stylelint-scss": "^6.12.1",
     "typescript-eslint": "^8.59.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "jsdom": "25.0.1",
+      "jsdom>parse5": "7.3.0"
+    }
   }
 }
