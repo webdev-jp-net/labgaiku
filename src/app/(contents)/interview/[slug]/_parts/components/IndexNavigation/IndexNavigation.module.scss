@@ -7,7 +7,7 @@
 .title {
   @include txt-kana;
 
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-lg);
 }
 
 .list {
@@ -24,7 +24,7 @@
   display: grid;
   grid-template-columns: var(--font-size-sm) 1fr;
   gap: var(--spacing-sm);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-md);
   list-style: none;
 
   &::before {
@@ -33,7 +33,7 @@
     display: block;
     margin-top: 0.75em;
     content: '';
-    background: var(--border-basic);
+    background: var(--txt-subtle);
   }
 }
 
@@ -45,6 +45,7 @@
 
   small {
     display: block;
-    font-size: var(--font-size-xs);
+    width: fit-content;
+    font-size: var(--font-size-sm);
   }
 }
