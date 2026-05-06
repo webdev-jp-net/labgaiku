@@ -60,19 +60,11 @@
 
   margin: var(--spacing-md) 0 0;
   font-size: var(--font-size-sm);
-
-  @include mq(narrow) {
-    // margin: var(--spacing-xl) 0 0;
-  }
-
-  @include mq(fromWide) {
-    // margin: var(--spacing-3xl) 0 0;
-  }
 }
 
 .body {
   @include mq(fromWide) {
-    padding: var(--spacing-3xl) var(--spacing-3xl) 0;
+    padding: rem(16) var(--spacing-3xl) 0;
   }
 }
 
@@ -82,7 +74,10 @@
   padding: 0;
   margin: 0;
   list-style: none;
-  border-top: 1px solid var(--border-basic);
+
+  @include mq(narrow) {
+    border-top: 1px solid var(--border-basic);
+  }
 }
 
 .item {
