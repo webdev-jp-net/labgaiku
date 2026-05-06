@@ -11,9 +11,8 @@
 }
 
 .siteName {
-  @include hd-md;
+  @include txt-lead;
 
-  font-weight: var(--font-weight-regular);
   color: currentColor;
   text-decoration: none;
 }

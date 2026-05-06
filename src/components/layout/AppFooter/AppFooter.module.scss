@@ -28,21 +28,15 @@
   grid-area: information;
   gap: var(--spacing-sm);
   align-self: flex-start;
+  color: currentColor;
   text-decoration: none;
 }
 
 .siteName {
+  @include txt-lead;
+
   font-weight: var(--font-weight-regular);
-  color: currentColor;
   text-decoration: none;
-
-  @include mq(narrow) {
-    @include hd-sm;
-  }
-
-  @include mq(fromWide) {
-    @include hd-md;
-  }
 }
 
 .domain {
