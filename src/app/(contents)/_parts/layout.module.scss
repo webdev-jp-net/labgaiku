@@ -1,0 +1,11 @@
+@use '@/styles/_variable' as *;
+
+.main {
+  @include mq(narrow) {
+    padding: 0 0 var(--spacing-6xl);
+  }
+
+  @include mq(fromWide) {
+    padding: 0 0 var(--spacing-7xl);
+  }
+}
