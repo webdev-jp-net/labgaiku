@@ -11,7 +11,6 @@ export type InterviewIndexItem = {
   heading: ReactNode
   guest: string
   date?: string
-  canView: boolean
   visibility: VisibilityLabel | null
 }
 
@@ -22,7 +21,6 @@ export const useInterviewIndex = ({ itemList }: UseInterviewIndexArgs) => {
       heading: item.title,
       guest: item.guest,
       date: item.date,
-      canView: item.canView,
       visibility: item.visibility,
     })),
   }

@@ -38,7 +38,6 @@ export default async function InterviewIndexPage() {
           title: buildTitle(interview.title ?? interview.guest),
           guest: canView ? interview.guest : MASK_PLACEHOLDER,
           date: interview.date,
-          canView,
           visibility: getVisibilityLabel(interview.visibility),
         }
       })

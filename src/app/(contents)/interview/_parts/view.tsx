@@ -11,7 +11,6 @@ export type InterviewListItem = {
   title: ReactNode
   guest: string
   date?: string
-  canView: boolean
   visibility: VisibilityLabel | null
 }
 
@@ -45,7 +44,6 @@ export function InterviewIndexView({ itemList }: InterviewIndexViewProps) {
                 title={item.heading}
                 guest={item.guest}
                 date={item.date}
-                canView={item.canView}
                 visibility={item.visibility}
               />
             </li>
