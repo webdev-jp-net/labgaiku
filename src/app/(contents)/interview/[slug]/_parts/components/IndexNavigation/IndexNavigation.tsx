@@ -12,7 +12,7 @@ type IndexNavigationProps = {
 
 export const IndexNavigation: FC<IndexNavigationProps> = ({ tocList }) => (
   <div className={styles.indexNavigation}>
-    <h2 className={styles.title}>INDEX</h2>
+    <h2 className={styles.title}>index</h2>
     <ul className={styles.list}>
       {tocList.map(item => (
         <li key={item.id} className={styles.item}>
