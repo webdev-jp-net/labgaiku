@@ -15,7 +15,6 @@ export const useInterviewDetail = ({ interview, toc }: UseInterviewDetailArgs) =
   }))
 
   return {
-    heading: interview.title ?? interview.guest,
     guestLine: `${interview.guest}さん`,
     dateTime: interview.date,
     formattedDate: interview.date ? formatJaDate(interview.date) : null,

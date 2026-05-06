@@ -1,27 +1,27 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import type { Interview } from '@/lib/api/microcms'
 import { MemberList } from './components/MemberList'
 import { IndexNavigation } from './components/IndexNavigation'
 import { useInterviewDetail } from './useInterviewDetail'
 import styles from './InterviewDetail.module.scss'
-import { WordUnit } from '@/components/WordUnit'
 
 export type PublicInterview = Omit<Interview, 'allowList' | 'visibility'>
 
 export type InterviewTocItem = {
   id: string
-  text: string
+  text: ReactNode
 }
 
 type InterviewDetailViewProps = {
   interview: PublicInterview
   toc: InterviewTocItem[]
+  heading: ReactNode
 }
 
-export function InterviewDetailView({ interview, toc }: InterviewDetailViewProps) {
+export function InterviewDetailView({ interview, toc, heading }: InterviewDetailViewProps) {
   const {
-    heading,
     guestLine,
     dateTime,
     formattedDate,
@@ -34,9 +34,7 @@ export function InterviewDetailView({ interview, toc }: InterviewDetailViewProps
     <article className={styles.article}>
       <header className={styles.header}>
         <div className={styles.sticky}>
-          <h1 className={styles.title}>
-            <WordUnit>{heading}</WordUnit>
-          </h1>
+          <h1 className={styles.title}>{heading}</h1>
           <p className={styles.guest}>{guestLine}</p>
           {formattedDate && (
             <time className={styles.date} dateTime={dateTime}>

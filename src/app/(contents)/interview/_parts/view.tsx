@@ -1,12 +1,13 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import { InterviewItem } from './components/InterviewItem'
 import { useInterviewIndex } from './useInterviewIndex'
 import styles from './InterviewIndex.module.scss'
 
 export type InterviewListItem = {
   id: string
-  title?: string
+  title: ReactNode
   guest: string
   date?: string
   canView: boolean

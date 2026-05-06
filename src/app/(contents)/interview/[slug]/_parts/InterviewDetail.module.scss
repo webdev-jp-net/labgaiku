@@ -45,6 +45,14 @@
 
 .title {
   @include hd-md;
+
+  small {
+    @include hd-sm;
+
+    display: inline-block;
+    margin: var(--spacing-sm) 0 0;
+    font-weight: var(--font-weight-thin);
+  }
 }
 
 .guest {
@@ -115,6 +123,14 @@
     @include hd-md;
 
     margin-top: var(--spacing-5xl);
+
+    small {
+      @include hd-sm;
+
+      display: inline-block;
+      margin: var(--spacing-sm) 0 0;
+      font-weight: var(--font-weight-thin);
+    }
   }
 
   hr + h2 {

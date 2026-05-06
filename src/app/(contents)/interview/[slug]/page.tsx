@@ -4,9 +4,23 @@ import { notFound } from 'next/navigation'
 import { getInterviewById } from '@/lib/api/microcms'
 import { authOptions } from '@/lib/auth'
 import { canViewInterview } from '@/lib/permission'
+import { WordUnit } from '@/components/WordUnit'
 import { LoginPrompt } from './_parts/components/LoginPrompt'
 import { InterviewDetailView } from './_parts/view'
 import type { InterviewTocItem, PublicInterview } from './_parts/view'
+
+const buildTitle = (raw: string) => {
+  const i = raw.indexOf('——')
+  if (i < 0) return <WordUnit>{raw}</WordUnit>
+  return (
+    <>
+      <WordUnit>{raw.slice(0, i)}</WordUnit>
+      <small>
+        <WordUnit>{raw.slice(i)}</WordUnit>
+      </small>
+    </>
+  )
+}
 
 type InterviewDetailPageProps = {
   params: Promise<{
@@ -74,11 +88,20 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
       }
     })
 
+    $('h2').each((_, el) => {
+      const $h2 = $(el)
+      const text = $h2.text()
+      const i = text.indexOf('——')
+      if (i < 0) return
+      $h2.text(text.slice(0, i))
+      $h2.append($('<small>').text(text.slice(i)))
+    })
+
     const toc: InterviewTocItem[] = $('h2')
       .toArray()
       .map(el => ({
         id: el.attribs.id,
-        text: $(el).text(),
+        text: buildTitle($(el).text()),
       }))
 
     const publicInterview: PublicInterview = {
@@ -94,7 +117,9 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
       member: interview.member,
     }
 
-    return <InterviewDetailView interview={publicInterview} toc={toc} />
+    const heading = buildTitle(publicInterview.title ?? publicInterview.guest)
+
+    return <InterviewDetailView interview={publicInterview} toc={toc} heading={heading} />
   } catch (error) {
     console.error(error)
     notFound()
