@@ -25,18 +25,13 @@
 }
 
 .guest {
+  @include txt-lead;
+
   display: flex;
   gap: var(--spacing-xs);
   align-items: center;
-  margin: var(--spacing-md) 0 0;
-
-  @include mq(narrow) {
-    font-size: var(--font-size-md);
-  }
-
-  @include mq(fromWide) {
-    font-size: var(--font-size-lg);
-  }
+  justify-content: flex-end;
+  margin: var(--spacing-lg) 0 0;
 }
 
 .suffix {

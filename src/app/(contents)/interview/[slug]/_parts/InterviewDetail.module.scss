@@ -26,7 +26,7 @@
   }
 
   @include mq(fromWide) {
-    padding: 0 var(--spacing-3xl);
+    padding: 0 0 0 var(--spacing-3xl);
   }
 }
 
@@ -44,11 +44,11 @@
 }
 
 .title {
-  @include hd-lg;
+  @include hd-md;
 }
 
 .guest {
-  @include hd-md;
+  @include txt-lead;
 
   margin: 0;
 }
@@ -81,12 +81,13 @@
     grid-template-columns: auto 1fr;
 
     @include mq(narrow) {
-      margin-top: 3em;
+      margin-top: var(--spacing-xl);
     }
 
     @include mq(fromWide) {
       gap: 0.5em;
-      margin-top: 4em;
+      margin-top: var(--spacing-2xl);
+      // margin-top: 4em;
     }
   }
 
@@ -94,8 +95,15 @@
     @include txt-paragraph;
 
     &::after {
-      margin: 0 0.5em;
       content: '：';
+
+      @include mq(narrow) {
+        margin: 0 0.2em;
+      }
+
+      @include mq(fromWide) {
+        margin: 0 0.5em;
+      }
     }
   }
 
@@ -106,13 +114,27 @@
   h2 {
     @include hd-md;
 
-    margin-top: var(--spacing-4xl);
+    margin-top: var(--spacing-5xl);
+  }
+
+  hr + h2 {
+    margin-top: var(--spacing-3xl);
   }
 
   h3 {
     @include hd-sm;
 
-    margin-top: var(--spacing-4xl);
+    @include mq(narrow) {
+      margin-top: var(--spacing-2xl);
+    }
+
+    @include mq(fromWide) {
+      margin-top: var(--spacing-4xl);
+    }
+  }
+
+  h2 + h3 {
+    margin-top: var(--spacing-2xl);
   }
 
   hr {
