@@ -45,30 +45,6 @@
 
 .title {
   @include hd-md;
-
-  @include mq(narrow) {
-    font-weight: var(--font-weight-regular);
-  }
-
-  @include mq(fromWide) {
-    font-weight: var(--font-weight-thin);
-  }
-
-  small {
-    @include hd-sm;
-
-    display: inline-block;
-    margin: var(--spacing-sm) 0 0;
-    font-weight: var(--font-weight-thin);
-
-    @include mq(narrow) {
-      font-weight: var(--font-weight-regular);
-    }
-
-    @include mq(fromWide) {
-      font-weight: var(--font-weight-thin);
-    }
-  }
 }
 
 .guest {
@@ -172,22 +148,6 @@
     @include hd-md;
 
     margin-top: var(--spacing-5xl);
-
-    @include mq(narrow) {
-      scroll-margin-top: var(--spacing-xl);
-    }
-
-    @include mq(fromWide) {
-      scroll-margin-top: var(--spacing-3xl);
-    }
-
-    small {
-      @include hd-sm;
-
-      display: inline-block;
-      margin: var(--spacing-sm) 0 0;
-      font-weight: var(--font-weight-thin);
-    }
   }
 
   hr + h2 {

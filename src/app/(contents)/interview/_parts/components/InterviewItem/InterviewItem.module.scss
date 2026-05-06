@@ -22,29 +22,6 @@
 
 .title {
   @include hd-md;
-
-  @include mq(narrow) {
-    font-weight: var(--font-weight-regular);
-  }
-
-  @include mq(fromWide) {
-    font-weight: var(--font-weight-thin);
-  }
-
-  small {
-    @include hd-sm;
-
-    display: inline-block;
-    margin: var(--spacing-sm) 0 0;
-
-    @include mq(narrow) {
-      font-weight: var(--font-weight-regular);
-    }
-
-    @include mq(fromWide) {
-      font-weight: var(--font-weight-thin);
-    }
-  }
 }
 
 .guest {
