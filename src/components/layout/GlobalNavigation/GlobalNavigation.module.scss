@@ -1,11 +1,13 @@
 @use '@/styles/_variable' as *;
 
-.header {
+.globalNavigation {
+  position: sticky;
+  inset: auto 0 env(safe-area-inset-bottom);
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  padding: var(--spacing-md) var(--spacing-md);
+  padding: var(--spacing-md);
   background-color: color-mix(in srgb, var(--bg-basic), transparent 10%);
   backdrop-filter: blur(0.4rem);
 }

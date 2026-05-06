@@ -5,7 +5,7 @@ import Link from 'next/link'
 import styles from './AppFooter.module.scss'
 import { useAppFooter } from './useAppFooter'
 
-interface AppFooterProps extends React.HTMLAttributes<HTMLHeadingElement> {
+interface AppFooterProps extends React.HTMLAttributes<HTMLElement> {
   session: Session | null
   className?: string
 }
