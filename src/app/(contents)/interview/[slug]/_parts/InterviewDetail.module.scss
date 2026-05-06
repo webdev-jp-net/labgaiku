@@ -58,10 +58,6 @@
 }
 
 .body {
-  @include mq(narrow) {
-    @include tmp-container;
-  }
-
   @include mq(fromWide) {
     padding: var(--spacing-3xl) var(--spacing-3xl) var(--spacing-5xl);
   }
@@ -80,14 +76,41 @@
     }
   }
 
+  dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    @include mq(narrow) {
+      margin-top: 3em;
+    }
+
+    @include mq(fromWide) {
+      gap: 0.5em;
+      margin-top: 4em;
+    }
+  }
+
+  dt {
+    @include txt-paragraph;
+
+    &::after {
+      margin: 0 0.5em;
+      content: '：';
+    }
+  }
+
+  dd {
+    @include txt-paragraph;
+  }
+
   h2 {
-    @include hd-lg;
+    @include hd-md;
 
     margin-top: var(--spacing-4xl);
   }
 
   h3 {
-    @include hd-md;
+    @include hd-sm;
 
     margin-top: var(--spacing-4xl);
   }
