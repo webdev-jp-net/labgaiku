@@ -1,47 +1,60 @@
 'use client'
 
-import type { Interview } from '@/lib/api/microcms'
+import type { ComponentProps, ReactNode } from 'react'
+import type { VisibilityLabel } from '@/lib/permission'
 import { MemberList } from './components/MemberList'
 import { IndexNavigation } from './components/IndexNavigation'
-import { useInterviewDetail } from './useInterviewDetail'
+import type { IndexNavigationItem } from './components/IndexNavigation/IndexNavigation'
 import styles from './InterviewDetail.module.scss'
 
-export type PublicInterview = Omit<Interview, 'allowList' | 'visibility'>
-
-export type InterviewTocItem = {
-  id: string
-  text: string
-}
-
 type InterviewDetailViewProps = {
-  interview: PublicInterview
-  toc: InterviewTocItem[]
+  heading: ReactNode
+  guest: string
+  dateTime?: string
+  formattedDate: string | null
+  sanitizedContent: string
+  indexNavigationList: IndexNavigationItem[]
+  memberList: ComponentProps<typeof MemberList>['memberList']
+  visibility: VisibilityLabel | null
 }
 
-export function InterviewDetailView({ interview, toc }: InterviewDetailViewProps) {
-  const {
-    heading,
-    guestLine,
-    dateTime,
-    formattedDate,
-    sanitizedContent,
-    toc: tocList,
-    memberList,
-  } = useInterviewDetail({ interview, toc })
-
+export function InterviewDetailView({
+  heading,
+  guest,
+  dateTime,
+  formattedDate,
+  sanitizedContent,
+  indexNavigationList,
+  memberList,
+  visibility,
+}: InterviewDetailViewProps) {
   return (
     <article className={styles.article}>
       <header className={styles.header}>
         <div className={styles.sticky}>
-          <h1 className={styles.title}>{heading}</h1>
-          <p className={styles.guest}>{guestLine}</p>
-          {formattedDate && (
-            <time className={styles.date} dateTime={dateTime}>
-              {formattedDate}
-            </time>
-          )}
+          <div>
+            <h1 className={styles.title}>{heading}</h1>
+            <p className={styles.guest}>
+              {guest}
+              <small className={styles.suffix}>さん</small>
+            </p>
+            {(formattedDate || visibility) && (
+              <div className={styles.meta}>
+                {formattedDate && (
+                  <time className={styles.date} dateTime={dateTime}>
+                    {formattedDate}
+                  </time>
+                )}
+                {visibility && (
+                  <span className={styles.visibility} aria-label={visibility.ariaLabel}>
+                    {visibility.label}
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
           <MemberList memberList={memberList} />
-          <IndexNavigation tocList={tocList} />
+          <IndexNavigation indexNavigationList={indexNavigationList} />
         </div>
       </header>
       <div className={styles.body} dangerouslySetInnerHTML={{ __html: sanitizedContent }} />

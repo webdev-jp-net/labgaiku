@@ -1,0 +1,66 @@
+@use '@/styles/_variable' as *;
+
+.root {
+  position: relative;
+  margin: var(--spacing-xl) 0 0;
+}
+
+.title {
+  @include txt-kana;
+
+  font-size: var(--font-size-lg);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+  max-width: 100%;
+  padding: 0;
+  margin: var(--spacing-lg) 0 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  font-size: var(--font-size-xs);
+  list-style: none;
+}
+
+.figure {
+  @include rect(rem(56));
+
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.image {
+  @include rect(100%);
+}
+
+.name {
+  position: relative;
+  margin: var(--spacing-sm) 0 0;
+  font-size: var(--font-size-md);
+  color: var(--txt-accent);
+  text-box: trim-both cap alphabetic;
+
+  small {
+    display: inline-block;
+    margin: 0 0 0 0.5em;
+    font-size: var(--font-size-xs);
+    line-height: 1.4;
+    color: var(--txt-muted);
+  }
+}
+
+.description {
+  margin: rem(12) 0 0;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  text-align: justify;
+}

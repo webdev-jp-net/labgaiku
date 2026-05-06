@@ -1,7 +1,18 @@
 import type { Session } from 'next-auth'
-import type { Interview } from '@/lib/api/microcms'
+import type { Interview, InterviewVisibility } from '@/lib/api/microcms'
 
 export const MASK_PLACEHOLDER = '＊＊＊＊＊'
+
+export type VisibilityLabel = {
+  label: 'secret' | 'limited'
+  ariaLabel: string
+}
+
+export const getVisibilityLabel = (visibility: InterviewVisibility[]): VisibilityLabel | null => {
+  if (visibility.includes('secret')) return { label: 'secret', ariaLabel: '公開範囲: 非公開' }
+  if (visibility.includes('limited')) return { label: 'limited', ariaLabel: '公開範囲: 限定公開' }
+  return null
+}
 
 const parseAllowList = (text: string | undefined): string[] =>
   (text ?? '')

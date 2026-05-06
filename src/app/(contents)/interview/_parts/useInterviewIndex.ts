@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+import type { VisibilityLabel } from '@/lib/permission'
 import type { InterviewListItem } from './view'
 
 type UseInterviewIndexArgs = {
@@ -6,20 +8,20 @@ type UseInterviewIndexArgs = {
 
 export type InterviewIndexItem = {
   id: string
-  heading: string
+  heading: ReactNode
   guest: string
   date?: string
-  canView: boolean
+  visibility: VisibilityLabel | null
 }
 
 export const useInterviewIndex = ({ itemList }: UseInterviewIndexArgs) => {
   return {
     items: itemList.map<InterviewIndexItem>(item => ({
       id: item.id,
-      heading: item.title ?? item.guest,
+      heading: item.title,
       guest: item.guest,
       date: item.date,
-      canView: item.canView,
+      visibility: item.visibility,
     })),
   }
 }
