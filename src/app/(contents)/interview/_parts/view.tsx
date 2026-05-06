@@ -2,10 +2,8 @@
 
 import type { ReactNode } from 'react'
 import type { VisibilityLabel } from '@/lib/permission'
+import { HostMemberList } from './components/HostMemberList'
 import { InterviewItem } from './components/InterviewItem'
-import { Haitani } from './images/Haitani'
-import { Iha } from './images/Iha'
-import { Tsunokawa } from './images/Tsunokawa'
 import { useInterviewIndex } from './useInterviewIndex'
 import styles from './InterviewIndex.module.scss'
 
@@ -36,50 +34,7 @@ export function InterviewIndexView({ itemList }: InterviewIndexViewProps) {
             考えていることや感じていること、そこには生き方や人となりが息づいています。
             形式知にはおさまらないソフトスキルの学びへようこそ。
           </p>
-          <div className={styles.member}>
-            <h3 className={styles.memberTitle}>Host members</h3>
-            <ul className={styles.memberList}>
-              <li className={styles.memberItem}>
-                <figure className={styles.memberFigure}>
-                  <Haitani className={styles.memberImage} />
-                </figure>
-                <div>
-                  <div className={styles.memberName}>
-                    灰谷<small>FE・エンジニア</small>
-                  </div>
-                  <p className={styles.memberDescription}>
-                    いろいろ思いついて企画をつくる人。話が長い。
-                  </p>
-                </div>
-              </li>
-              <li className={styles.memberItem}>
-                <figure className={styles.memberFigure}>
-                  <Tsunokawa className={styles.memberImage} />
-                </figure>
-                <div>
-                  <div className={styles.memberName}>
-                    角川<small>FE・エンジニア</small>
-                  </div>
-                  <p className={styles.memberDescription}>
-                    あいずち番長。絶妙なところで「うん」と言う。
-                  </p>
-                </div>
-              </li>
-              <li className={styles.memberItem}>
-                <figure className={styles.memberFigure}>
-                  <Iha className={styles.memberImage} />
-                </figure>
-                <div>
-                  <div className={styles.memberName}>
-                    伊波<small>SRE・エンジニア</small>
-                  </div>
-                  <p className={styles.memberDescription}>
-                    知りたがりでアツい。トークが一番うまい。
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
+          <HostMemberList />
         </div>
       </header>
       <div className={styles.body}>
