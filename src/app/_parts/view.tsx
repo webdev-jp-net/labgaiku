@@ -37,7 +37,8 @@ export const HomeView: FC = () => {
         <div className={styles.body}>
           <section className={styles.section}>
             <p className={styles.paragraph}>
-              「Labが行く」は、雑談をするための勉強会です。
+              「Labが行く」は、<span className={styles.highlight}>雑談をする</span>
+              ための勉強会です。
               金曜日の夕方にオンラインで集まり、2時間しゃべったら「それじゃあ」と週末を迎えます。
             </p>
             <p className={styles.paragraph}>
@@ -78,7 +79,10 @@ export const HomeView: FC = () => {
           </article>
           {/* <article className={styles.article}>
             <header className={styles.articleHeader}>
-              <h2 className={styles.articleTitle}>人と働く仕組みは設計する</h2>
+              <h2 className={styles.articleTitle}>
+                <span>人と働く仕組みは</span>
+                <span>設計する</span>
+              </h2>
               <small className={styles.articleKana}>ZINE</small>
             </header>
             <div className={styles.articleBody}>

@@ -29,10 +29,6 @@
   display: flex;
   flex-direction: column;
 
-  @include mq(narrow) {
-    // padding: 0 var(--spacing-md);
-  }
-
   @include mq(fromWide) {
     position: sticky;
     top: 0;
@@ -57,7 +53,6 @@
   @include hd-display;
 
   padding-top: 1em;
-  font-weight: var(--font-weight-thin);
   text-indent: -0.1em;
 }
 
@@ -210,30 +205,21 @@
 .articleHeader {
   display: flex;
   flex-direction: column;
-
-  @include mq(narrow) {
-    gap: var(--spacing-md);
-  }
-
-  @include mq(fromWide) {
-    gap: var(--spacing-md);
-  }
+  gap: var(--spacing-lg);
 }
 
 .articleTitle {
   @include hd-lg;
+
+  span {
+    white-space: nowrap;
+  }
 }
 
 .articleKana {
   @include txt-kana;
 
-  @include mq(narrow) {
-    font-size: var(--font-size-lg);
-  }
-
-  @include mq(fromWide) {
-    font-size: var(--font-size-lg);
-  }
+  font-size: var(--font-size-xl);
 }
 
 .articleBody {
