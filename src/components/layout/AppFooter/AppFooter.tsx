@@ -12,10 +12,10 @@ interface AppFooterProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 export function AppFooter({ session, className, ...props }: AppFooterProps) {
-  const { handleClick, handleKeyDown, label, description, ref } = useAppFooter({ session })
+  const { handleClick, handleKeyDown, label, description } = useAppFooter({ session })
 
   return (
-    <footer ref={ref} className={`${styles.footer} ${className ?? ''}`} {...props}>
+    <footer className={`${styles.footer} ${className ?? ''}`} {...props}>
       <Link href="/" className={styles.information}>
         <span className={styles.siteName}>Labが行く</span>
         <small className={styles.domain}>labgaiku.org</small>
