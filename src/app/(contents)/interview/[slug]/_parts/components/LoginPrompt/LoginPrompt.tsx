@@ -48,7 +48,7 @@ export const LoginPrompt: FC<LoginPromptProps> = ({
       </header>
       <div className={styles.body}>
         <p className={styles.paragraph}>
-          この記事は限定公開です。
+          このインタビューは限定公開です。
           <br />
           権限のあるアカウントで
           <span
