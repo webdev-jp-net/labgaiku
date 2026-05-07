@@ -41,6 +41,7 @@
   }
 }
 
+// サイト名
 .heroHeader {
   display: grid;
 
@@ -78,6 +79,7 @@
   }
 }
 
+// ナビ
 .nav {
   margin: var(--spacing-3xl) 0 0;
 }
@@ -118,6 +120,7 @@
   }
 }
 
+// 本文
 .body {
   display: flex;
   flex-direction: column;
@@ -135,6 +138,7 @@
   }
 }
 
+// イントロダクション
 .section {
   display: flex;
   flex-direction: column;
@@ -150,7 +154,7 @@
 }
 
 .highlight {
-  @include txt-marker;
+  @include txt-accent;
 
   padding: 0 0.2em;
 }
@@ -159,6 +163,7 @@
   @include txt-paragraph;
 }
 
+// コンテンツ紹介
 .article {
   position: relative;
 }
