@@ -107,7 +107,7 @@ export const HomeView: FC = () => {
           </article> */}
         </div>
       </section>
-      <GlobalNavigation className={styles.appHeader} />
+      <GlobalNavigation />
       <AppFooter className={styles.appFooter} session={null} />
     </main>
   )

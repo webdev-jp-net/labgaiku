@@ -155,30 +155,6 @@
   }
 }
 
-.appHeader {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  container-type: scroll-state;
-
-  > * {
-    pointer-events: none;
-    opacity: 0;
-    filter: blur(0.1rem);
-    transition:
-      opacity var(--transition),
-      filter var(--transition);
-  }
-
-  @container scroll-state(stuck: top) {
-    > * {
-      pointer-events: auto;
-      opacity: 1;
-      filter: blur(0);
-    }
-  }
-}
-
 .section {
   display: flex;
   flex-direction: column;
