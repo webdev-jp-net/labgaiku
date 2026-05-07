@@ -39,9 +39,9 @@ export const HomeView: FC = () => {
             <p className={styles.paragraph}>
               成果に近い応用研究ではなく、知識そのものに近い基礎研究へ夢中になる体験、これは、緊急度が低いけれど重要度は高いことなのかもしれません。
               Labの時間は、すぐさま役に立つことのない
-              <span className={styles.highlight}>buffer（アソビ）</span>で
+              <span className={styles.highlight}>buffer（アソビ）</span>であり、
               <span className={styles.highlight}>playfulness（遊び）</span>
-              なのですが、そうしたていねいな余白やノイズは &ldquo;無意味の意味&rdquo;
+              ですが、そうしたていねいな余白やノイズは &ldquo;無意味の意味&rdquo;
               にふと気づく時間にも思えます。
             </p>
             <p className={styles.paragraph}>

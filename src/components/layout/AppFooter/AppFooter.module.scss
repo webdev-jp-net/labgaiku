@@ -1,11 +1,15 @@
 @use '@/styles/_variable' as *;
 
 .footer {
+  width: 100%;
+  background-color: var(--bg-panel);
+}
+
+.layout {
   display: grid;
-  grid-template-areas: 'information nav' 'console console';
+  grid-template-areas: 'information nav' 'copyright console';
   width: 100%;
   margin: 0 auto;
-  border-top: 1px solid var(--border-basic);
 
   @include mq(narrow) {
     grid-template-columns: 1fr max(auto, 50%);
@@ -53,7 +57,16 @@
   grid-area: console;
   gap: var(--spacing-sm);
   align-items: center;
+  align-items: flex-end;
   justify-self: flex-end;
+  line-height: 1.4;
+  word-break: break-all;
+
+  br {
+    @include mq(fromWide) {
+      display: none;
+    }
+  }
 }
 
 .consoleDescription {
@@ -65,5 +78,14 @@
   @include txt-link;
 
   font-size: var(--font-size-xs);
+  word-break: keep-all;
   cursor: pointer;
+}
+
+.copyright {
+  grid-area: copyright;
+  align-self: flex-end;
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  color: var(--txt-muted);
 }
