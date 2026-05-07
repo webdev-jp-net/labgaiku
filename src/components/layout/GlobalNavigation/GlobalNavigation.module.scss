@@ -4,17 +4,31 @@
   position: sticky;
   inset: auto 0 env(safe-area-inset-bottom);
   z-index: 5;
+  width: 100%;
+  background-color: var(--bg-panel);
+  backdrop-filter: blur(1rem);
+
+  html:not([data-visible-nav]) & {
+    pointer-events: none;
+    opacity: 0;
+    transform-origin: bottom;
+    scale: 1 0.8;
+    transition:
+      opacity var(--transition),
+      scale var(--transition);
+  }
+}
+
+.layout {
   display: grid;
   align-items: center;
   width: 100%;
   margin: 0 auto;
-  background-color: color-mix(in srgb, var(--bg-basic), transparent 10%);
-  backdrop-filter: blur(0.4rem);
 
   @include mq(narrow) {
     grid-template-columns: 1fr auto;
     gap: var(--spacing-xl) var(--spacing-md);
-    padding: var(--spacing-md) var(--spacing-md);
+    padding: rem(12) var(--spacing-md);
   }
 
   @include mq(fromWide) {
@@ -22,12 +36,6 @@
     gap: var(--spacing-2xl) 0;
     max-width: rem(1280);
     padding: var(--spacing-md) var(--spacing-3xl);
-  }
-
-  html:not([data-visible-nav]) & {
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity var(--transition);
   }
 }
 
@@ -98,9 +106,9 @@
 
 .indexPopover {
   padding: var(--spacing-md);
-  background-color: color-mix(in srgb, var(--bg-basic), transparent 10%);
+  background-color: var(--bg-panel);
   border: none;
-  backdrop-filter: blur(0.4rem);
+  backdrop-filter: blur(1rem);
 
   @include mq(narrow) {
     width: 100%;
