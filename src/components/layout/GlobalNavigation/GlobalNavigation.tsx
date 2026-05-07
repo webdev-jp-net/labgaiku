@@ -29,54 +29,56 @@ export function GlobalNavigation({ className, ...props }: GlobalNavigationProps)
 
   return (
     <nav className={`${styles.globalNavigation} ${className ?? ''}`} {...props}>
-      <div className={styles.header}>
-        <Link href="/" className={styles.siteName}>
-          Labが行く
-        </Link>
-        {isOnInterviewDetail && (
-          <div className={styles.category}>
-            {' '}
-            <Link href="/interview" className={styles.categoryLink}>
-              Labが聞く
-            </Link>
-          </div>
-        )}
-      </div>
-      <div className={styles.menu}>
-        {indexNavigationList.length > 0 && (
-          <>
-            <button
-              type="button"
-              className={styles.indexTrigger}
-              popoverTarget={popoverId}
-              style={{ anchorName } as React.CSSProperties}
-              aria-label="index"
-            >
-              {isPopoverOpen ? <X strokeWidth={1.5} /> : <List strokeWidth={1.5} />}
-            </button>
-            <div
-              ref={popoverRef}
-              id={popoverId}
-              popover="auto"
-              className={styles.indexPopover}
-              style={{ positionAnchor: anchorName } as React.CSSProperties}
-              onToggle={handleToggle}
-              onClick={e => {
-                if ((e.target as HTMLElement).closest('a')) popoverRef.current?.hidePopover()
-              }}
-            >
-              <IndexNavigation indexNavigationList={indexNavigationList} />
+      <div className={styles.layout}>
+        <div className={styles.header}>
+          <Link href="/" className={styles.siteName}>
+            Labが行く
+          </Link>
+          {isOnInterviewDetail && (
+            <div className={styles.category}>
+              {' '}
+              <Link href="/interview" className={styles.categoryLink}>
+                Labが聞く
+              </Link>
             </div>
-          </>
-        )}
-        <button
-          type="button"
-          className={styles.scrollToTopTrigger}
-          onClick={() => window.scrollTo(0, 0)}
-          aria-label="先頭へ"
-        >
-          <ArrowUp strokeWidth={1.5} />
-        </button>
+          )}
+        </div>
+        <div className={styles.menu}>
+          {indexNavigationList.length > 0 && (
+            <>
+              <button
+                type="button"
+                className={styles.indexTrigger}
+                popoverTarget={popoverId}
+                style={{ anchorName } as React.CSSProperties}
+                aria-label="index"
+              >
+                {isPopoverOpen ? <X strokeWidth={1.5} /> : <List strokeWidth={1.5} />}
+              </button>
+              <div
+                ref={popoverRef}
+                id={popoverId}
+                popover="auto"
+                className={styles.indexPopover}
+                style={{ positionAnchor: anchorName } as React.CSSProperties}
+                onToggle={handleToggle}
+                onClick={e => {
+                  if ((e.target as HTMLElement).closest('a')) popoverRef.current?.hidePopover()
+                }}
+              >
+                <IndexNavigation indexNavigationList={indexNavigationList} />
+              </div>
+            </>
+          )}
+          <button
+            type="button"
+            className={styles.scrollToTopTrigger}
+            onClick={() => window.scrollTo(0, 0)}
+            aria-label="先頭へ"
+          >
+            <ArrowUp strokeWidth={1.5} />
+          </button>
+        </div>
       </div>
     </nav>
   )

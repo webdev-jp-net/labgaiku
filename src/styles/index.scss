@@ -7,6 +7,7 @@
 :root {
   /* カラー */
   --bg-basic: #fafaf7;
+  --bg-panel: color-mix(in srgb, var(--txt-subtle), transparent 95%);
   --bg-accent: #90d5cc;
   --txt-basic: #4a4845;
   --txt-muted: #85827a;
@@ -51,6 +52,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-basic: #12120f;
+    --bg-panel: color-mix(in srgb, var(--txt-subtle), transparent 95%);
     --bg-accent: #427e8a;
     --txt-basic: #c1c0b8;
     --txt-muted: #77756e;
