@@ -35,12 +35,12 @@ export const useAppFooter = ({ session }: UseAppFooterArgs) => {
 
   useEffect(() => {
     if (isVisible) {
-      document.documentElement.dataset.visibleFooter = ''
+      delete document.documentElement.dataset.visibleNav
     } else {
-      delete document.documentElement.dataset.visibleFooter
+      document.documentElement.dataset.visibleNav = ''
     }
     return () => {
-      delete document.documentElement.dataset.visibleFooter
+      document.documentElement.dataset.visibleNav = ''
     }
   }, [isVisible])
 

@@ -23,7 +23,7 @@
     padding: var(--spacing-md) var(--spacing-3xl);
   }
 
-  [data-visible-footer] & {
+  html:not([data-visible-nav]) & {
     pointer-events: none;
     opacity: 0;
     transition: opacity var(--transition);
