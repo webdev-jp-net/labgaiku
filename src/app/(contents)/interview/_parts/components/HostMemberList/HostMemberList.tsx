@@ -16,7 +16,7 @@ export const HostMemberList: FC = () => (
           <div className={styles.name}>
             灰谷<small>FE・エンジニア</small>
           </div>
-          <p className={styles.description}>いろいろ思いついて企画をつくる人。話が長い。</p>
+          <p className={styles.description}>思いつきで企画をつくる人。話が散らかっている。</p>
         </div>
       </li>
       <li className={styles.item}>
@@ -38,7 +38,7 @@ export const HostMemberList: FC = () => (
           <div className={styles.name}>
             伊波<small>SRE・エンジニア</small>
           </div>
-          <p className={styles.description}>知りたがりでアツい。トークが一番うまい。</p>
+          <p className={styles.description}>知りたがりでアツい。トークがいちばん上手い。</p>
         </div>
       </li>
     </ul>
