@@ -5,10 +5,15 @@
 }
 
 .layout {
+  @include mq(narrow) {
+    padding: 0 0 var(--spacing-6xl);
+  }
+
   @include mq(fromWide) {
     display: grid;
     grid-template-columns: rem(630 - 64 - 64) 1fr;
     max-width: rem(1280);
+    padding: 0 0 var(--spacing-7xl);
     margin-inline: auto;
   }
 }
