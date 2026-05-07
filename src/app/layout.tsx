@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Plaster } from 'next/font/google'
 import localFont from 'next/font/local'
+import { Providers } from './providers'
 import '@/styles/index.scss'
 
 const lineSeedJP = localFont({
@@ -46,9 +47,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja" className={`${lineSeedJP.variable} ${plaster.variable}`}>
+    <html lang="ja" className={`${lineSeedJP.variable} ${plaster.variable}`} data-visible-nav>
       <body>
-        <div id="root">{children}</div>
+        <Providers>
+          <div id="root">{children}</div>
+        </Providers>
       </body>
     </html>
   )

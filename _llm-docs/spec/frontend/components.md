@@ -63,11 +63,19 @@ src/
 - API呼び出しは`src/lib`の関数を利用
 - hookはViewに必要な値・ハンドラーを返却
 
+## コンポーネント間の状態共有
+
+- 異なるコンポーネントから同じ状態を読み書きする場合は`jotai`のatomを使用し、`src/data/store.ts`に集約する
+- Providerは`src/app/providers.tsx`に置き、root layoutで全体を包む（SSRでグローバルストアをリクエスト間共有しないため必須）
+- 書き込み側は状態の起点（多くは`_parts/view.tsx`）が`useEffect`内で`useSetAtom`を呼び、unmount時に初期値へクリアする
+- 読み込み側は`useAtomValue`で購読する
+
 ## 共通コンポーネント
 
 - `src/components/layout/`にレイアウト系を集約（`AppHeader`/`AppFooter`）
-- いずれもparts-component構造（フォルダ内に`index.tsx`/`*.tsx`/`*.module.scss`、必要に応じて`use*.ts`）
+- いずれもparts-component構造（フォルダー内に`index.tsx`/`*.tsx`/`*.module.scss`、必要に応じて`use*.ts`）
 - 認証UIは専用の共有コンポーネントを置かず、必要箇所（AppHeader/AppFooter/`LoginPrompt`）にインラインで`signIn`/`signOut`を呼ぶボタンを配置する方針
+- `GlobalNavigation`/`AppFooter`/`ContentsMenu`の連携と`data-visible-nav`属性による可視制御は[ナビゲーション仕様](./navigation.md)を参照
 
 ## 補足
 
