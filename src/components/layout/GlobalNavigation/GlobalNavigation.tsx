@@ -52,7 +52,7 @@ export function GlobalNavigation({ className, ...props }: GlobalNavigationProps)
               style={{ anchorName } as React.CSSProperties}
               aria-label="index"
             >
-              {isPopoverOpen ? <X /> : <List />}
+              {isPopoverOpen ? <X strokeWidth={1.5} /> : <List strokeWidth={1.5} />}
             </button>
             <div
               ref={popoverRef}
@@ -75,7 +75,7 @@ export function GlobalNavigation({ className, ...props }: GlobalNavigationProps)
           onClick={() => window.scrollTo(0, 0)}
           aria-label="先頭へ"
         >
-          <ArrowUp />
+          <ArrowUp strokeWidth={1.5} />
         </button>
       </div>
     </nav>
