@@ -21,7 +21,6 @@
 @mixin txt-lead {
   font-size: var(--font-size-lg);
   line-height: 1;
-  color: var(--txt-accent);
   letter-spacing: 0.05em;
   text-box: trim-both cap alphabetic;
 }

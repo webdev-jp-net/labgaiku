@@ -25,9 +25,24 @@ microCMSから取得したインタビュー記事は、サーバーコンポー
 
 入稿運用: メインタイトルとサブタイトルを`——`で区切って入力する。
 
+## Introductionと本文の構成
+
+`interview.introduction`と`interview.content`は同じ整形・サニタイズを通したうえで、Viewの本文ブロック内に`introduction`→`content`の順で並べる。それぞれ別の`<div>`に出力し、間に他のViewパーツ（例:`MemberList`）を挿入できる構造を保つ。
+
+### MemberListの表示位置
+
+`MemberList`は記事ヘッダー（`.sticky`内）と本文ブロック（`introduction`と`content`の間）の2箇所に出力し、ブレークポイントごとに片方のみを可視化する。
+
+| 場所                            | SP（narrow） | PC（fromWide） |
+| ------------------------------- | ------------ | -------------- |
+| ヘッダー（`.headerMember`）     | 非表示       | 表示           |
+| 本文ブロック内（`.memberList`） | 表示         | 非表示         |
+
+切替は`InterviewDetail.module.scss`の`@include mq()`で`display: none`を当てる。同様に`.headerIndex`（ヘッダー内の`IndexNavigation`）はSPで非表示にする。
+
 ## 本文HTMLの整形
 
-詳細ページの`page.tsx`で`cheerio`を用いて`interview.content`を読み込み、以下を順に適用する。
+詳細ページの`page.tsx`で`cheerio`を用いて`interview.content`/`interview.introduction`をそれぞれ読み込み、以下を同じ順序で両者に適用する。
 
 ### 話者+コロン → `<dl>`化
 
@@ -64,7 +79,7 @@ microCMSから取得したインタビュー記事は、サーバーコンポー
 
 ## 目次（IndexNavigation）
 
-- `cheerio`で本文`<h2>`の`id`とテキストを抽出する
+- `cheerio`で`interview.content`の`<h2>`の`id`とテキストを抽出する（`interview.introduction`の見出しは目次対象外）
 - microCMSのリッチエディターが見出しに自動付与する`id`をアンカーリンクのhrefに利用する
 - 各テキストはタイトルと同じ`buildTitle`で整形した`ReactNode`としてViewに渡す
 - アンカー着地時の上余白は本文`<h2>`の`scroll-margin-top`で確保する

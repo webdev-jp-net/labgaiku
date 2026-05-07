@@ -14,6 +14,8 @@
 - `isomorphic-dompurify`:本文HTMLのサニタイズ
 - `cheerio`:本文HTMLから見出しを抽出して目次を生成
 - `dayjs`:開催日の`YYYY年M月D日`整形
+- `jotai`:コンポーネント間で共有する状態の管理
+- `lucide-react`:アイコン
 
 ## ディレクトリ概要
 

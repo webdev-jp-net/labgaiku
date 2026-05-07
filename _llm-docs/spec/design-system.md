@@ -175,9 +175,9 @@
 
 ### 採用
 
-- **Lucide Icons**をCDNから使用（細めの1.5ストローク、余白のあるジオメトリで本システムの余白主義と整合）。
-  - CDN：`https://unpkg.com/lucide-static@latest/icons/`
-  - ストロークは本システム内で`1.5`に統一。
+- **Lucide Icons**を`lucide-react`パッケージから使用（細めの1.5ストローク、余白のあるジオメトリで本システムの余白主義と整合）。
+  - パッケージ：`lucide-react`から名前付きでimport（例：`import { List, X, ArrowUp } from 'lucide-react'`）
+  - ストロークは`strokeWidth={1.5}`を渡して本システム内で1.5に統一する
 - **Unicode記号**を積極活用：`→`（続きを読む）、`←`（戻る）、`·`（区切り）、`——`（セクション区切り）、`¶`（段落マーク、フッター等）。
 
 ### 絵文字

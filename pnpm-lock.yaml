@@ -26,6 +26,12 @@ importers:
       isomorphic-dompurify:
         specifier: ^2.36.0
         version: 2.36.0
+      jotai:
+        specifier: ^2.20.0
+        version: 2.20.0(@types/react@19.2.0)(react@19.2.5)
+      lucide-react:
+        specifier: ^1.14.0
+        version: 1.14.0(react@19.2.5)
       microcms-js-sdk:
         specifier: ^3.4.0
         version: 3.4.0
@@ -2693,6 +2699,27 @@ packages:
         integrity: sha512-1vUQX+IdDMVPj4k8kOxgUqlcK518yluMuGZwqlr44FS1ppZB/5GWh4rZG89erpOBOJjU/OBsnCVFfapsRz6nEA==,
       }
 
+  jotai@2.20.0:
+    resolution:
+      {
+        integrity: sha512-b5GAqgmXmXzB4WPaTH26ppk9Sl7AA9WSQX7yfdM+gJ1rFROiWcVbi97gFuN/yVCojOcbcvop2sfLL+fjxW0JVg==,
+      }
+    engines: { node: '>=12.20.0' }
+    peerDependencies:
+      '@babel/core': '>=7.0.0'
+      '@babel/template': '>=7.0.0'
+      '@types/react': '>=17.0.0'
+      react: '>=17.0.0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@babel/template':
+        optional: true
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+
   js-tokens@4.0.0:
     resolution:
       {
@@ -2902,6 +2929,14 @@ packages:
         integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==,
       }
     engines: { node: '>=10' }
+
+  lucide-react@1.14.0:
+    resolution:
+      {
+        integrity: sha512-+1mdWcfSJVUsaTIjN9zoezmUhfXo5l0vP7ekBMPo3jcS/aIkxHnXqAPsByszMZx/Y8oQBRJxJx5xg+RH3urzxA==,
+      }
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   math-intrinsics@1.1.0:
     resolution:
@@ -6185,6 +6220,11 @@ snapshots:
 
   jose@4.15.9: {}
 
+  jotai@2.20.0(@types/react@19.2.0)(react@19.2.5):
+    optionalDependencies:
+      '@types/react': 19.2.0
+      react: 19.2.5
+
   js-tokens@4.0.0: {}
 
   js-yaml@3.14.1:
@@ -6313,6 +6353,10 @@ snapshots:
   lru-cache@6.0.0:
     dependencies:
       yallist: 4.0.0
+
+  lucide-react@1.14.0(react@19.2.5):
+    dependencies:
+      react: 19.2.5
 
   math-intrinsics@1.1.0: {}
 

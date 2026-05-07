@@ -1,7 +1,8 @@
 'use client'
 
-import { type ComponentProps, type ReactNode } from 'react'
-// import { useRef, type ComponentProps, type ReactNode } from 'react'
+import { useEffect, type ComponentProps, type ReactNode } from 'react'
+import { useSetAtom } from 'jotai'
+import { indexNavigationAtom } from '@/data/store'
 import type { VisibilityLabel } from '@/lib/permission'
 import { MemberList } from './components/MemberList'
 import { IndexNavigation } from './components/IndexNavigation'
@@ -13,6 +14,7 @@ type InterviewDetailViewProps = {
   guest: string
   dateTime?: string
   formattedDate: string | null
+  sanitizedIntroduction?: string
   sanitizedContent: string
   indexNavigationList: IndexNavigationItem[]
   memberList: ComponentProps<typeof MemberList>['memberList']
@@ -24,14 +26,17 @@ export function InterviewDetailView({
   guest,
   dateTime,
   formattedDate,
+  sanitizedIntroduction,
   sanitizedContent,
   indexNavigationList,
   memberList,
   visibility,
 }: InterviewDetailViewProps) {
-  // const dialogRef = useRef<HTMLDialogElement>(null)
-  // const handleOpen = () => dialogRef.current?.showModal()
-  // const handleClose = () => dialogRef.current?.close()
+  const setIndexNavigationList = useSetAtom(indexNavigationAtom)
+  useEffect(() => {
+    setIndexNavigationList(indexNavigationList)
+    return () => setIndexNavigationList([])
+  }, [indexNavigationList, setIndexNavigationList])
 
   return (
     <article className={styles.article}>
@@ -58,26 +63,22 @@ export function InterviewDetailView({
               </div>
             )}
           </div>
-          <MemberList memberList={memberList} />
-          <IndexNavigation indexNavigationList={indexNavigationList} />
+          <MemberList memberList={memberList} className={styles.headerMember} />
+          <div className={styles.headerIndex}>
+            <IndexNavigation indexNavigationList={indexNavigationList} />
+          </div>
         </div>
       </header>
-      <div className={styles.body} dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
-      {/* <button type="button" onClick={handleOpen}>
-        目次
-      </button>
-      <dialog
-        ref={dialogRef}
-        className={styles.dialog}
-        onClick={e => {
-          if ((e.target as HTMLElement).closest('a')) handleClose()
-        }}
-      >
-        <IndexNavigation indexNavigationList={indexNavigationList} />
-        <button type="button" onClick={handleClose}>
-          閉じる
-        </button>
-      </dialog> */}
+      <div className={styles.body}>
+        {sanitizedIntroduction && (
+          <div
+            className={styles.wysiwyg}
+            dangerouslySetInnerHTML={{ __html: sanitizedIntroduction }}
+          />
+        )}
+        <MemberList memberList={memberList} className={styles.memberList} />
+        <div className={styles.wysiwyg} dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+      </div>
     </article>
   )
 }

@@ -21,6 +21,7 @@ export type Interview = {
   guest: string
   date?: string
   title?: string
+  introduction?: string
   content?: string
   member?: InterviewMember[]
   allowList?: string

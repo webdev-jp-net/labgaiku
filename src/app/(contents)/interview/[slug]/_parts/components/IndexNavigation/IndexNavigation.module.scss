@@ -13,11 +13,18 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
   padding: 0;
   margin: var(--spacing-md) 0 0;
   font-size: var(--font-size-sm);
   list-style: none;
+
+  @include mq(narrow) {
+    gap: var(--spacing-md);
+  }
+
+  @include mq(fromWide) {
+    gap: var(--spacing-sm);
+  }
 }
 
 .item {
@@ -40,7 +47,7 @@
 .link {
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
-  color: currentColor;
+  color: var(--txt-basic);
   text-decoration: none;
 
   small {
