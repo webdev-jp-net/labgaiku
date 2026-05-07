@@ -87,12 +87,14 @@ This repository uses separate licenses for code and content.
 本リポジトリは、コードとコンテンツで異なるライセンスを適用しています。
 
 ### Code / コード (ロジック・仕組み)
+
 The software code in this repository is released into the public domain under the **Unlicense**.  
 See the `UNLICENSE` file for details.  
 本リポジトリのソースコード（プログラム・ロジック）は **Unlicense** に基づき、パブリックドメインとして公開されています。  
 クレジット表記なしで、商用・非商用問わず完全に自由にご利用いただけます。
 
 ### Content & Themes / コンテンツ・デザイン・テーマ
+
 All rights reserved for the content, including text, images, designs, and specific themes.  
 See the `LICENSE-CONTENT` file for details.  
 文章、画像、デザイン、および取り扱っている固有のテーマ・世界観などのコンテンツ資産に関する著作権は、すべて作者に帰属します（All Rights Reserved）。  
