@@ -7,14 +7,14 @@ type Member = {
   tagList: string[]
 }
 
-type MemberListProps = {
+type MemberListProps = React.HTMLAttributes<HTMLDivElement> & {
   memberList: Member[]
 }
 
-export const MemberList: FC<MemberListProps> = ({ memberList }) => {
+export const MemberList: FC<MemberListProps> = ({ memberList, ...props }) => {
   if (memberList.length === 0) return null
   return (
-    <div className={styles.memberList}>
+    <div className={`${styles.memberList} ${props.className ?? ''}`} {...props}>
       <h2 className={styles.title}>
         member<small>敬称略</small>
       </h2>

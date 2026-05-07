@@ -14,6 +14,7 @@ type InterviewDetailViewProps = {
   guest: string
   dateTime?: string
   formattedDate: string | null
+  sanitizedIntroduction?: string
   sanitizedContent: string
   indexNavigationList: IndexNavigationItem[]
   memberList: ComponentProps<typeof MemberList>['memberList']
@@ -25,6 +26,7 @@ export function InterviewDetailView({
   guest,
   dateTime,
   formattedDate,
+  sanitizedIntroduction,
   sanitizedContent,
   indexNavigationList,
   memberList,
@@ -61,11 +63,22 @@ export function InterviewDetailView({
               </div>
             )}
           </div>
-          <MemberList memberList={memberList} />
-          <IndexNavigation indexNavigationList={indexNavigationList} />
+          <MemberList memberList={memberList} className={styles.headerMember} />
+          <div className={styles.headerIndex}>
+            <IndexNavigation indexNavigationList={indexNavigationList} />
+          </div>
         </div>
       </header>
-      <div className={styles.body} dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+      <div className={styles.body}>
+        {sanitizedIntroduction && (
+          <div
+            className={styles.wysiwyg}
+            dangerouslySetInnerHTML={{ __html: sanitizedIntroduction }}
+          />
+        )}
+        <MemberList memberList={memberList} className={styles.memberList} />
+        <div className={styles.wysiwyg} dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+      </div>
     </article>
   )
 }

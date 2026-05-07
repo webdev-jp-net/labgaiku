@@ -43,6 +43,18 @@
   }
 }
 
+.headerMember {
+  @include mq(narrow) {
+    display: none;
+  }
+}
+
+.headerIndex {
+  @include mq(narrow) {
+    display: none;
+  }
+}
+
 .title {
   @include hd-md;
 }
@@ -94,12 +106,14 @@
   @include mq(fromWide) {
     padding: var(--spacing-3xl) var(--spacing-3xl) var(--spacing-5xl);
   }
+}
 
+.wysiwyg {
   p {
     @include txt-paragraph;
   }
 
-  p ~ p {
+  * ~ p {
     @include mq(narrow) {
       margin-top: 3em;
     }

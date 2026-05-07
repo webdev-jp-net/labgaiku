@@ -12,7 +12,7 @@
   backdrop-filter: blur(0.4rem);
 
   @include mq(narrow) {
-    grid-template-columns: 1fr minmax(auto, 50%);
+    grid-template-columns: 1fr auto;
     gap: var(--spacing-xl) var(--spacing-md);
     padding: var(--spacing-md) var(--spacing-md);
   }
@@ -31,11 +31,42 @@
   }
 }
 
+.header {
+  display: flex;
+  align-items: center;
+}
+
 .siteName {
   @include txt-lead;
 
   color: currentColor;
   text-decoration: none;
+}
+
+.category {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5em;
+  font-size: var(--font-size-sm);
+
+  &::before {
+    margin-right: 0.5em;
+    color: var(--txt-subtle);
+    content: '・';
+  }
+}
+
+.categoryLink {
+  color: var(--txt-muted);
+  text-decoration: none;
+}
+
+.menu {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .indexTrigger {
@@ -44,6 +75,19 @@
   display: grid;
   place-items: center;
   justify-self: end;
+  padding: 0;
+  color: var(--txt-mutec);
+  appearance: none;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.scrollToTopTrigger {
+  @include rect(rem(32));
+
+  display: grid;
+  place-items: center;
   padding: 0;
   color: var(--txt-mutec);
   appearance: none;
