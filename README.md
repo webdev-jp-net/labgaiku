@@ -13,10 +13,13 @@
 - **スタイリング**: SCSS Modules
 - **認証**: SSO（Google）
 - **OAuth**: Google
-- **ホスティング**: 選定中
+- **ホスティング**: Vercel
 - **パッケージマネージャー**: pnpm
 
 ## セットアップ
+
+> [!NOTE]
+> インタビュー記事の管理にはmicroCMSを利用しており、リポジトリの機構単独では動作しません。
 
 ### 1. 依存関係のインストール
 
@@ -32,18 +35,7 @@ pnpm install
 cp .env.example .env
 ```
 
-`.env`ファイルを編集して、以下の環境変数を設定：
-
-```env
-# Auth.js設定
-AUTH_SECRET=your-secret-key-here  # openssl rand -base64 32 で生成
-AUTH_TRUST_HOST=true
-NEXTAUTH_URL=http://localhost:4321
-
-# Google OAuth（Google Cloud Consoleで取得）
-GOOGLE_CLIENT_ID=your-google-client-id
-GOOGLE_CLIENT_SECRET=your-google-client-secret
-```
+`.env`ファイルを編集して、必要な環境変数を設定してください
 
 ### 3. OAuth設定
 
@@ -73,7 +65,7 @@ pnpm preview
 # 型チェック
 pnpm typecheck
 
-# リント
+# Lint
 pnpm lint
 pnpm lint:fix
 
@@ -83,8 +75,9 @@ pnpm format
 
 ## License / ライセンス
 
-This repository uses separate licenses for code and content.  
-本リポジトリは、コードとコンテンツで異なるライセンスを適用しています。
+> [!IMPORTANT]
+> This repository uses separate licenses for code and content.  
+> 本リポジトリは、コードとコンテンツで異なるライセンスを適用しています。
 
 ### Code / コード (ロジック・仕組み)
 
