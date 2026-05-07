@@ -2,6 +2,7 @@
 
 import type { Session } from 'next-auth'
 import Link from 'next/link'
+import { ContentsMenu } from '@/components/ContentsMenu'
 import styles from './AppFooter.module.scss'
 import { useAppFooter } from './useAppFooter'
 
@@ -19,20 +20,7 @@ export function AppFooter({ session, className, ...props }: AppFooterProps) {
         <span className={styles.siteName}>Labが行く</span>
         <small className={styles.domain}>labgaiku.org</small>
       </Link>
-      <ul className={styles.navList}>
-        <li className={styles.navItem}>
-          <Link href="/interview" className={styles.navLink}>
-            <span className={styles.navTitle}>Labが聞く</span>
-            <span className={styles.navKana}>interview</span>
-          </Link>
-        </li>
-        {/* <li className={styles.navItem}>
-          <Link href="/zine" className={styles.navLink}>
-            <span className={styles.navTitle}>人と働く仕組みは設計する</span>
-            <span className={styles.navKana}>ZINE</span>
-          </Link>
-        </li> */}
-      </ul>
+      <ContentsMenu className={styles.nav} />
       <div className={styles.console}>
         <p className={styles.consoleDescription}>{description}</p>
         <span

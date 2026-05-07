@@ -82,59 +82,39 @@
   margin: var(--spacing-3xl) 0 0;
 }
 
-.navList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-  padding: 0;
-  margin: 0;
-}
+[class*='contentsMenu'].navList {
+  @include mq(narrow) {
+    margin-top: var(--spacing-sm);
+  }
 
-.navItem {
-  position: relative;
-  padding-left: rem(18 + 8);
-  list-style: none;
-}
+  @include mq(fromWide) {
+    margin-top: var(--spacing-sm);
+  }
 
-.navLink {
-  display: inline-flex;
-  flex-direction: column;
-  gap: rem(16);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-regular);
-  color: var(--txt-muted);
-  text-decoration: none;
-  transition: background-color var(--transition);
+  li[class*='item'] {
+    grid-template-columns: var(--font-size-lg) 1fr;
 
-  @media (any-hover: hover) {
-    &:hover {
-      color: var(--txt-accent);
+    @include mq(narrow) {
+      padding-left: rem(18 + 8);
+    }
+
+    @include mq(fromWide) {
+      padding-left: 0;
     }
   }
-}
 
-.navShoulderKana {
-  @include txt-kana;
+  a[class*='link'] {
+    gap: var(--font-size-sm);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-regular);
+  }
 
-  font-size: var(--font-size-sm);
-}
+  span[class*='title'] {
+    @include txt-lead;
+  }
 
-.navTitle {
-  @include txt-lead;
-
-  position: relative;
-
-  &::before {
-    @include rect(rem(18), 1px);
-
-    position: absolute;
-    right: 100%;
-    bottom: calc(50% - 1px);
-    display: inline-block;
-    margin-right: rem(8);
-    vertical-align: middle;
-    content: '';
-    background-color: var(--border-basic);
+  span[class*='kana'] {
+    font-size: var(--font-size-sm);
   }
 }
 
@@ -151,7 +131,7 @@
 
   @include mq(fromWide) {
     gap: var(--spacing-7xl);
-    padding: calc(30svh + rem(56 + 44 + 18 + 64)) rem(160) 0 var(--spacing-3xl);
+    padding: calc(30svh + rem(56 + 44 + 14 + 64)) rem(160) 0 var(--spacing-3xl);
   }
 }
 

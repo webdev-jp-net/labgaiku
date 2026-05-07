@@ -4,6 +4,7 @@ import Link from 'next/link'
 import type { FC } from 'react'
 import { GlobalNavigation } from '@/components/layout/GlobalNavigation'
 import { AppFooter } from '@/components/layout/AppFooter'
+import { ContentsMenu } from '@/components/ContentsMenu'
 import styles from './Home.module.scss'
 // import { WordUnit } from '@/components/WordUnit'
 
@@ -18,20 +19,7 @@ export const HomeView: FC = () => {
               <span className={styles.kana}>lab ga iku</span>
             </header>
             <nav className={styles.nav}>
-              <ul className={styles.navList}>
-                <li className={styles.navItem}>
-                  <Link className={styles.navLink} href="/interview">
-                    <span className={styles.navTitle}>Labが聞く</span>
-                    <small className={styles.navShoulderKana}>interview</small>
-                  </Link>
-                </li>
-                {/* <li className={styles.navItem}>
-                  <Link className={styles.navLink} href="/zine">
-                    <span className={styles.navTitle}>人と働く仕組みは設計する</span>
-                    <small className={styles.navShoulderKana}>ZINE</small>
-                  </Link>
-                </li> */}
-              </ul>
+              <ContentsMenu className={styles.navList} />
             </nav>
           </div>
         </div>
