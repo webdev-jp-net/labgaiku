@@ -41,7 +41,7 @@ export const {{ inputs.name | pascal }}: FC<{{ inputs.name | pascal }}Props> = (
 # `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.module.scss`
 
 ```scss
-@use "style/_variable" as *;
+@use '@/styles/_variable' as *;
 
 .{{ inputs.name | camel }} {
   //
