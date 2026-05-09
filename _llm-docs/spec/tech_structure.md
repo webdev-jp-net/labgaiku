@@ -30,8 +30,8 @@
 - `NEXTAUTH_URL`, `NEXTAUTH_SECRET`
 - `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`
 - `MICROCMS_SERVICE_DOMAIN`, `MICROCMS_API_KEY`（サーバー専用、`NEXT_PUBLIC_`プレフィックスを付けない）
+- `MICROCMS_PREVIEW_SECRET`（microCMS画面プレビューURLに含めるトークン。サーバー専用）
 
 ## 補足
 
 - バックエンド／DBは持たず、コンテンツ取得はmicroCMSのみ
-- 拡張方針は各仕様書（routing, components, microcms等）を参照
