@@ -4,7 +4,7 @@
 
 microCMSから取得したインタビュー記事は、サーバーコンポーネント（`page.tsx`）でいくつかの整形を経たうえでViewに渡る。Viewは表示処理のみを担当し、整形ロジックを持たない方針。
 
-データ取得や`canViewInterview`等の権限判定の前提は[microCMS連携仕様](./microcms.md)を参照。
+データ取得・`canViewInterview`の実装・`visibility`／`allowList`の判定ルールは[microCMS連携仕様](../microcms.md)を参照。
 
 ## 整形の実行場所
 
@@ -77,12 +77,23 @@ microCMSから取得したインタビュー記事は、サーバーコンポー
 
 `WordUnit`コンポーネントが`.word`クラスを定義しているため、`page.tsx`からも同じCSS Modulesをimportし同一ハッシュを参照する。実装は`segmentToHtml(text)`ヘルパーに集約。
 
+## HTMLサニタイズ
+
+- `interview.content`／`interview.introduction`は`richEditorV2`形式でHTML文字列としてmicroCMSから返る
+- サニタイズ処理は`src/lib/sanitize.ts`の`sanitizeHtml`（DOMPurifyベース）に集約。詳細ページの`page.tsx`で`cheerio`整形後のHTMLに対して適用してからViewに渡す（`view.tsx`から`sanitizeHtml`を直接呼ばない方針）
+- Viewでの描画は`dangerouslySetInnerHTML`を経由する
+
 ## 目次（IndexNavigation）
 
 - `cheerio`で`interview.content`の`<h2>`の`id`とテキストを抽出する（`interview.introduction`の見出しは目次対象外）
 - microCMSのリッチエディターが見出しに自動付与する`id`をアンカーリンクのhrefに利用する
-- 各テキストはタイトルと同じ`buildTitle`で整形した`ReactNode`としてViewに渡す
+- 各テキストはタイトルと同じ`InterviewTitle`コンポーネントで整形してViewに渡す
 - アンカー着地時の上余白は本文`<h2>`の`scroll-margin-top`で確保する
+
+## 開催日の整形
+
+- `interview.date`の表示は`src/lib/date.ts`の`formatJaDate`を経由し、`YYYY年M月D日`形式に整形する
+- 整形には`dayjs`を使用
 
 ## 公開範囲ラベル
 
@@ -111,6 +122,7 @@ microCMSから取得したインタビュー記事は、サーバーコンポー
 
 ## 関連ファイル
 
+- `src/components/InterviewTitle/`: タイトル整形コンポーネント（`——`でメインとサブを分割し、後半を`<small>`で囲む）
 - `src/components/WordUnit/`: BudouX文節分割コンポーネント（`.word`クラスを定義）
 - `src/lib/sanitize.ts`: `sanitizeHtml`（DOMPurify）
 - `src/lib/permission.ts`: 権限判定と公開範囲ラベル組立

@@ -28,31 +28,28 @@
 }
 
 .item {
-  display: grid;
-  grid-template-columns: var(--font-size-sm) 1fr;
-  gap: var(--spacing-sm);
+  padding: 0 0 0 var(--font-size-xl);
   font-size: var(--font-size-md);
   list-style: none;
-
-  &::before {
-    @include rect(var(--font-size-sm), 1px);
-
-    display: block;
-    margin-top: 0.75em;
-    content: '';
-    background: var(--txt-subtle);
-  }
+  background: linear-gradient(to bottom, var(--txt-subtle), var(--txt-subtle)) left top 1em /
+    #{rem(12)} 1px no-repeat;
 }
 
 .link {
+  @include txt-link;
+
   font-weight: var(--font-weight-regular);
   line-height: 1.5;
-  color: var(--txt-basic);
-  text-decoration: none;
 
   small {
     display: block;
     width: fit-content;
     font-size: var(--font-size-sm);
+    background: inherit;
+  }
+
+  span {
+    text-decoration: underline dotted 1px;
+    text-underline-offset: 0.2em;
   }
 }

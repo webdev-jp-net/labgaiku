@@ -36,11 +36,48 @@
 }
 
 .title {
+  width: fit-content;
   font-weight: var(--font-weight-regular);
+  color: color-mix(in srgb, var(--bg-accent), transparent 100%);
+  text-shadow: 0 0 0 var(--txt-basic);
+  background: repeating-linear-gradient(
+      -0.2turn,
+      transparent,
+      transparent 2px,
+      currentColor 4px,
+      currentColor calc(100% - 4px),
+      transparent calc(100% - 2px),
+      transparent 100%
+    )
+    right bottom / 50% 0.8em no-repeat;
+  transition:
+    color var(--transition-enter),
+    background-size var(--transition-enter);
+
+  @media (any-hover: hover) {
+    .link:hover & {
+      color: var(--bg-marker);
+      text-shadow: 0 0 1px var(--txt-basic);
+      background-position-x: left;
+      background-size: 100% 0.8em;
+      transition:
+        text-shadow var(--transition),
+        color var(--transition),
+        background-size var(--transition-leave);
+    }
+  }
 }
 
 .kana {
   @include txt-kana;
 
   font-size: var(--font-size-xs);
+  transition: filter var(--transition-enter);
+
+  @media (any-hover: hover) {
+    .link:hover & {
+      filter: blur(rem(1));
+      transition: filter var(--transition-leave);
+    }
+  }
 }

@@ -52,7 +52,7 @@ export const use{{ inputs.name | pascal }} = () => {
 # `{{ inputs.name | kebab }}/_parts/page.module.scss`
 
 ```scss
-@use "@/styles/_variable" as *;
+@use '@/styles/_variable' as *;
 
 .{{ inputs.name | camel }} {
   // TODO: スタイルを定義してください

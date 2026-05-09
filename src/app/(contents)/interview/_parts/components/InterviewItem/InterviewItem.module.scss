@@ -1,27 +1,51 @@
 @use '@/styles/_variable' as *;
 
 .item {
-  display: flex;
-  flex-direction: column;
-
   &[href] {
     color: currentColor;
     text-decoration: none;
   }
 }
 
-.link {
-  transition: color var(--transition);
-
-  @media (any-hover: hover) {
-    &:hover {
-      color: var(--txt-accent);
-    }
-  }
-}
-
 .title {
   @include hd-md;
+
+  display: inline;
+  justify-self: flex-start;
+  width: fit-content;
+  color: color-mix(in srgb, var(--bg-accent), transparent 100%);
+  text-shadow: 0 0 0 var(--txt-basic);
+  background: repeating-linear-gradient(
+      -0.2turn,
+      transparent,
+      transparent rem(8),
+      currentColor rem(12),
+      currentColor calc(100% - #{rem(12)}),
+      transparent calc(100% - #{rem(8)}),
+      transparent 100%
+    )
+    right bottom 0.3em / 50% 0.8em no-repeat;
+  transition:
+    text-shadow var(--transition),
+    color var(--transition-enter),
+    background-size var(--transition-enter);
+
+  @media (any-hover: hover) {
+    .item:hover & {
+      color: var(--bg-marker);
+      text-shadow: 0 0 1px var(--txt-basic);
+      background-position-x: left;
+      background-size: 100% 0.8em;
+      transition:
+        text-shadow var(--transition),
+        color var(--transition),
+        background-size var(--transition-leave);
+    }
+  }
+
+  small {
+    width: fit-content;
+  }
 }
 
 .guest {

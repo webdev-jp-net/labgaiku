@@ -109,32 +109,67 @@
   }
 }
 
-@mixin txt-link {
-  color: currentColor;
-  text-decoration: none;
+@mixin txt-link($underline: true) {
+  @if $underline {
+    text-decoration: underline dotted 1px;
+    text-underline-offset: 0.2em;
+  } @else {
+    text-decoration: none;
+  }
+
+  color: color-mix(in srgb, var(--bg-accent), transparent 100%);
+  text-shadow: 0 0 0 var(--txt-basic);
   background: repeating-linear-gradient(
-      to right,
-      currentColor,
-      currentColor 3px,
-      transparent 3px,
-      transparent 5px
+      -0.2turn,
+      transparent,
+      transparent 2px,
+      currentColor 4px,
+      currentColor calc(100% - 4px),
+      transparent calc(100% - 2px),
+      transparent 100%
     )
-    left bottom 1px / 100% 1px no-repeat;
-  transition: background-position var(--transition);
+    right bottom 0.3em / 75% 0.8em no-repeat;
+  transition:
+    text-shadow var(--transition),
+    color var(--transition-enter),
+    background-size var(--transition-enter);
 
   @media (any-hover: hover) {
     &:hover {
-      background-position: right bottom 0;
+      color: var(--bg-marker);
+      text-shadow: 0 0 1px var(--txt-basic);
+      background-position-x: left;
+      background-size: 100% 0.8em;
+      transition:
+        text-shadow var(--transition),
+        color var(--transition),
+        background-size var(--transition-leave);
     }
   }
 }
 
 @mixin txt-marker {
-  background: linear-gradient(to bottom, var(--border-basic), var(--border-basic)) left bottom
-    0.4em / 100% 0.8em no-repeat;
+  background: repeating-linear-gradient(
+      -0.2turn,
+      transparent,
+      transparent 2px,
+      color-mix(in srgb, var(--txt-subtle), transparent 66%) 4px,
+      color-mix(in srgb, var(--txt-subtle), transparent 66%) calc(100% - 4px),
+      transparent calc(100% - 2px),
+      transparent 100%
+    )
+    right bottom 0.3em / 100% 0.8em no-repeat;
 }
 
 @mixin txt-accent {
-  background: linear-gradient(to bottom, var(--border-marker), var(--border-marker)) left bottom
-    0.4em / 100% 0.8em no-repeat;
+  background: repeating-linear-gradient(
+      -0.2turn,
+      transparent,
+      transparent 2px,
+      var(--bg-marker) 4px,
+      var(--bg-marker) calc(100% - 4px),
+      transparent calc(100% - 2px),
+      transparent 100%
+    )
+    right bottom 0.3em / 100% 0.8em no-repeat;
 }
