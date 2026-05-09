@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Plaster } from 'next/font/google'
 import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Providers } from './providers'
 import '@/styles/index.scss'
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div id="root">{children}</div>
         </Providers>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
