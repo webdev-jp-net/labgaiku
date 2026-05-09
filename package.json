@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@uidotdev/usehooks": "^2.4.1",
+    "@vercel/analytics": "^2.0.1",
     "budoux": "^0.8.2",
     "cheerio": "^1.2.0",
     "dayjs": "^1.11.20",
