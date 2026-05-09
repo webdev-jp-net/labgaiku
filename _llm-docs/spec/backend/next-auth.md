@@ -4,7 +4,7 @@
 
 Google OAuthを利用したNextAuth.js 4系の構成。JWTセッションストラテジーでユーザー情報を保持する。データベースは使用せず、microCMSと組み合わせて最低限の認証機能を提供。
 
-アプリ全体を保護するグローバルなアクセス制限は持たず、誰でもGoogleアカウントでサインイン可能。閲覧範囲の制御は記事単位で`_llm-docs/spec/frontend/microcms.md`の`allowList`フィールドで行う。
+アプリ全体を保護するグローバルなアクセス制限は持たず、誰でもGoogleアカウントでサインイン可能。閲覧範囲の制御は記事単位で`_llm-docs/spec/microcms.md`の`allowList`フィールドで行う。
 
 セッション取得はサーバー側で完結させる方針を採り、`SessionProvider`/`useSession`は使用しない。Client Componentで必要な認証状態は、`(contents)/layout.tsx`のServer Componentが`getServerSession`で取得した`session`をpropで渡す。
 
@@ -51,8 +51,3 @@ Google OAuthを利用したNextAuth.js 4系の構成。JWTセッションスト�
 4. 認証済みユーザは記事ごとのallowListに応じて`limited`記事を閲覧可能
 5. `public`記事は未認証でも閲覧可能
 6. `secret`記事は`allowList`該当ユーザのみ閲覧可、それ以外は一覧から除外され、詳細URL直アクセス時はログイン促しViewが返る
-
-## カスタマイズ方針
-
-- ロール等を扱う場合はJWTコールバックにフィールドを追加
-- 認証UIを増やす場合は専用の共有コンポーネントを置かず、必要箇所にインラインで配置する方針を維持

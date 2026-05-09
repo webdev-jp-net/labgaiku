@@ -6,12 +6,14 @@ Next.js App Router（`src/app`）を利用したルーティング構成。
 
 ## ルート構成
 
-| ルート              | 認証               | 説明                                                                                                                                         |
-| ------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/`                 | 不要               | トップページ                                                                                                                                 |
-| `/interview`        | 不要               | インタビュー一覧（誰でもアクセス可。`limited`は非該当ユーザにタイトル/ゲストを伏せ字表示・日付は生表示、`secret`は非該当ユーザから完全除外） |
-| `/interview/{slug}` | `visibility`による | インタビュー詳細（`public`は誰でも、`limited`/`secret`は記事ごとの`allowList`判定。非該当ユーザの直アクセス時はログイン促しViewを表示）      |
-| `/api/auth/*`       | -                  | NextAuthエンドポイント                                                                                                                       |
+| ルート               | 認証               | 説明                                                                                                                                                                                            |
+| -------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                  | 不要               | トップページ                                                                                                                                                                                    |
+| `/interview`         | 不要               | インタビュー一覧（誰でもアクセス可。`limited`は非該当ユーザにタイトル/ゲストを伏せ字表示・日付は生表示、`secret`は非該当ユーザから完全除外）                                                    |
+| `/interview/{slug}`  | `visibility`による | インタビュー詳細（`public`は誰でも、`limited`/`secret`は記事ごとの`allowList`判定。非該当ユーザの直アクセス時はログイン促しViewを表示。Draft Mode中は`allowList`判定をスキップして本文を表示）  |
+| `/api/auth/*`        | -                  | NextAuthエンドポイント                                                                                                                                                                          |
+| `/api/draft`         | プレビュートークン | microCMS画面プレビュー用エンドポイント。`secret`/`slug`/`draftKey`を受け取り、`MICROCMS_PREVIEW_SECRET`と一致したらNext.js Draft Modeを有効化し`/interview/{slug}?draftKey=<key>`へリダイレクト |
+| `/api/disable-draft` | -                  | Draft Modeを解除し`/interview`へリダイレクト                                                                                                                                                    |
 
 ## 認証フロー
 
@@ -27,15 +29,41 @@ Next.js App Router（`src/app`）を利用したルーティング構成。
 
 ## ディレクトリ構造
 
-- `src/app/layout.tsx`: ルートlayout（`<html>`/`<body>`とフォントのみ。AppHeaderは含まない）
-- `src/app/page.tsx`: トップページ（Home。AppHeader/AppFooterは表示されない）
-- `src/app/_parts/`: Homeのビュー/フック
-- `src/app/(contents)/layout.tsx`: コンテンツ用layout（`getServerSession`を呼び、`AppHeader`/`AppFooter`へsessionをpropで渡す。`<main>`を提供）
-- `src/app/(contents)/interview/page.tsx`: インタビュー一覧（サーバーコンポーネント）
-- `src/app/(contents)/interview/_parts/`: 一覧ページのビュー/フック/`InterviewItem` parts-component
-- `src/app/(contents)/interview/[slug]/page.tsx`: インタビュー詳細
-- `src/app/(contents)/interview/[slug]/_parts/`: 詳細ページのビュー/フック/`LoginPrompt` parts-component
-- `src/app/api/auth/[...nextauth]/route.ts`: NextAuth API
+```
+src/
+└── app/
+    ├── layout.tsx
+    ├── page.tsx
+    ├── _parts/
+    ├── (contents)/
+    │   ├── layout.tsx
+    │   └── interview/
+    │       ├── page.tsx
+    │       ├── _parts/
+    │       └── [slug]/
+    │           ├── page.tsx
+    │           └── _parts/
+    └── api/
+        ├── auth/
+        │   └── [...nextauth]/
+        │       └── route.ts
+        ├── draft/
+        │   └── route.ts
+        └── disable-draft/
+            └── route.ts
+```
+
+- `layout.tsx`（root）：ルートlayout（`<html>`/`<body>`とフォントのみ・AppHeader非含有）
+- `page.tsx`（root）：トップページ（Home・AppHeader/AppFooter非表示）
+- `_parts/`（root）：Homeのview/フック
+- `layout.tsx`（contents）：`getServerSession`で`AppHeader`/`AppFooter`にsessionをprop注入し`<main>`を提供
+- `page.tsx`（インタビュー一覧）：インタビュー一覧
+- `_parts/`（インタビュー一覧）：一覧のview/フック/`InterviewItem`
+- `page.tsx`（インタビュー詳細）：インタビュー詳細
+- `_parts/`（インタビュー詳細）：詳細のview/フック/`LoginPrompt`
+- `route.ts`（auth）：NextAuth API
+- `route.ts`（draft）：microCMS画面プレビュー受け口（Draft Mode有効化→`/interview/{slug}?draftKey=<key>`へリダイレクト）
+- `route.ts`（disable-draft）：Draft Mode解除（`/interview`リダイレクト）
 
 > route group `(contents)`はURLに出ないため、URLパス（`/interview`, `/interview/{slug}`）は変わりません。
 
@@ -48,5 +76,5 @@ Next.js App Router（`src/app`）を利用したルーティング構成。
 ## 関連ドキュメント
 
 - [コンポーネント設計](./components.md)
-- [microCMS連携仕様](./microcms.md)
+- [microCMS連携仕様](../microcms.md)
 - [認証仕様](../backend/next-auth.md)

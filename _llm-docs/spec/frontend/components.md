@@ -21,7 +21,6 @@ Next.js App Router + React 19 + TypeScriptを前提としたコンポーネン�
 ### 型安全
 
 - すべてのProps/戻り値にTypeScript型を付与
-- 必要な型は`src/lib`配下で共有
 
 ## ディレクトリ構造
 
@@ -77,7 +76,6 @@ src/
 - 認証UIは専用の共有コンポーネントを置かず、必要箇所（AppHeader/AppFooter/`LoginPrompt`）にインラインで`signIn`/`signOut`を呼ぶボタンを配置する方針
 - `GlobalNavigation`/`AppFooter`/`ContentsMenu`の連携と`data-visible-nav`属性による可視制御は[ナビゲーション仕様](./navigation.md)を参照
 
-## 補足
+## 装飾
 
-- Chakra UI等の外部UIライブラリは未使用
 - 装飾は仕様で明示された範囲のみ実装し、共通スタイルは`src/styles`配下で管理
