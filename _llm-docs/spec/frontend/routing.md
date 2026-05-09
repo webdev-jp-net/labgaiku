@@ -6,14 +6,13 @@ Next.js App Router（`src/app`）を利用したルーティング構成。
 
 ## ルート構成
 
-| ルート               | 認証               | 説明                                                                                                                                                                                            |
-| -------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/`                  | 不要               | トップページ                                                                                                                                                                                    |
-| `/interview`         | 不要               | インタビュー一覧（誰でもアクセス可。`limited`は非該当ユーザにタイトル/ゲストを伏せ字表示・日付は生表示、`secret`は非該当ユーザから完全除外）                                                    |
-| `/interview/{slug}`  | `visibility`による | インタビュー詳細（`public`は誰でも、`limited`/`secret`は記事ごとの`allowList`判定。非該当ユーザの直アクセス時はログイン促しViewを表示。Draft Mode中は`allowList`判定をスキップして本文を表示）  |
-| `/api/auth/*`        | -                  | NextAuthエンドポイント                                                                                                                                                                          |
-| `/api/draft`         | プレビュートークン | microCMS画面プレビュー用エンドポイント。`secret`/`slug`/`draftKey`を受け取り、`MICROCMS_PREVIEW_SECRET`と一致したらNext.js Draft Modeを有効化し`/interview/{slug}?draftKey=<key>`へリダイレクト |
-| `/api/disable-draft` | -                  | Draft Modeを解除し`/interview`へリダイレクト                                                                                                                                                    |
+| ルート              | 認証               | 説明                                                                                                                                                                                            |
+| ------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                 | 不要               | トップページ                                                                                                                                                                                    |
+| `/interview`        | 不要               | インタビュー一覧（誰でもアクセス可。`limited`は非該当ユーザにタイトル/ゲストを伏せ字表示・日付は生表示、`secret`は非該当ユーザから完全除外）                                                    |
+| `/interview/{slug}` | `visibility`による | インタビュー詳細（`public`は誰でも、`limited`/`secret`は記事ごとの`allowList`判定。非該当ユーザの直アクセス時はログイン促しViewを表示。Draft Mode中は`allowList`判定をスキップして本文を表示）  |
+| `/api/auth/*`       | -                  | NextAuthエンドポイント                                                                                                                                                                          |
+| `/api/draft`        | プレビュートークン | microCMS画面プレビュー用エンドポイント。`secret`/`slug`/`draftKey`を受け取り、`MICROCMS_PREVIEW_SECRET`と一致したらNext.js Draft Modeを有効化し`/interview/{slug}?draftKey=<key>`へリダイレクト |
 
 ## 認証フロー
 
@@ -47,9 +46,7 @@ src/
         ├── auth/
         │   └── [...nextauth]/
         │       └── route.ts
-        ├── draft/
-        │   └── route.ts
-        └── disable-draft/
+        └── draft/
             └── route.ts
 ```
 
@@ -63,7 +60,6 @@ src/
 - `_parts/`（インタビュー詳細）：詳細のview/フック/`LoginPrompt`
 - `route.ts`（auth）：NextAuth API
 - `route.ts`（draft）：microCMS画面プレビュー受け口（Draft Mode有効化→`/interview/{slug}?draftKey=<key>`へリダイレクト）
-- `route.ts`（disable-draft）：Draft Mode解除（`/interview`リダイレクト）
 
 > route group `(contents)`はURLに出ないため、URLパス（`/interview`, `/interview/{slug}`）は変わりません。
 

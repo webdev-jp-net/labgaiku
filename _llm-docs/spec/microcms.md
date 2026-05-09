@@ -53,9 +53,7 @@ src/
 │   │           ├── page.tsx
 │   │           └── _parts/
 │   └── api/
-│       ├── draft/
-│       │   └── route.ts
-│       └── disable-draft/
+│       └── draft/
 │           └── route.ts
 └── lib/
     └── api/
@@ -68,7 +66,6 @@ src/
 - `page.tsx`：詳細ページ（整形を集約しフックは置かない）
 - `_parts/`：詳細のview／`LoginPrompt`／`MemberList`／`IndexNavigation`
 - `route.ts`：画面プレビュー受け口（draft）
-- `route.ts`：Draft Mode解除（disable-draft）
 
 繰り返しUIは`components/`配下のparts-componentに切り出す。
 
@@ -100,9 +97,7 @@ https://<host>/api/draft?secret=<TOKEN>&slug={CONTENT_ID}&draftKey={DRAFT_KEY}
 src/
 └── app/
     ├── api/
-    │   ├── draft/
-    │   │   └── route.ts
-    │   └── disable-draft/
+    │   └── draft/
     │       └── route.ts
     └── (contents)/
         └── interview/
@@ -111,7 +106,6 @@ src/
 ```
 
 - `route.ts`（draft）：`secret`／`slug`／`draftKey`を検証→Draft Modeを有効化→`/interview/{slug}?draftKey=<key>`へリダイレクト
-- `route.ts`（disable-draft）：Draft Mode解除→`/interview`へリダイレクト
 - `page.tsx`（インタビュー詳細）：`draftMode().isEnabled`が`true`かつURLクエリに`draftKey`が含まれるとき、その`draftKey`を`getInterviewById`に渡し、`canViewInterview`の判定をスキップする
 
 ### Cookieの挙動
