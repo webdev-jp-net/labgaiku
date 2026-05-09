@@ -20,10 +20,9 @@ export default async function InterviewIndexPage() {
       })
       .map(interview => {
         const canView = canViewInterview(interview, session)
-        const titleSource = canView ? (interview.title ?? interview.guest) : interview.title
         return {
           id: interview.id,
-          title: titleSource ? <InterviewTitle>{titleSource}</InterviewTitle> : MASK_PLACEHOLDER,
+          title: <InterviewTitle>{interview.title ?? interview.guest}</InterviewTitle>,
           guest: canView ? interview.guest : MASK_PLACEHOLDER,
           date: interview.date,
           visibility: getVisibilityLabel(interview.visibility),

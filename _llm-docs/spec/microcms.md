@@ -19,7 +19,7 @@ Labが聞くのインタビュー記事（`interview`コンテンツ）はmicroC
 | `visibility`   | 公開範囲       | select       |  ○   | 初期値`secret`。選択肢:`secret`,`limited`,`public`                                                                                     |
 | `guest`        | ゲスト         | text         |  ○   | 一意制約あり                                                                                                                           |
 | `date`         | 開催日         | date         |  ー  | 日付形式で保存                                                                                                                         |
-| `title`        | タイトル       | text         |  ー  |                                                                                                                                        |
+| `title`        | タイトル       | text         |  ○   |                                                                                                                                        |
 | `introduction` | 序文           | richEditorV2 |  ー  | `content`と同じ書式・整形を適用し、`content`の直前に表示する                                                                           |
 | `content`      | 本文           | richEditorV2 |  ー  | 見出し/段落/装飾/表などが利用可能                                                                                                      |
 | `allowList`    | 閲覧許可リスト | textArea     |  ー  | `limited`時の閲覧許可リスト。1行1値・改行区切り。`@`を含む行はメールアドレス、含まない行はドメインとして判定。前後空白と大小文字は無視 |

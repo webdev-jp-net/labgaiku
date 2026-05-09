@@ -53,16 +53,16 @@ export default async function InterviewDetailPage({
     if (!previewDraftKey && !canViewInterview(interview, session)) {
       const callbackUrl = `/interview/${slug}`
       const isSecret = interview.visibility.includes('secret')
-      const headingNode =
-        !isSecret && interview.title ? (
-          <InterviewTitle>{interview.title}</InterviewTitle>
-        ) : (
-          MASK_PLACEHOLDER
-        )
       return (
         <LoginPrompt
           callbackUrl={callbackUrl}
-          heading={headingNode}
+          heading={
+            isSecret ? (
+              MASK_PLACEHOLDER
+            ) : (
+              <InterviewTitle>{interview.title ?? interview.guest}</InterviewTitle>
+            )
+          }
           guest={MASK_PLACEHOLDER}
           dateTime={isSecret ? undefined : interview.date}
           formattedDate={
