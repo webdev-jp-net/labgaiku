@@ -1,7 +1,6 @@
 import { timingSafeEqual } from 'node:crypto'
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { getInterviewById } from '@/lib/api/microcms'
 
 /**
  * microCMS画面プレビューの起点。検証後に下書き表示を有効化して対象ページへ送る。
@@ -36,16 +35,6 @@ export async function GET(request: Request) {
     return new Response(
       'プレビューを開始できませんでした。URLにslugまたはdraftKeyが含まれていません。microCMS管理画面の画面プレビュー設定をご確認ください。',
       { status: 400 }
-    )
-  }
-
-  try {
-    await getInterviewById(slug, { draftKey, fields: 'id' })
-  } catch (error) {
-    console.error('Failed to fetch microCMS draft', error)
-    return new Response(
-      'プレビュー対象のインタビューを取得できませんでした。下書きの状態とURLパラメータをご確認ください。',
-      { status: 401 }
     )
   }
 
