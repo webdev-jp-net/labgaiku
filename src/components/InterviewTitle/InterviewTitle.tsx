@@ -1,8 +1,6 @@
 import type { FC } from 'react'
 import { WordUnit } from '@/components/WordUnit'
 
-import styles from './InterviewTitle.module.scss'
-
 type InterviewTitleProps = {
   /** タイトル文字列。`——` を境にサブタイトルへ分けられる */
   children: string
@@ -15,19 +13,13 @@ type InterviewTitleProps = {
  */
 export const InterviewTitle: FC<InterviewTitleProps> = ({ children }) => {
   const i = children.indexOf('——')
-  if (i < 0) {
-    return (
-      <span className={styles.interviewTitle}>
-        <WordUnit>{children}</WordUnit>
-      </span>
-    )
-  }
+  if (i < 0) return <WordUnit>{children}</WordUnit>
   return (
-    <span className={styles.interviewTitle}>
+    <>
       <WordUnit>{children.slice(0, i)}</WordUnit>
       <small>
         <WordUnit>{children.slice(i)}</WordUnit>
       </small>
-    </span>
+    </>
   )
 }
