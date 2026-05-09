@@ -1,0 +1,36 @@
+@use '../function/rem' as *;
+@use '../mixin/rect' as *;
+
+@mixin btn-glass {
+  display: grid;
+  place-items: center;
+  padding: var(--spacing-sm);
+  color: var(--txt-basic);
+  appearance: none;
+  cursor: pointer;
+  background-color: var(--bg-light);
+  border: none;
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--transition-enter),
+    background-color var(--transition-enter),
+    box-shadow var(--transition-enter);
+
+  @media (any-hover: hover) {
+    &:hover {
+      color: var(--txt-muted);
+      background-color: var(--bg-basic);
+      box-shadow:
+        inset 1px 1px 1px 0 color-mix(in srgb, var(--bg-basic), transparent 50%),
+        inset -1px -1px 1px 0 color-mix(in srgb, var(--bg-panel), transparent 50%);
+      transition:
+        color var(--transition),
+        background-color var(--transition-leave),
+        box-shadow var(--transition-leave);
+    }
+  }
+
+  svg {
+    @include rect(100%);
+  }
+}
