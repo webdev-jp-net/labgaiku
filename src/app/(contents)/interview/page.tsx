@@ -2,22 +2,9 @@ import { getServerSession } from 'next-auth'
 import { getInterviewList } from '@/lib/api/microcms'
 import { authOptions } from '@/lib/auth'
 import { canViewInterview, getVisibilityLabel, MASK_PLACEHOLDER } from '@/lib/permission'
-import { WordUnit } from '@/components/WordUnit'
+import { InterviewTitle } from '@/components/InterviewTitle'
 import { InterviewIndexView } from './_parts/view'
 import type { InterviewListItem } from './_parts/view'
-
-const buildTitle = (raw: string) => {
-  const i = raw.indexOf('——')
-  if (i < 0) return <WordUnit>{raw}</WordUnit>
-  return (
-    <>
-      <WordUnit>{raw.slice(0, i)}</WordUnit>
-      <small>
-        <WordUnit>{raw.slice(i)}</WordUnit>
-      </small>
-    </>
-  )
-}
 
 export default async function InterviewIndexPage() {
   const session = await getServerSession(authOptions)
@@ -33,9 +20,10 @@ export default async function InterviewIndexPage() {
       })
       .map(interview => {
         const canView = canViewInterview(interview, session)
+        const titleSource = canView ? (interview.title ?? interview.guest) : interview.title
         return {
           id: interview.id,
-          title: buildTitle(interview.title ?? interview.guest),
+          title: titleSource ? <InterviewTitle>{titleSource}</InterviewTitle> : MASK_PLACEHOLDER,
           guest: canView ? interview.guest : MASK_PLACEHOLDER,
           date: interview.date,
           visibility: getVisibilityLabel(interview.visibility),

@@ -9,6 +9,7 @@ import { useLoginPrompt } from './useLoginPrompt'
 type LoginPromptProps = {
   callbackUrl: string
   heading: ReactNode
+  guest: string
   dateTime?: string
   formattedDate: string | null
   visibility: VisibilityLabel | null
@@ -17,6 +18,7 @@ type LoginPromptProps = {
 export const LoginPrompt: FC<LoginPromptProps> = ({
   callbackUrl,
   heading,
+  guest,
   dateTime,
   formattedDate,
   visibility,
@@ -29,6 +31,10 @@ export const LoginPrompt: FC<LoginPromptProps> = ({
         <div className={detailStyles.sticky}>
           <div>
             <h1 className={detailStyles.title}>{heading}</h1>
+            <p className={detailStyles.guest}>
+              {guest}
+              <small className={detailStyles.suffix}>さん</small>
+            </p>
             {(formattedDate || visibility) && (
               <div className={detailStyles.meta}>
                 {formattedDate && (

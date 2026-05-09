@@ -1,14 +1,15 @@
 import { loadDefaultJapaneseParser } from 'budoux'
 import * as cheerio from 'cheerio'
 import { getServerSession } from 'next-auth'
+import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import { getInterviewById } from '@/lib/api/microcms'
 import { authOptions } from '@/lib/auth'
 import { formatJaDate } from '@/lib/date'
 import { canViewInterview, getVisibilityLabel, MASK_PLACEHOLDER } from '@/lib/permission'
 import { sanitizeHtml } from '@/lib/sanitize'
-import { WordUnit } from '@/components/WordUnit'
 import wordStyles from '@/components/WordUnit/WordUnit.module.scss'
+import { InterviewTitle } from '@/components/InterviewTitle'
 import { LoginPrompt } from './_parts/components/LoginPrompt'
 import { InterviewDetailView } from './_parts/view'
 import type { IndexNavigationItem } from './_parts/components/IndexNavigation/IndexNavigation'
@@ -24,38 +25,45 @@ const segmentToHtml = (text: string) =>
     .map(s => `<span class="${wordStyles.word}">${escapeHtml(s)}</span>`)
     .join('')
 
-const buildTitle = (raw: string) => {
-  const i = raw.indexOf('——')
-  if (i < 0) return <WordUnit>{raw}</WordUnit>
-  return (
-    <>
-      <WordUnit>{raw.slice(0, i)}</WordUnit>
-      <small>
-        <WordUnit>{raw.slice(i)}</WordUnit>
-      </small>
-    </>
-  )
-}
-
 type InterviewDetailPageProps = {
   params: Promise<{
     slug: string
   }>
+  searchParams: Promise<{
+    draftKey?: string
+  }>
 }
 
-export default async function InterviewDetailPage({ params }: InterviewDetailPageProps) {
+export default async function InterviewDetailPage({
+  params,
+  searchParams,
+}: InterviewDetailPageProps) {
   const session = await getServerSession(authOptions)
   const { slug } = await params
+  const { draftKey } = await searchParams
+
+  const { isEnabled: isDraft } = await draftMode()
+  const previewDraftKey = isDraft && draftKey ? draftKey : undefined
 
   try {
-    const interview = await getInterviewById(slug)
-    if (!canViewInterview(interview, session)) {
+    const interview = await getInterviewById(
+      slug,
+      previewDraftKey ? { draftKey: previewDraftKey } : undefined
+    )
+    if (!previewDraftKey && !canViewInterview(interview, session)) {
       const callbackUrl = `/interview/${slug}`
       const isSecret = interview.visibility.includes('secret')
+      const headingNode =
+        !isSecret && interview.title ? (
+          <InterviewTitle>{interview.title}</InterviewTitle>
+        ) : (
+          MASK_PLACEHOLDER
+        )
       return (
         <LoginPrompt
           callbackUrl={callbackUrl}
-          heading={isSecret ? MASK_PLACEHOLDER : buildTitle(interview.title ?? interview.guest)}
+          heading={headingNode}
+          guest={MASK_PLACEHOLDER}
           dateTime={isSecret ? undefined : interview.date}
           formattedDate={
             isSecret ? MASK_PLACEHOLDER : interview.date ? formatJaDate(interview.date) : null
@@ -64,7 +72,7 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
         />
       )
     }
-    const namePattern = /^([^\x00-\x7F]+?)[:：](.*)$/s
+    const namePattern = /^([^\p{ASCII}]+?)[:：](.*)$/su
     const colonPattern = /^[:：]\s*/
     const processInterviewHtml = (html: string) => {
       const $ = cheerio.load(html)
@@ -90,7 +98,7 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
           const elText = $(first).text()
 
           // ケース3: 先頭 element 内に「名前 + コロン」がすべて入っている
-          const elInnerMatch = elText.match(/^([^\x00-\x7F]+?)[:：]\s*$/)
+          const elInnerMatch = elText.match(/^([^\p{ASCII}]+?)[:：]\s*$/u)
           if (elInnerMatch) {
             const [, name] = elInnerMatch
             $(first).remove()
@@ -103,7 +111,7 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
             return
           }
 
-          if (!/^[^\x00-\x7F]+$/.test(elText)) return
+          if (!/^[^\p{ASCII}]+$/u.test(elText)) return
           const second = nodes[1]
           if (!second || second.type !== 'text') return
           if (!colonPattern.test(second.data)) return
@@ -142,7 +150,7 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
       .toArray()
       .map(el => ({
         id: el.attribs.id,
-        text: buildTitle($content(el).text()),
+        text: <InterviewTitle>{$content(el).text()}</InterviewTitle>,
       }))
 
     const memberList = (interview.member ?? []).map(m => ({
@@ -151,7 +159,7 @@ export default async function InterviewDetailPage({ params }: InterviewDetailPag
       tagList: [...(m.isGuest ? ['ゲスト'] : []), ...(m.isFacilitator ? ['ファシリテーター'] : [])],
     }))
 
-    const heading = buildTitle(interview.title ?? interview.guest)
+    const heading = <InterviewTitle>{interview.title ?? interview.guest}</InterviewTitle>
 
     return (
       <InterviewDetailView
