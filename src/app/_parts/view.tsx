@@ -60,9 +60,7 @@ export const HomeView: FC = () => {
               </p>
             </div>
             <footer className={styles.articleFooter}>
-              <Link className={styles.moreLink} href="/interview">
-                詳しく見る
-              </Link>
+              <Link href="/interview">詳しく見る</Link>
             </footer>
           </article>
           {/* <article className={styles.article}>
@@ -88,7 +86,7 @@ export const HomeView: FC = () => {
               </p>
             </div>
             <footer className={styles.articleFooter}>
-              <Link className={styles.moreLink} href="/zine">
+              <Link href="/zine">
                 詳しく見る
               </Link>
             </footer>
