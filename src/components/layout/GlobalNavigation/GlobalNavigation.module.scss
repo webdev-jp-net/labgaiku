@@ -5,8 +5,12 @@
   inset: auto 0 env(safe-area-inset-bottom);
   z-index: 5;
   width: 100%;
-  background-color: var(--bg-panel);
+  background: var(--bg-panel) linear-gradient(to bottom, var(--bg-light), var(--bg-basic));
+  border-top: 1px solid var(--bg-basic);
   backdrop-filter: blur(1rem);
+  transition:
+    opacity var(--transition-enter),
+    scale var(--transition-enter);
 
   html:not([data-visible-nav]) & {
     pointer-events: none;
@@ -14,8 +18,8 @@
     transform-origin: bottom;
     scale: 1 0.8;
     transition:
-      opacity var(--transition),
-      scale var(--transition);
+      opacity var(--transition-leave),
+      scale var(--transition-leave);
   }
 }
 
@@ -28,7 +32,7 @@
   @include mq(narrow) {
     grid-template-columns: 1fr auto;
     gap: var(--spacing-xl) var(--spacing-md);
-    padding: rem(12) var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
   }
 
   @include mq(fromWide) {
@@ -46,19 +50,22 @@
 
 .siteName {
   @include txt-lead;
+  @include txt-link(false);
 
-  color: currentColor;
-  text-decoration: none;
+  background-position-y: bottom;
 }
 
 .category {
   position: relative;
   display: flex;
   align-items: center;
-  padding: 0 0.5em;
+  margin: 0 0 0 1.5em;
   font-size: var(--font-size-sm);
 
   &::before {
+    position: absolute;
+    top: 0;
+    right: 100%;
     margin-right: 0.5em;
     color: var(--txt-subtle);
     content: '・';
@@ -66,8 +73,16 @@
 }
 
 .categoryLink {
-  color: var(--txt-muted);
+  @include txt-link(false);
+
   text-decoration: none;
+  text-shadow: 0 0 0 var(--txt-muted);
+
+  @media (any-hover: hover) {
+    &:hover {
+      text-shadow: 0 0 1px var(--txt-muted);
+    }
+  }
 }
 
 .menu {
@@ -78,41 +93,32 @@
 }
 
 .indexTrigger {
-  @include rect(rem(32));
+  @include rect(rem(40));
+  @include btn-glass;
 
-  display: grid;
-  place-items: center;
   justify-self: end;
-  padding: 0;
-  color: var(--txt-mutec);
-  appearance: none;
-  cursor: pointer;
-  background: transparent;
-  border: none;
 }
 
 .scrollToTopTrigger {
-  @include rect(rem(32));
-
-  display: grid;
-  place-items: center;
-  padding: 0;
-  color: var(--txt-mutec);
-  appearance: none;
-  cursor: pointer;
-  background: transparent;
-  border: none;
+  @include rect(rem(40));
+  @include btn-glass;
 }
 
 .indexPopover {
   padding: var(--spacing-md);
-  background-color: var(--bg-panel);
-  border: none;
+  background: var(--bg-panel)
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--bg-basic), transparent 50%),
+      color-mix(in srgb, var(--bg-basic), transparent 50%)
+    );
+  border-width: 1px 0 0;
+  border-top: 1px solid var(--bg-basic);
   backdrop-filter: blur(1rem);
 
   @include mq(narrow) {
     width: 100%;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
     position-area: top;
   }
 

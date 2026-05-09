@@ -206,10 +206,3 @@
 .articleFooter {
   margin: var(--spacing-2xl) 0 0;
 }
-
-.moreLink {
-  @include txt-link;
-
-  color: var(--txt-accent);
-  text-decoration: none;
-}
