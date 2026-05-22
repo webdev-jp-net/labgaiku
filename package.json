@@ -1,7 +1,7 @@
 {
   "name": "lab-ga-iku",
   "type": "module",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "scripts": {
     "dev": "next dev --turbopack -H 0.0.0.0",
     "build": "next build",
@@ -47,6 +47,7 @@
     "typescript-eslint": "^8.59.1"
   },
   "pnpm": {
+    "minimumReleaseAge": 10080,
     "overrides": {
       "jsdom": "25.0.1",
       "jsdom>parse5": "7.3.0"
