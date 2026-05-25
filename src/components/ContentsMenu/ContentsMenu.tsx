@@ -18,12 +18,12 @@ export const ContentsMenu = ({ className, ...props }: ContentsMenuProps) => {
           <span className={styles.kana}>interview</span>
         </Link>
       </li>
-      {/* <li className={styles.item}>
+      <li className={styles.item}>
         <Link href="/zine" className={styles.link}>
           <span className={styles.title}>人と働く仕組みは設計する</span>
           <span className={styles.kana}>ZINE</span>
         </Link>
-      </li> */}
+      </li>
     </ul>
   )
 }

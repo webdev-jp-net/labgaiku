@@ -1,0 +1,128 @@
+@use '@/styles/_variable' as *;
+
+// レイアウト
+.section {
+  @include mq(narrow) {
+    @include tmp-container;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3xl);
+    margin-top: var(--spacing-3xl);
+  }
+
+  @include mq(fromWide) {
+    display: grid;
+    grid-template-columns: rem(630 - 64 - 64) 1fr;
+    max-width: rem(1280);
+    margin-inline: auto;
+  }
+}
+
+// ヘッダー
+.header {
+  @include mq(narrow) {
+    gap: var(--spacing-md);
+  }
+
+  @include mq(fromWide) {
+    padding: 0 var(--spacing-3xl);
+  }
+}
+
+.sticky {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+
+  @include mq(fromWide) {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: var(--spacing-3xl) 0 0;
+  }
+}
+
+.title {
+  @include hd-lg;
+
+  span {
+    white-space: nowrap;
+  }
+}
+
+.kana {
+  @include txt-kana;
+
+  font-size: var(--font-size-xl);
+}
+
+.description {
+  @include txt-paragraph;
+
+  margin: var(--spacing-md) 0 0;
+  font-size: var(--font-size-sm);
+}
+
+// 本文
+.body {
+  display: flex;
+  flex-direction: column;
+
+  @include mq(narrow) {
+    gap: 3em;
+  }
+
+  @include mq(fromWide) {
+    gap: 4em;
+    padding: rem(16) var(--spacing-3xl) 0;
+  }
+}
+
+.figure {
+  margin-top: var(--spacing-2xl);
+}
+
+.image {
+  @include rect(100%);
+
+  object-fit: contain;
+}
+
+.headline {
+  @include hd-md;
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+}
+
+.articleHeader {
+  display: flex;
+  flex-direction: column;
+}
+
+.articleBody {
+  display: flex;
+  flex-direction: column;
+
+  @include mq(narrow) {
+    gap: 3em;
+  }
+
+  @include mq(fromWide) {
+    gap: 4em;
+  }
+}
+
+.paragraph {
+  @include txt-paragraph;
+}
+
+.highlight {
+  @include txt-accent;
+
+  padding: 0 0.2em;
+}
