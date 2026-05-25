@@ -6,7 +6,7 @@ import { GlobalNavigation } from '@/components/layout/GlobalNavigation'
 import { AppFooter } from '@/components/layout/AppFooter'
 import { ContentsMenu } from '@/components/ContentsMenu'
 import styles from './Home.module.scss'
-// import { WordUnit } from '@/components/WordUnit'
+import { WordUnit } from '@/components/WordUnit'
 
 export const HomeView: FC = () => {
   return (
@@ -63,7 +63,7 @@ export const HomeView: FC = () => {
               <Link href="/interview">詳しく見る</Link>
             </footer>
           </article>
-          {/* <article className={styles.article}>
+          <article className={styles.article}>
             <header className={styles.articleHeader}>
               <h2 className={styles.articleTitle}>
                 <WordUnit>人と働く仕組みは設計する</WordUnit>
@@ -77,20 +77,17 @@ export const HomeView: FC = () => {
               </p>
               <p className={styles.paragraph}>
                 エンジニアに限らずクリエイター界隈では、成長環境とチーム運営の持続性は切り離して考えにくいテーマです。
+                <br />
+                そして、ワークライフバランスが目新しい言葉ではなくなっている昨今、「働く時間」の質をなおざりにしないマインドはクリエイターだけでなく全ての人が注目するテーマではないでしょうか。
               </p>
               <p className={styles.paragraph}>
-                そして、ライフ・ワーク・バランスが目新しい言葉ではなくなっている昨今、「働く時間」の質をなおざりにしないマインドはクリエイターだけでなく全ての人が注目するテーマではないでしょうか。
-              </p>
-              <p className={styles.paragraph}>
-                チームが順調と感じる瞬間、その背景にはLogic（仕組み）が存在しているはずです。そんなエンジニアならではの視点でマニアックに再現性を分析した「働く仕組みの設計」は、思いがけないヒントになるかもしれません。
+                チームが順調と感じる瞬間、その背景にはLogic（仕組み）が存在しているはずです。そんな、エンジニアならではの視点でマニアックに再現性を分析した「働く仕組みの設計」は、思いがけないヒントになるかもしれません。
               </p>
             </div>
             <footer className={styles.articleFooter}>
-              <Link href="/zine">
-                詳しく見る
-              </Link>
+              <Link href="/zine">詳しく見る</Link>
             </footer>
-          </article> */}
+          </article>
         </div>
       </section>
       <GlobalNavigation />
