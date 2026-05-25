@@ -2,7 +2,6 @@
 
 import type { ReactNode } from 'react'
 import type { VisibilityLabel } from '@/lib/permission'
-import { HostMemberList } from './components/HostMemberList'
 import { InterviewItem } from './components/InterviewItem'
 import { useInterviewIndex } from './useInterviewIndex'
 import styles from './InterviewIndex.module.scss'
@@ -34,7 +33,6 @@ export function InterviewIndexView({ itemList }: InterviewIndexViewProps) {
             考えていることや感じていること、そこには生き方や人となりが息づいています。
             形式知にはおさまらないソフトスキルの学びへようこそ。
           </p>
-          <HostMemberList />
         </div>
       </header>
       <div className={styles.body}>
