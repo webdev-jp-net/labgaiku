@@ -11,7 +11,7 @@
     margin-top: var(--spacing-3xl);
   }
 
-  @include mq(fromWide) {
+  @include mq(fromLaptop) {
     display: grid;
     grid-template-columns: rem(630 - 64 - 64) 1fr;
     max-width: rem(1280);
