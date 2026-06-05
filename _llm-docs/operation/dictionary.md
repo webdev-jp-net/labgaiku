@@ -44,7 +44,7 @@
 
 ## CSSクラス命名
 
-- **形式**: CSS Modules のキャメルケース
+- **形式**: CSS Modulesのキャメルケース
 - セマンティックな名称を使用（例: `list`, `listItem`, `body`）
 - 状態を表す場合は `--isActive` のように接尾辞で表現
 
