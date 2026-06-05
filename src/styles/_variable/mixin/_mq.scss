@@ -7,7 +7,7 @@
  *
  * 利用可能なプリセット値:
  * - narrow: 480px ... スマートフォン
- * - middle: 900px ... タブレット
+ * - middle: 1280px ... タブレット
  * - wide: 1440px ... ラップトップPC
  * - maximum: 1680px ... デスクトップPC
  *
@@ -36,7 +36,7 @@
 
 @mixin mq($preset: null, $from: null, $until: null) {
   $narrow: 480px;
-  $middle: 900px;
+  $middle: 1280px;
   $wide: 1440px;
   $maximum: 1680px;
 
