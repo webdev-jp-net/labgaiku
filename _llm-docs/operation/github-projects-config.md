@@ -62,7 +62,7 @@ GitHub ProjectsのWeb画面で以下のカスタムフィールドを追加し�
 **プロジェクトIDの確認方法:**
 
 - ProjectsページのURLを確認
-- 例: `https://github.com/orgs/your-org/projects/123` の場合、PROJECT_ID は `123`
+- 例: `https://github.com/orgs/your-org/projects/123` の場合、PROJECT_IDは `123`
 
 ### 4. 設定ファイルの更新
 

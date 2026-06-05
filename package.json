@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write . && textlint --fix \"**/*.md\""
   },
   "dependencies": {
     "@uidotdev/usehooks": "^2.4.1",
@@ -44,6 +44,8 @@
     "stylelint-config-standard-scss": "^15.0.1",
     "stylelint-order": "^7.0.0",
     "stylelint-scss": "^6.12.1",
+    "textlint": "^15.7.1",
+    "textlint-rule-preset-jtf-style": "^3.0.3",
     "typescript-eslint": "^8.59.1"
   },
   "pnpm": {
