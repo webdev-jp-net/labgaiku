@@ -9,7 +9,7 @@
     padding: 0 0 var(--spacing-6xl);
   }
 
-  @include mq(fromWide) {
+  @include mq(fromLaptop) {
     display: grid;
     grid-template-columns: rem(630 - 64 - 64) 1fr;
     max-width: rem(1280);
@@ -134,6 +134,10 @@
 
   @include mq(fromWide) {
     gap: var(--spacing-7xl);
+    padding: var(--spacing-4xl) var(--spacing-3xl) var(--spacing-3xl);
+  }
+
+  @include mq(fromLaptop) {
     padding: calc(30svh + rem(56 + 44 + 14 + 64)) rem(160) 0 var(--spacing-3xl);
   }
 }
