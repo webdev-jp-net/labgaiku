@@ -123,6 +123,12 @@
     }
   }
 
+  blockquote {
+    padding: var(--spacing-sm) 0 var(--spacing-sm) calc(var(--spacing-md) - rem(2));
+    margin-top: 3em;
+    border-left: rem(2) solid var(--border-basic);
+  }
+
   dl {
     display: grid;
     grid-template-columns: auto 1fr;
