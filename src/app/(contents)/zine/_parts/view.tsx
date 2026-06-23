@@ -3,6 +3,9 @@ import { WordUnit } from '@/components/WordUnit'
 import styles from './Zine.module.scss'
 
 import coverImage from './images/cover.webp'
+import pageImage from './images/page.webp'
+import viewImage from './images/view.webp'
+import detailImage from './images/detail.webp'
 
 export const ZineView: FC = () => {
   return (
@@ -14,10 +17,11 @@ export const ZineView: FC = () => {
           </h1>
           <small className={styles.kana}>ZINE</small>
           <p className={styles.description}>
-            チームビルディングの取り組みについて、リソグラフという孔版印刷でちいさな冊子をつくりました。
+            エンジニアチームの働き方をマニアックに研究しすぎて、30ページの冊子になりました。
           </p>
-          <p className={styles.description}>同じ内容を、ZennのBookでも公開しています。</p>
           <p className={styles.description}>
+            同じ内容を、ZennのBookでも公開しています。
+            <br />
             <a
               href="https://zenn.dev/webdev/books/collaboration-architecture"
               target="_blank"
@@ -30,7 +34,7 @@ export const ZineView: FC = () => {
       </header>
       <div className={styles.body}>
         <figure className={styles.figure}>
-          <img className={styles.image} src={coverImage.src} alt="カバー画像" />
+          <img className={styles.image} src={viewImage.src} alt="全体" />
         </figure>
         <article className={styles.article}>
           <header className={styles.articleHeader}>
@@ -60,6 +64,14 @@ export const ZineView: FC = () => {
               </span>
               は、思いがけないヒントになるかもしれません。
             </p>
+            <figure className={styles.figure}>
+              <img className={styles.image} src={detailImage.src} alt="詳細画像" />
+              <figcaption className={styles.caption}>リソグラフという孔版印刷です</figcaption>
+            </figure>
+            <figure className={styles.figure}>
+              <img className={styles.image} src={pageImage.src} alt="ページ画像" />
+              <figcaption className={styles.caption}>ハガキと同じくらいのサイズ</figcaption>
+            </figure>
             <p className={styles.paragraph}>
               <a
                 href="https://zenn.dev/webdev/books/collaboration-architecture"
