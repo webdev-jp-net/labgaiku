@@ -66,11 +66,11 @@ export const ZineView: FC = () => {
             </p>
             <figure className={styles.figure}>
               <img className={styles.image} src={detailImage.src} alt="詳細画像" />
-              <figcaption className={styles.caption}>リソグラフという孔版印刷です。</figcaption>
+              <figcaption className={styles.caption}>リソグラフという孔版印刷です</figcaption>
             </figure>
             <figure className={styles.figure}>
               <img className={styles.image} src={pageImage.src} alt="ページ画像" />
-              <figcaption className={styles.caption}>ハガキと同じくらいのちいさな冊子。</figcaption>
+              <figcaption className={styles.caption}>ハガキと同じくらいのサイズ</figcaption>
             </figure>
             <p className={styles.paragraph}>
               <a

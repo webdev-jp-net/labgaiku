@@ -84,9 +84,15 @@
 }
 
 .image {
-  @include rect(100%);
-
+  width: 100%;
   object-fit: contain;
+}
+
+.caption {
+  @include txt-description;
+
+  margin-top: var(--spacing-xs);
+  text-align: right;
 }
 
 .headline {
