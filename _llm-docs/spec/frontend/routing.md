@@ -21,8 +21,8 @@ Next.js App Router（`src/app`）を利用したルーティング構成。
   - `secret`: `allowList`該当ログインユーザは一覧で通常表示+リンク有効、詳細閲覧可。非該当ユーザ（未認証含む）は一覧から完全除外、詳細URL直アクセス時はログイン促しViewを表示
   - `limited`: 一覧ではタイトル/ゲストを伏せ字+非リンク・日付のみ生で表示。`allowList`該当ログインユーザのみ伏せ字解除+リンク有効、詳細閲覧可。非該当ユーザの詳細URL直アクセスはログイン促しViewを表示
   - `public`: 一覧で通常表示。詳細は誰でも閲覧可
-- ログイン/ログアウトは`AppHeader`、`AppFooter`、未認可詳細の`LoginPrompt`のいずれからも実施可能（誰でもサインイン可、グローバルなドメイン制限なし）
-- `signIn`/`signOut`は`callbackUrl`を指定せず、操作前のページへ戻る挙動とする
+- ログイン/ログアウトは`AppFooter`、未認可詳細の`LoginPrompt`のいずれからも実施可能（誰でもサインイン可、グローバルなドメイン制限なし）
+- `AppFooter`の`signIn`/`signOut`は`callbackUrl`を指定せず、操作前のページへ戻る挙動とする。`LoginPrompt`の`signIn`は`callbackUrl`に表示中の記事URL（`/interview/{slug}`）を指定する
 
 詳細は[認証仕様](../backend/next-auth.md)を参照。
 
@@ -50,10 +50,10 @@ src/
             └── route.ts
 ```
 
-- `layout.tsx`（root）：ルートlayout（`<html>`/`<body>`とフォントのみ・AppHeader非含有）
-- `page.tsx`（root）：トップページ（Home・AppHeader/AppFooter非表示）
+- `layout.tsx`（root）：ルートlayout（`<html>`/`<body>`とフォントのみ）
+- `page.tsx`（root）：トップページ（Home）
 - `_parts/`（root）：Homeのview/フック
-- `layout.tsx`（contents）：`getServerSession`で`AppHeader`/`AppFooter`にsessionをprop注入し`<main>`を提供
+- `layout.tsx`（contents）：`getServerSession`で`AppFooter`にsessionをprop注入し`<main>`を提供
 - `page.tsx`（インタビュー一覧）：インタビュー一覧
 - `_parts/`（インタビュー一覧）：一覧のview/フック/`InterviewItem`
 - `page.tsx`（インタビュー詳細）：インタビュー詳細

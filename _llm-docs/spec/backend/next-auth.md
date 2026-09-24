@@ -17,15 +17,15 @@ Google OAuthを利用したNextAuth.js 4系の構成。JWTセッションスト�
 ## ディレクトリ構成
 
 - `src/lib/auth.ts`: `authOptions`の定義
-  - Google Provider設定
+  - Google Provider設定（`authorization.params.prompt`に`select_account`を指定し、ログインのたびにGoogleのアカウント選択画面を表示する）
   - `signIn`コールバックは常に`true`を返す（グローバル制限なし）
   - `jwt`/`session`コールバックでメール・名前・アイコンをJWTに保存
 - `src/lib/permission.ts`: 記事ごとの閲覧可否判定
   - `canViewInterview(interview, session)`を一覧/詳細の両方で使用
 - `src/app/api/auth/[...nextauth]/route.ts`: NextAuth APIハンドラー
-- `src/app/(contents)/layout.tsx`: `getServerSession(authOptions)`でsessionを取得し、`AppHeader`/`AppFooter`にpropで注入するServer Component
+- `src/app/(contents)/layout.tsx`: `getServerSession(authOptions)`でsessionを取得し、`AppFooter`にpropで注入するServer Component
 
-`src/components/auth/`配下の共有コンポーネント（SessionWrapper/SignIn/SignOut）は持たない。`signIn`/`signOut`を呼ぶボタンは、必要箇所（`AppHeader`/`AppFooter`/未認可詳細の`LoginPrompt`）に直接インラインで配置する。
+`src/components/auth/`配下の共有コンポーネント（SessionWrapper/SignIn/SignOut）は持たない。`signIn`/`signOut`を呼ぶボタンは、必要箇所（`AppFooter`/未認可詳細の`LoginPrompt`）に直接インラインで配置する。
 
 ## アクセス制限
 
@@ -45,8 +45,8 @@ Google OAuthを利用したNextAuth.js 4系の構成。JWTセッションスト�
 
 ## フロー
 
-1. `AppHeader`/`AppFooter`/`LoginPrompt`のいずれかにあるログインボタンを押すと`signIn('google')`が呼ばれてGoogle認証画面へ遷移
-2. `signIn`/`signOut`は`callbackUrl`を指定せず、操作前のページに戻る挙動とする
+1. `AppFooter`/`LoginPrompt`のいずれかにあるログインボタンを押すと`signIn('google')`が呼ばれてGoogle認証画面へ遷移
+2. `AppFooter`の`signIn`/`signOut`は`callbackUrl`を指定せず、操作前のページに戻る挙動とする。`LoginPrompt`の`signIn`は`callbackUrl`に表示中の記事URL（`/interview/{slug}`）を指定する
 3. `signIn`コールバックは常に`true`を返し、誰でも認証成功
 4. 認証済みユーザは記事ごとのallowListに応じて`limited`記事を閲覧可能
 5. `public`記事は未認証でも閲覧可能
