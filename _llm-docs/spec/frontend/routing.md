@@ -51,7 +51,7 @@ src/
 ```
 
 - `layout.tsx`（root）：ルートlayout（`<html>`/`<body>`とフォントのみ）
-- `page.tsx`（root）：トップページ（Home・AppFooter非表示）
+- `page.tsx`（root）：トップページ（Home）
 - `_parts/`（root）：Homeのview/フック
 - `layout.tsx`（contents）：`getServerSession`で`AppFooter`にsessionをprop注入し`<main>`を提供
 - `page.tsx`（インタビュー一覧）：インタビュー一覧
