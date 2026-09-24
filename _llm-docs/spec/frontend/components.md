@@ -29,7 +29,7 @@ src/
 ├── app/                            # App Routerのページ・レイアウト
 │   ├── layout.tsx                  # Root layout
 │   ├── page.tsx + _parts/          # Home
-│   ├── (contents)/                 # AppHeader/AppFooter/<main>を提供するlayout配下
+│   ├── (contents)/                 # GlobalNavigation/AppFooter/<main>を提供するlayout配下
 │   │   └── interview/              # 一覧と詳細[slug]、各page.tsx + _parts/
 │   └── api/auth/[...nextauth]/     # NextAuth API
 ├── components/layout/              # 共通レイアウト（parts-component構造）
@@ -71,9 +71,9 @@ src/
 
 ## 共通コンポーネント
 
-- `src/components/layout/`にレイアウト系を集約（`AppHeader`/`AppFooter`）
+- `src/components/layout/`にレイアウト系を集約（`GlobalNavigation`/`AppFooter`）
 - いずれもparts-component構造（フォルダー内に`index.tsx`/`*.tsx`/`*.module.scss`、必要に応じて`use*.ts`）
-- 認証UIは専用の共有コンポーネントを置かず、必要箇所（AppHeader/AppFooter/`LoginPrompt`）にインラインで`signIn`/`signOut`を呼ぶボタンを配置する方針
+- 認証UIは専用の共有コンポーネントを置かず、必要箇所（AppFooter/`LoginPrompt`）にインラインで`signIn`/`signOut`を呼ぶボタンを配置する方針
 - `GlobalNavigation`/`AppFooter`/`ContentsMenu`の連携と`data-visible-nav`属性による可視制御は[ナビゲーション仕様](./navigation.md)を参照
 
 ## 装飾

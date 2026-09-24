@@ -27,17 +27,29 @@ gh issue view [Issue番号]
 
 ### Step 3: ブランチ判定と対応
 
-- **現在のブランチ名に `#[Issue番号]` が含まれる場合**: そのまま継続使用可能。Step 5へスキップ
+- **現在のブランチ名が `#[Issue番号]` で終わる場合**: そのまま継続使用可能。Step 5へスキップ
 - **上記以外の場合（`develop`・`main`・別Issueのブランチ）**: 対象Issue番号に対応する既存ブランチを探す
 
+末尾で照合する。`#3` は `#30` や `#35` にも部分一致するため、`grep "#[Issue番号]"` では別のIssueの
+ブランチを拾う。ローカルとリモートは分けて扱う。リモートの参照名をそのままcheckoutするとdetached HEADになる。
+
 ```bash
-git branch --all | grep "#[Issue番号]"
+# ローカル
+git branch --format='%(refname:short)' | grep -E "#[Issue番号]$"
+# リモート
+git branch --remotes --format='%(refname:short)' | grep -E "#[Issue番号]$"
 ```
 
-- **既存ブランチが見つかった場合**: そのブランチへチェックアウトしてStep 5へスキップ
+- **ローカルに見つかった場合**: そのブランチへチェックアウトしてStep 5へスキップ
 
 ```bash
-git checkout [見つかったブランチ名]
+git switch [見つかったローカルブランチ名]
+```
+
+- **リモートにだけ見つかった場合**: 追跡ブランチを作ってチェックアウトし、Step 5へスキップ
+
+```bash
+git switch --track [origin/見つかったブランチ名]
 ```
 
 - **見つからない場合**: Step 4へ進み新規ブランチを作成する
@@ -92,11 +104,6 @@ feature/[概要]#[Issue番号]
 | `feature/initial-setup#1` | `feature/初期セットアップ-#1` — 日本語使用 |
 | `feature/user-auth#15`    | `feature/api docs-#23` — スペース使用      |
 | `feature/api-docs#23`     |                                            |
-
-### ブランチ作成の判定基準
-
-- `develop` または `main` 以外にいる場合は現在のブランチを継続使用し、新規作成しない
-- `develop` または `main` にいる場合のみ新規作成
 
 ### ブランチ命名チェック
 

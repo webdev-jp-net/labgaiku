@@ -1,0 +1,84 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit|Bash|mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun run \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/read-gate.ts\"",
+            "timeout": 20,
+            "statusMessage": "🚧 必読ファイルの読了を確認中..."
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mkdir -p \"${CLAUDE_PROJECT_DIR:-.}/.claude/tmp\" && touch \"${CLAUDE_PROJECT_DIR:-.}/.claude/tmp/.bash-mark\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun run \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/md-doc-balance.ts\"",
+            "timeout": 10,
+            "statusMessage": "📖 ドキュメントのバランスチェク中…"
+          },
+          {
+            "type": "command",
+            "command": "bun run \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/md-jtf-fix.ts\"",
+            "timeout": 20,
+            "statusMessage": "📝 JTF: 全角/半角スペースを整形中..."
+          },
+          {
+            "type": "command",
+            "command": "bun run \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/md-heading-lint.ts\"",
+            "timeout": 10,
+            "statusMessage": "📐 見出しlint: 構造を検査中..."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -Rs '{hookSpecificOutput: {hookEventName: \"UserPromptSubmit\", additionalContext: .}}' \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/self-check-criteria.txt\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -Rs '{hookSpecificOutput: {hookEventName: \"UserPromptSubmit\", additionalContext: .}}' \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/no-discretion.txt\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "l=$(bun run \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/read-gate.ts\" --list) && [ -n \"$l\" ] || l='- 必読一覧を取得できなかった。.claude/hooks/read-gate.ts が動くか確認するまで着手しない。'; printf '%s\\n' 'CLAUDE.mdは読むだけでなく従うこと。指示されたルールは一部を選ぶのではなく全部読み、全部従う。省略・要約・取捨選択をしない。stateがin_progressならnext_actionからの再開を提案すること。完了時はstate/episodesを更新すること。' '' '着手前に次をすべて読む。' \"$l\" | jq -Rs '{hookSpecificOutput:{hookEventName:\"SessionStart\",additionalContext:.}}'",
+            "statusMessage": "ルールの読了を促し中"
+          }
+        ]
+      }
+    ]
+  }
+}
