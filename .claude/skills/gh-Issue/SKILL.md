@@ -42,11 +42,9 @@ printf '%s' $'本文内容\n' | gh issue create --title "タイトル" --body-fi
 
 **一時ファイル方式（バックアップ）**
 
-`mkdir -p .claude/tmp` で置き場を用意してから、Writeツールで `.claude/tmp/issue-body.md` に本文を書く。
-`.claude/tmp` は追跡対象外なので、cloneした直後には存在しない。
-
 ```bash
-gh issue create --title "タイトル" --body-file .claude/tmp/issue-body.md
+printf '%s' $'本文内容\n' > /tmp/issue_body.md
+gh issue create --title "タイトル" --body-file /tmp/issue_body.md
 ```
 
 ### Step 5: 作成確認
