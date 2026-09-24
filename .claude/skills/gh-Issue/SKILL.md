@@ -32,26 +32,21 @@ argument-hint: [document-path]
 
 ### Step 4: Issueの作成
 
-承認後、以下の優先順位で `gh issue create` を実行する。
+承認後、`_llm-rules/github_integration.md`の「改行を含むMarkdown記述時の実行方式」に従って実行する。
 
-**1. `--body` オプション直接指定（最優先）**
-
-```bash
-gh issue create --title "タイトル" --body "複数行の
-本文を直接記述"
-```
-
-**2. printf + パイプ方式（長文・特殊文字の場合）**
+**printf + パイプ方式（優先）**
 
 ```bash
 printf '%s' $'本文内容\n' | gh issue create --title "タイトル" --body-file -
 ```
 
-**3. 一時ファイル方式（最終手段）**
+**一時ファイル方式（バックアップ）**
+
+`mkdir -p .claude/tmp` で置き場を用意してから、Writeツールで `.claude/tmp/issue-body.md` に本文を書く。
+`.claude/tmp` は追跡対象外なので、cloneした直後には存在しない。
 
 ```bash
-printf '%s' $'本文内容\n' > /tmp/issue_body.md
-gh issue create --title "タイトル" --body-file /tmp/issue_body.md
+gh issue create --title "タイトル" --body-file .claude/tmp/issue-body.md
 ```
 
 ### Step 5: 作成確認

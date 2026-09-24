@@ -47,5 +47,12 @@ coverage/
 .claude/launch.json
 .claude/worktrees
 
-# serena
+# serena (ツールが自動生成・自動更新するため追跡しない)
 .serena/
+
+# playwright-mcp (実行時の生成物)
+.playwright-mcp/
+
+# エージェントの実行記録（テンプレートのみ追跡し、記録の実体は追跡しない）
+_llm-memories/*
+!_llm-memories/templates/
