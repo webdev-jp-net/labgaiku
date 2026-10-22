@@ -2,7 +2,6 @@ import type { FC } from 'react'
 import { WordUnit } from '@/components/WordUnit'
 import styles from './Zine.module.scss'
 
-import coverImage from './images/cover.webp'
 import pageImage from './images/page.webp'
 import viewImage from './images/view.webp'
 import detailImage from './images/detail.webp'
